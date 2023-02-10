@@ -1,0 +1,238 @@
+street,city,pincode,capacity
+Ramkrishna Samadhi Road,Mumbai,700027,0
+15th Cross,Kolk?ta,560038,64000
+Raghunathpur Road,Bangalore,800013,32000
+Vikas Nagar,Chennai,226022,73000
+Navi ,Hyderabad,400703,92000
+Shastri Nagar,Pune,110052,80000
+R. K. Puram,Ahmedabad,500056,96000
+Nehru Nagar,Surat,201001,69000
+"Kanpur Road,",Lucknow,226012,19000
+Sant Nagar,Jaipur,110065,28000
+Sainik Nagar,Cawnpore,208005,69000
+New Aligarh,Mirz?pur,202001,16000
+R. K. Puram,N?gpur,110022,1000
+Sector 12,Gh?zi?b?d,201301,71000
+Indirapuram,Indore,201014,64000
+Kavi Nagar,Vadodara,201002,0
+Rajendra Nagar,Vish?khapatnam,800016,20000
+Sector 19,Bhop?l,110075,88000
+Sainik Nagar ,Chinchvad,208005,5000
+Vasundhara,Patna,201012,96000
+R. K. Puram,Ludhi?na,110022,7000
+Sector 14,?gra,201301,76000
+Sainik Nagar,Kaly?n,208005,97000
+Kavi Nagar,Madurai,201002,80000
+Rajendra Nagar,Jamshedpur,800016,29000
+"Sector 19, ",N?sik,110075,74000
+"Sainik Nagar, ",Far?d?b?d,208005,35000
+MG Road,Aurang?b?d,201012,65000
+Park Street,R?jkot,110022,75000
+Linking Road,Meerut,201301,71000
+Janpath,Jabalpur,208005,85000
+Brigade Road,Th?ne,201002,56000
+Church Street,Dhanb?d,800016,49000
+Main Bazaar,Allah?b?d,110075,68000
+Carter Road,V?r?nasi,110078,65000
+Hill Road,Sr?nagar,110065,96000
+Turner Road,Amritsar,208005,86000
+Carter Road,Al?garh,201012,55000
+Hill Road,Bhiwandi,110022,37000
+Turner Road,Gwalior,201301,91000
+Nehru Road,Bhilai,208005,71000
+Mount Road,H?ora,201002,66000
+Periyar Road,R?nchi,800016,91000
+100 Feet Road,Bezw?da,110075,7000
+Sarat Bose Road,Chand?garh,208005,61000
+Ramkrishna Samadhi Road,Mysore,201012,60000
+15th Cross,Raipur,110022,1000
+Raghunathpur Road,Kota,201301,53000
+Vikas Nagar,Bareilly,208005,32000
+Navi ,Jodhpur,201002,63000
+Shastri Nagar,Coimbatore,800016,40000
+R. K. Puram,Dispur,110075,67000
+Nehru Nagar,Guw?h?ti,208005,50000
+"Kanpur Road,",Sol?pur,201012,54000
+Sant Nagar,Trichinopoly,110022,52000
+Sainik Nagar,Hubli,201301,29000
+New Aligarh,Jalandhar,208005,18000
+R. K. Puram,Bhubaneshwar,201002,47000
+Sector 12,Bhayandar,800016,51000
+Indirapuram,Mor?d?b?d,110075,37000
+Kavi Nagar,Kolh?pur,208005,92000
+Rajendra Nagar,Thiruvananthapuram,201012,91000
+Sector 19,Sah?ranpur,110022,22000
+Sainik Nagar ,Warangal,201301,21000
+Vasundhara,Salem,208005,52000
+R. K. Puram,M?legaon,201002,16000
+Sector 14,Kochi,800016,76000
+Sainik Nagar,Gorakhpur,110075,67000
+Kavi Nagar,Shimoga,208005,34000
+Rajendra Nagar,Tirupp?r,208004,15000
+"Sector 19, ",Gunt?r,112450,57000
+"Sainik Nagar, ",Raurkela,113560,25000
+MG Road,Mangalore,201002,36000
+Park Street,N?nded,800016,65000
+Linking Road,Cuttack,110075,32000
+Janpath,Ch?nda,208005,67000
+Brigade Road,Dehra D?n,201002,79000
+Church Street,Durg?pur,800016,14000
+Main Bazaar,?sansol,201301,91000
+Carter Road,Bh?vnagar,208005,64000
+Hill Road,Amr?vati,201002,18000
+Turner Road,Nellore,800016,63000
+Carter Road,Ajmer,110075,57000
+Hill Road,Tinnevelly,208005,40000
+Turner Road,B?kaner,201002,42000
+Nehru Road,Agartala,800016,65000
+Mount Road,Ujjain,201301,45000
+Periyar Road,Jh?nsi,208005,92000
+100 Feet Road,Ulh?snagar,201002,6000
+Sarat Bose Road,Davangere,800016,42000
+S.V. Road,Jammu,110075,81000
+Lamington Road,Belgaum,208005,21000
+Link Road,Gulbarga,201002,40000
+Rani Jhansi Road,J?mnagar,800016,7000
+Veer Savarkar Marg,Dh?lia,201301,42000
+M.G. Road,Gaya,208005,99000
+Park Avenue,Jalgaon,201002,13000
+Queens Road,Kurnool,800016,96000
+Union Street,Udaipur,110075,19000
+Marol Maroshi Road,Bellary,208005,78000
+Hill Road,Ch?nda,76790,16000
+Bandra Reclamation,Dehra D?n,61792,75000
+Jogeshwari Vikhroli Link Road,Durg?pur,65646,25000
+Juhu Tara Road,?sansol,46412,68000
+Marine Drive,Bh?vnagar,108951,42000
+Elphinstone Road,Amr?vati,28758,53000
+Nariman Point,Nellore,17136,64000
+Waterfield Road,Ajmer,32104,29000
+Haji Ali,Tinnevelly,20876,34000
+Kemps Corner,B?kaner,32017,31000
+Colaba Causeway,Agartala,47196,56000
+Prabhadevi,Ujjain,37624,47000
+Opera House,Jh?nsi,37251,32000
+Ballygunge Place,Ulh?snagar,42418,54000
+Sudder Street,Davangere,46842,97000
+Chittaranjan Avenue,Jammu,37121,70000
+New Alipore,Belgaum,102562,54000
+Rash Behari Avenue,Gulbarga,93637,21000
+Howrah Bridge,J?mnagar,30495,69000
+S.N Banerjee Road,Dh?lia,27185,16000
+Bhowanipore,Gaya,107460,56000
+J.L. Nehru Road,Jalgaon,105783,65000
+Lenin Sarani,Kurnool,53494,44000
+Taltala,Udaipur,75307,27000
+B.B.D Bagh,Bellary,32276,11000
+Free School Street,S?ngli,97450,73000
+Bepin Behari Ganguly Street,Tuticorin,72589,95000
+A.P.C Road,Calicut,26421,39000
+Raja Ram Mohan Roy Road,Akola,63013,83000
+C.R Avenue,Bh?galpur,79630,84000
+R.K Mission Road,S?kar,50411,28000
+Shakespeare Sarani,Tumk?r,33335,77000
+Camac Street,Quilon,52646,91000
+Chirag Dilli,Muzaffarnagar,21933,83000
+Hauz Khas Village,Bh?lw?ra,96317,13000
+Ghaffar Market,Niz?m?b?d,96434,91000
+Defence Colony,Bh?tp?ra,106914,26000
+Safdarjung Enclave,K?kin?da,25185,14000
+Connaught Place,Parbhani,56406,11000
+India Gate,P?nih?ti,18380,10000
+Khan Market,L?t?r,101869,63000
+Lajpat Nagar,Rohtak,80344,4000
+Greater Kailash,R?jap?laiyam,97835,93000
+Karol Bagh,Ahmadnagar,23705,5000
+Paharganj,Cuddapah,35949,60000
+100 Feet Road,R?jahmundry,30668,1000
+Sarat Bose Road,Alwar,12030,34000
+S.V. Road,Muzaffarpur,18081,10000
+Lamington Road,Bil?spur,30020,53000
+Link Road,Mathura,11041,17000
+Rani Jhansi Road,K?m?rh?ti,78968,83000
+Veer Savarkar Marg,Pati?la,69083,78000
+M.G. Road,Saugor,52208,97000
+Park Avenue,Bij?pur,80080,73000
+Queens Road,Brahmapur,28667,63000
+Union Street,Sh?hj?npur,30512,27000
+Marol Maroshi Road,Trich?r,43175,4000
+Hill Road,Barddham?n,64629,11000
+Bandra Reclamation,Kulti,59977,96000
+Jogeshwari Vikhroli Link Road,Sambalpur,49903,58000
+Juhu Tara Road,Purnea,58950,48000
+Marine Drive,Hisar,59161,41000
+Elphinstone Road,F?roz?b?d,17233,99000
+Nariman Point,B?dar,86444,51000
+Waterfield Road,R?mpur,50438,69000
+Haji Ali,Shiliguri,26248,67000
+Kemps Corner,B?li,90713,22000
+Colaba Causeway,P?n?pat,20233,69000
+Prabhadevi,Kar?mnagar,26728,91000
+Opera House,Bhuj,102462,50000
+Ballygunge Place,Ichalkaranji,24880,24000
+Sudder Street,Tirupati,78425,97000
+Chittaranjan Avenue,Hospet,24296,74000
+New Alipore,??zawl,53336,61000
+Rash Behari Avenue,Sannai,22261,1000
+Howrah Bridge,B?r?sat,53139,50000
+S.N Banerjee Road,Ratl?m,23414,9000
+Bhowanipore,Handw?ra,59393,9000
+J.L. Nehru Road,Drug,95482,41000
+Lenin Sarani,Imph?l,93607,87000
+Taltala,Anantapur,91880,95000
+B.B.D Bagh,Et?wah,18079,35000
+Free School Street,R?ich?r,16343,66000
+Bepin Behari Ganguly Street,Ongole,33922,87000
+A.P.C Road,Bharatpur,59755,15000
+Raja Ram Mohan Roy Road,Begusarai,87725,44000
+C.R Avenue,Son?pat,20265,65000
+R.K Mission Road,R?mgundam,102989,32000
+Shakespeare Sarani,H?pur,77083,28000
+Camac Street,Uluberiya,81054,65000
+Chirag Dilli,Porbandar,106826,44000
+Hauz Khas Village,P?li,65794,91000
+Ghaffar Market,Vizianagaram,104544,85000
+Defence Colony,Puducherry,65383,15000
+Safdarjung Enclave,Karn?l,87591,93000
+Connaught Place,N?gercoil,87216,70000
+India Gate,Tanjore,109792,88000
+Khan Market,Sambhal,75698,29000
+Lajpat Nagar,Naih?ti,99785,66000
+Greater Kailash,Secunder?b?d,35765,12000
+Karol Bagh,Kharagpur,15774,21000
+Paharganj,Dindigul,10295,94000
+Raghunathpur Road,Shimla,67051,61000
+Vikas Nagar,Ingr?j B?z?r,26341,30000
+Navi ,Ellore,46633,81000
+Shastri Nagar,Puri,52530,86000
+R. K. Puram,Haldia,62326,75000
+Nehru Nagar,Nandy?l,41023,70000
+"Kanpur Road,",Bulandshahr,92896,13000
+Sant Nagar,Chakradharpur,10207,6000
+Sainik Nagar,Bhiw?ni,48923,57000
+New Aligarh,Gurgaon,28258,82000
+R. K. Puram,Burh?npur,102131,16000
+Sector 12,Khammam,48502,75000
+Indirapuram,Madhyamgram,44346,57000
+Kavi Nagar,Gh?nd?nagar,33511,66000
+Rajendra Nagar,Baharampur,61194,35000
+Sector 19,Mahb?bnagar,71195,51000
+Sainik Nagar ,Mahes?na,107756,78000
+Vasundhara,?doni,95185,34000
+R. K. Puram,R?iganj,77490,16000
+Sector 14,Bhus?val,61320,77000
+Sainik Nagar,Bahraigh,28562,38000
+Kavi Nagar,Shr?r?mpur,58695,70000
+Rajendra Nagar,Tonk,60569,89000
+"Sector 19, ",Sirsa,34417,62000
+"Sainik Nagar, ",Jaunpur,96057,62000
+MG Road,Madanapalle,58421,14000
+Park Street,Hugli,66970,35000
+Linking Road,Vellore,36709,81000
+Janpath,Alleppey,56893,56000
+Brigade Road,Cuddalore,99649,67000
+Church Street,Deo,108040,28000
+Main Bazaar,Ch?r?la,40540,92000
+Carter Road,Machil?patnam,40912,90000
+Hill Road,Medin?pur,84891,52000
+Turner Road,Dera,47215,18000

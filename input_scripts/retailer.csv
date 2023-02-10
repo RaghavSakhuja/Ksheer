@@ -1,0 +1,101 @@
+street,city,pincode,name,username,passwd,profit,manager_name
+Ramkrishna Samadhi Road,Mumbai,700027,Kishore Kirana Store,Ma_2,Ma_2,8606,Max
+15th Cross,Kolk?ta,560038,Madhav General Store,Et_3,Et_3,600,Ethan
+Raghunathpur Road,Bangalore,800013,Anand Provision Store,Li_4,Li_4,7634,Liam
+Vikas Nagar,Chennai,226022,Shree Ji General Store,No_5,No_5,4749,Noah
+Navi ,Hyder?b?d,400703,Raghav Kirana Store,Wi_6,Wi_6,267,William
+Shastri Nagar,Pune,110052,Shivam Provision Store,Ja_7,Ja_7,7221,James
+R. K. Puram,Ahmedabad,500056,Mittal Provision Store,Ol_8,Ol_8,70,Oliver
+Nehru Nagar,S?rat,201001,Vardhaman General Store,Be_9,Be_9,784,Benjamin
+"Kanpur Road,",Lucknow,226012,Goel Kirana Store,El_10,El_10,2458,Elijah
+Sant Nagar,Jaipur,110065, Laxmi General Store,Lu_11,Lu_11,7968,Lucas
+Sainik Nagar,Cawnpore,208005, Garg Provision Store,Ma_12,Ma_12,6057,Mason
+New Aligarh,Mirz?pur,202001, Saini General Store,Al_13,Al_13,8941,Alexander
+R. K. Puram,N?gpur,110022, Singhal Kirana Store,Ja_14,Ja_14,6701,Jacob
+Sector 12,Gh?zi?b?d,201301, Bharat Provision Store, M_15, M_15,6208, Michael
+Indirapuram,Indore,201014, Raj Kirana Store, D_16, D_16,7331, Daniel
+Kavi Nagar,Vadodara,201002, Aggarwal Provision Store, M_17, M_17,5312, Matthew
+Rajendra Nagar,Vish?khapatnam,800016, Mehta General Store, S_18, S_18,909, Samuel
+Sector 19,Bhop?l,110075, Tyagi Kirana Store, J_19, J_19,148, Joseph
+Sainik Nagar ,Chinchvad,208005, Gupta Provision Store, D_20, D_20,3108, David
+Vasundhara,Patna,201012, Dhawan General Store, B_21, B_21,4610, Benjamin
+R. K. Puram,Ludhi?na,110022, Jain Kirana Store, A_22, A_22,27, Andrew
+Sector 14,?gra,201301, Arora Provision Store, R_23, R_23,4184, Ryan
+Sainik Nagar,Kaly?n,208005, Malik General Store, J_24, J_24,7373, John
+Kavi Nagar,Madurai,201002, Sharma Kirana Store, T_25, T_25,9808, Tyler
+Rajendra Nagar,Jamshedpur,800016, Patel Provision Store, D_26, D_26,1303, Dylan
+"Sector 19, ",N?sik,110075, Verma General, N_27, N_27,2214, Nathan
+"Sainik Nagar, ",Far?d?b?d,208005, Singh General Store, Z_28, Z_28,6077, Zachary
+MG Road,Aurang?b?d,201012, Kapoor Kirana Store, L_29, L_29,2448, Luke
+Park Street,R?jkot,110022, Chauhan Provision Store, C_30, C_30,4262, Caleb
+Linking Road,Meerut,201301, Saxena General Store, C_31, C_31,5298, Christian
+Janpath,Jabalpur,208005, Rawat Kirana Store, A_32, A_32,1576, Adam
+Brigade Road,Th?ne,201002, Bhatia Provision Store, H_33, H_33,1684, Henry
+Church Street,Dhanb?d,800016, Mathur General Store, O_34, O_34,9002, Owen
+Main Bazaar,Allah?b?d,110075, Arya Kirana Store, J_35, J_35,2138, Jackson
+Carter Road,V?r?nasi,110078, Chaudhary Provision Store, G_36, G_36,7723, Gavin
+Hill Road,Sr?nagar,110065, Srivastava General Store, W_37, W_37,5358, Wyatt
+Turner Road,Amritsar,208005, Goyal Kirana Store, A_38, A_38,3894, Aiden
+Carter Road,Al?garh,201012, Wadhera Provision Store, E_39, E_39,3916, Ethan
+Hill Road,Bhiwandi,110022, Oberoi General Store, P_40, P_40,5578, Parker
+Turner Road,Gwalior,201301, Tiwari Kirana Store, J_41, J_41,3742, Julian
+Nehru Road,Bhilai,208005, Singh Provision Store, G_42, G_42,5877, Grayson
+Mount Road,H?ora,201002, Tandon General Store, C_43, C_43,1207, Cole
+Periyar Road,R?nchi,800016, Mehra Kirana Store, L_44, L_44,5877, Levi
+100 Feet Road,Bezw?da,110075, Ahuja Provision Store, I_45, I_45,3148, Isaac
+Sarat Bose Road,Chand?garh,208005, Grover General Store, J_46, J_46,1097, Jason
+S.V. Road,Mysore,201012, Sehgal Kirana Store, A_47, A_47,6983, Aaron
+Lamington Road,Raipur,110022, Aggarwal Provision Store, N_48, N_48,5602, Nathan
+Link Road,Kota,201301, Kaur General Store, G_49, G_49,2929, Gabriel
+Rani Jhansi Road,Bareilly,208005, Bedi Kirana Store, E_50, E_50,3531, Evan
+Veer Savarkar Marg,Jodhpur,201002, Kochhar Provision Store, I_51, I_51,99, Isaiah
+M.G. Road,Coimbatore,800016, Dua General Store, L_52, L_52,8522, Luke
+Park Avenue,Dispur,110075, Chhabra Kirana Store, L_53, L_53,2677, Logan
+Queens Road,Guw?h?ti,208005, Dhillon Provision Store, N_54, N_54,7819, Nicholas
+Union Street,Sol?pur,201012, Basu General Store, E_55, E_55,7688, Eli
+Marol Maroshi Road,Trichinopoly,110022, Aneja Kirana Store, J_56, J_56,2567, Jackson
+Hill Road,Hubli,201301, Chaddha Provision Store, D_57, D_57,8845, Dylan
+Bandra Reclamation,Jalandhar,208005, Bhandari General Store, A_58, A_58,1880, Alexander
+Jogeshwari Vikhroli Link Road,Bhubaneshwar,201002, Kishan Kirana Store, W_59, W_59,897, William
+Juhu Tara Road,Bhayandar,800016, Talwar Provision Store, M_60, M_60,8336, Mason
+Marine Drive,Mor?d?b?d,110075, Gaur General Store, O_61, O_61,3971, Owen
+Elphinstone Road,Kolh?pur,208005, Bhat Kirana Store, J_62, J_62,6971, James
+Nariman Point,Thiruvananthapuram,201012, Talwar Provision Store, C_63, C_63,3381, Caleb
+Waterfield Road,Sah?ranpur,110022, Banerjee General Store, L_64, L_64,3277, Liam
+Haji Ali,Warangal,201301, Khanna Kirana Store, A_65, A_65,2676, Alexander
+Kemps Corner,Salem,208005, Nayyar Provision Store, E_66, E_66,7276, Ethan
+Colaba Causeway,M?legaon,201002, Chakraborty General Store, B_67, B_67,5963, Benjamin
+Prabhadevi,Kochi,800016, Nanda Kirana Store, W_68, W_68,5370, William
+Opera House,Gorakhpur,110075, Sood Provision Store, N_69, N_69,7219, Noah
+Ballygunge Place,Shimoga,208005, Shukla General Store, J_70, J_70,7447, Jacob
+Sudder Street,Tirupp?r,208004, Saini Kirana Store, O_71, O_71,9415, Owen
+Chittaranjan Avenue,Gunt?r,112450, Mathur Provision Store, E_72, E_72,1501, Ethan
+New Alipore,Raurkela,113560, Bhatt General Store, L_73, L_73,5576, Liam
+Rash Behari Avenue,Mangalore,201002, Arora Kirana Store, W_74, W_74,4968, William
+Howrah Bridge,N?nded,800016, Puri Provision Store, M_75, M_75,499, Mason
+S.N Banerjee Road,Cuttack,110075, Tandon General Store, O_76, O_76,6100, Oliver
+Bhowanipore,Ch?nda,208005, Wadhwa Kirana Store, A_77, A_77,6852, Alexander
+J.L. Nehru Road,Dehra D?n,201002, Chopra Provision Store, B_78, B_78,9833, Benjamin
+Lenin Sarani,Durg?pur,800016, Vohra General Store, E_79, E_79,3306, Ethan
+Taltala,?sansol,201301, Anand Kirana Store, W_80, W_80,8308, William
+B.B.D Bagh,Bh?vnagar,208005, Kataria Provision Store, N_81, N_81,6289, Noah
+Free School Street,Amr?vati,201002, Singh General Store, M_82, M_82,6033, Mason
+Bepin Behari Ganguly Street,Nellore,800016, Kaushik Kirana Store, O_83, O_83,7051, Oliver
+A.P.C Road,Ajmer,110075, Mohan Provision Store, A_84, A_84,9736, Alexander
+Raja Ram Mohan Roy Road,Tinnevelly,208005, Saini General Store, E_85, E_85,3806, Ethan
+C.R Avenue,B?kaner,201002, Negi Kirana Store, W_86, W_86,2074, William
+R.K Mission Road,Agartala,800016, Khurana Provision Store, N_87, N_87,1539, Noah
+Shakespeare Sarani,Ujjain,201301, Jain General Store, M_88, M_88,4000, Mason
+Camac Street,Jh?nsi,208005, Chopra Kirana Store, O_89, O_89,2444, Oliver
+Chirag Dilli,Ulh?snagar,201002, Suri Provision Store, A_90, A_90,1126, Alexander
+Hauz Khas Village,Davangere,800016, Gill General Store, B_91, B_91,5784, Benjamin
+Ghaffar Market,Jammu,110075, Grewal Kirana Store, E_92, E_92,2491, Ethan
+Defence Colony,Belgaum,208005, Bhatia Provision Store, W_93, W_93,9972, William
+Safdarjung Enclave,Gulbarga,201002, Bhat General Store, N_94, N_94,2488, Noah
+Connaught Place,J?mnagar,800016, Dhingra Kirana Store, M_95, M_95,9150, Mason
+India Gate,Dh?lia,201301, Duggal Provision Store, O_96, O_96,9967, Oliver
+Khan Market,Gaya,208005, Agarwal General Store, A_97, A_97,2290, Alexander
+Lajpat Nagar,Jalgaon,201002, Saini Kirana Store, B_98, B_98,5242, Benjamin
+Greater Kailash,Kurnool,800016, Rana Provision Store, E_99, E_99,1659, Ethan
+Karol Bagh,Udaipur,110075, Mukherjee General Store, W_100, W_100,65, William
+Paharganj,Bellary,208005,Bhatia Kirana Store,No_101,No_101,4396,Noah

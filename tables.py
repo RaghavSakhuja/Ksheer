@@ -55,8 +55,8 @@ mycur.execute("""create table district_hq(
 
 mycur.execute("""create table executive(
     emp_id int(10) primary key not null auto_increment,
-    username varchar(50) NOT NULL unique,
-    name varchar(50) NOT NULL,
+    username varchar(200) NOT NULL unique,
+    name varchar(200) NOT NULL,
     passwd varchar(50) NOT NULL,
     department varchar(50),
     hq_id int(10) NOT NULL,
@@ -68,11 +68,11 @@ mycur.execute("""create table retailer(
     street varchar(200) ,
     city varchar(50) NOT NULL,
     pincode int(6) NOT NULL,
-    name varchar(50) NOT NULL,
-    username varchar(50) NOT NULL unique,
+    name varchar(200) NOT NULL,
+    username varchar(200) NOT NULL unique,
     passwd varchar(50) NOT NULL,
     profit int(10) NOT NULL default 0,
-    manager_name varchar(50)
+    manager_name varchar(200)
     )""")
 
 mycur.execute("""create table collective(
@@ -80,15 +80,15 @@ mycur.execute("""create table collective(
     street varchar(200) ,
     city varchar(50) NOT NULL,
     pincode int(6) NOT NULL,
-    name varchar(50) NOT NULL,
-    username varchar(50) NOT NULL unique,
+    name varchar(200) NOT NULL,
+    username varchar(200) NOT NULL unique,
     passwd varchar(50) NOT NULL,
     no_of_members int(10) NOT NULL
     )""")
 
 mycur.execute("""create table Raw_material(
     raw_id varchar(5) primary key not null,
-    name varchar(50) NOT NULL,
+    name varchar(200) NOT NULL,
     fat_percent int(2) NOT NULL,
     protein_percent int(2) NOT NULL,
     amount int(10) NOT NULL,
@@ -96,7 +96,7 @@ mycur.execute("""create table Raw_material(
     )""")
 mycur.execute("""create table product(
     product_id varchar(5) primary key not null,
-    name varchar(50) NOT NULL,
+    name varchar(200) NOT NULL,
     fat_percent int(2) NOT NULL,
     protein_percent int(2) NOT NULL,
     calories int(10) NOT NULL,
@@ -115,7 +115,7 @@ mycur.execute("""create table batch(
 
 mycur.execute("""create table customer(
     customer_id int(10) primary key not null auto_increment,
-    name varchar(50) NOT NULL,
+    name varchar(200) NOT NULL,
     age int(3) NOT NULL,
     gender varchar(10) NOT NULL,
     phone varchar(15) unique
@@ -149,7 +149,6 @@ mycur.execute("""create table bill_product(
 mycur.execute("""create table warehouse_batch(    
     warehouse_id int(10) NOT NULL,
     batch_id int(10) NOT NULL,
-    quantity int(10) NOT NULL,
     foreign key (warehouse_id) references warehouse(warehouse_id),
     foreign key (batch_id) references batch(batch_id)
     )""")
@@ -168,15 +167,15 @@ mycur.execute("""create table collective_phone(
 
 mycur.execute("""create table preservative(
     product_id varchar(5) NOT NULL,
-    preservative varchar(50) NOT NULL,
-    percentage int(10) NOT NULL,
+    name varchar(50) NOT NULL,
+    amount int(10) NOT NULL,
     foreign key (product_id) references product(product_id)
     )""")
 
 mycur.execute("""create table district_warehouse(
     hq_id int(10) not null,
     warehouse_id int(10) not null,
-    foreign key (hq_id) references executive(emp_id),
+    foreign key (hq_id) references district_hq(hq_id),
     foreign key (warehouse_id) references warehouse(warehouse_id)
     )""")
 

@@ -1,7 +1,7 @@
 import csv
 import mysql.connector
 
-filename = "input_scripts/collective.csv"
+filename = "input_scripts/bill_product.csv"
 field = []
 rows = []
 
@@ -20,8 +20,8 @@ with open(filename, 'r') as csvfile:
   field = next(csvreader)
   for row in csvreader:
     rows.append(row)
-    '''collective( street, city, pincode, name, username, passwd, no_of_members)'''
-    s=f'''insert into collective({field[0]}, {field[1]}, {field[2]}, {field[3]}, {field[4]}, {field[5]}, {field[6]}) values( '{row[0]}', '{row[1]}', {row[2]}, '{row[3]}', '{row[4]}', '{row[5]}', {row[6]})'''
+    '''bill_product( bill_id, product_id, quantity)'''
+    s=f'''insert into bill_product({field[0]}, {field[1]}, {field[2]}) values({row[0]}, '{row[1]}', {row[2]})'''
     try:
       mycur.execute(s)
     except Exception as e:

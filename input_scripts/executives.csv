@@ -1,0 +1,101 @@
+username,name,passwd,department,hq_id
+Aarav_2,Aarav,Aarav_2,HR,2
+Advait_3,Advait,Advait_3,Manufacturing,10
+Aryan_4, Aryan, Aryan_4,Manufacturing,20
+Avni_5, Avni, Avni_5,Supply Chain Management,7
+Aisha_6, Aisha, Aisha_6,Manufacturing,10
+Anaya_7, Anaya, Anaya_7,Business Development,2
+Arjun_8, Arjun, Arjun_8,Health and Safety,2
+Arnav_9, Arnav, Arnav_9,HR,2
+Atharva_10, Atharva, Atharva_10,Finance and Accounting,10
+Aniket_11, Aniket, Aniket_11,IT,14
+Aaradhya_12, Aaradhya, Aaradhya_12,Finance and Accounting,18
+Aditi_13, Aditi, Aditi_13,Procurement,20
+Aditya_14, Aditya, Aditya_14,Manufacturing,13
+Alia_15, Alia, Alia_15,Security,18
+Amrita_16, Amrita, Amrita_16,Security,8
+Anand_17, Anand, Anand_17,RnD,14
+Anika_18, Anika, Anika_18,Health and Safety,14
+Anjali_19, Anjali, Anjali_19,HR,20
+Aryan_20, Aryan, Aryan_20,Business Development,15
+Avikar_21, Avikar, Avikar_21,Health and Safety,20
+Anushka_22, Anushka, Anushka_22,RnD,13
+Apoorva_23, Apoorva, Apoorva_23,Procurement,18
+Aruna_24, Aruna, Aruna_24,Security,15
+Ashwin_25, Ashwin, Ashwin_25,Procurement,9
+Avantika_26, Avantika, Avantika_26,Business Development,6
+Bala_27, Bala, Bala_27,Business Development,19
+Chaitanya_28, Chaitanya, Chaitanya_28,Business Development,19
+Devanshi_29, Devanshi, Devanshi_29,Finance and Accounting,5
+Dhruv_30, Dhruv, Dhruv_30,Facilities Management,4
+Diya_31, Diya, Diya_31,Business Development,18
+Disha_32, Disha, Disha_32,Supply Chain Management,5
+Divya_33, Divya, Divya_33,Procurement,13
+Esha_34, Esha, Esha_34,Supply Chain Management,17
+Gaurav_35, Gaurav, Gaurav_35,Supply Chain Management,11
+Hrithik_36, Hrithik, Hrithik_36,Legal,20
+Ishaan_37, Ishaan, Ishaan_37,Finance and Accounting,16
+Isha_38, Isha, Isha_38,RnD,10
+Jhanvi_39, Jhanvi, Jhanvi_39,Health and Safety,18
+Jai_40, Jai, Jai_40,Facilities Management,2
+Jaya_41, Jaya, Jaya_41,Health and Safety,6
+Kavya_42, Kavya, Kavya_42,Supply Chain Management,12
+Kritika_43, Kritika, Kritika_43,Security,6
+Karthik_44, Karthik, Karthik_44,Supply Chain Management,9
+Kavyanjali_45, Kavyanjali, Kavyanjali_45,Design,13
+Keerthi_46, Keerthi, Keerthi_46,Facilities Management,13
+Lakshmi_47, Lakshmi, Lakshmi_47,Security,20
+Maitreyi_48, Maitreyi, Maitreyi_48,HR,1
+Meera_49, Meera, Meera_49,HR,17
+Mukesh_50, Mukesh, Mukesh_50,Manufacturing,13
+Naina_51, Naina, Naina_51,Design,19
+Nandini_52, Nandini, Nandini_52,Legal,10
+Neha_53, Neha, Neha_53,Health and Safety,9
+Nishant_54, Nishant, Nishant_54,Manufacturing,9
+Nithya_55, Nithya, Nithya_55,IT,5
+Pallavi_56, Pallavi, Pallavi_56,Supply Chain Management,14
+Parth_57, Parth, Parth_57,RnD,5
+Pranav_58, Pranav, Pranav_58,Supply Chain Management,2
+Priya_59, Priya, Priya_59,Security,16
+Raghav_60, Raghav, Raghav_60,Health and Safety,11
+Ramesh_61, Ramesh, Ramesh_61,Manufacturing,8
+Rishabh_62, Rishabh, Rishabh_62,Manufacturing,18
+Rohit_63, Rohit, Rohit_63,Manufacturing,9
+Saina_64, Saina, Saina_64,HR,5
+Samarth_65, Samarth, Samarth_65,Operations,7
+Sanjana_66, Sanjana, Sanjana_66,HR,11
+Sarika_67, Sarika, Sarika_67,Procurement,19
+Shikha_68, Shikha, Shikha_68,HR,17
+Shreya_69, Shreya, Shreya_69,Manufacturing,15
+Shubham_70, Shubham, Shubham_70,Facilities Management,19
+Siddharth_71, Siddharth, Siddharth_71,Business Development,19
+Smriti_72, Smriti, Smriti_72,Procurement,16
+Sonali_73, Sonali, Sonali_73,Security,20
+Srinivas_74, Srinivas, Srinivas_74,IT,9
+Suraj_75, Suraj, Suraj_75,IT,18
+Tanuja_76, Tanuja, Tanuja_76,Manufacturing,16
+Trisha_77, Trisha, Trisha_77,Security,19
+Usha_78, Usha, Usha_78,IT,1
+Varsha_79, Varsha, Varsha_79,Security,2
+Vasudev_80, Vasudev, Vasudev_80,Facilities Management,11
+Vedika_81, Vedika, Vedika_81,HR,16
+Vidhi_82, Vidhi, Vidhi_82,Finance and Accounting,2
+Vivaan_83, Vivaan, Vivaan_83,RnD,1
+Vivek_84, Vivek, Vivek_84,Security,6
+Yash_85, Yash, Yash_85,HR,11
+Yashika_86, Yashika, Yashika_86,Business Development,19
+Yogesh_87, Yogesh, Yogesh_87,Security,7
+Abhinav_88, Abhinav, Abhinav_88,RnD,13
+Aditi_89, Aditi, Aditi_89,Supply Chain Management,1
+Aditya_90, Aditya, Aditya_90,RnD,13
+Akash_91, Akash, Akash_91,Legal,15
+Akshat_92, Akshat, Akshat_92,HR,12
+Alok_93, Alok, Alok_93,Health and Safety,17
+Amol_94, Amol, Amol_94,Procurement,3
+Anant_95, Anant, Anant_95,Finance and Accounting,4
+Anmol_96, Anmol, Anmol_96,Finance and Accounting,18
+Arjun_97, Arjun, Arjun_97,HR,12
+Arnav_98, Arnav, Arnav_98,Security,11
+Arun_99, Arun, Arun_99,Design,2
+Ashish_100, Ashish, Ashish_100,Procurement,20
+Karan_101,Karan,Karan_101,IT,2

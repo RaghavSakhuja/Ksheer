@@ -1,7 +1,7 @@
 import csv
 import mysql.connector
 
-filename = "input_scripts/warehouse_batch.csv"
+filename = "input_scripts/preservatives.csv"
 field = []
 rows = []
 
@@ -20,8 +20,9 @@ with open(filename, 'r') as csvfile:
   field = next(csvreader)
   for row in csvreader:
     rows.append(row)
-    '''warehouse_batch( warehouse_id, batch_id)'''
-    s=f'''insert into warehouse_batch({field[0]}, {field[1]}) values({row[0]}, {row[1]})''' 
+    '''preservative( product_id, preservative_name, percentage)'''
+    s=f'''insert into preservative({field[0]}, {field[1]}, {field[2]}) values('{row[0]}', '{row[1]}', {row[2]})'''
+
     try:
       mycur.execute(s)
     except Exception as e:
