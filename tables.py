@@ -27,7 +27,7 @@ mycur.execute("drop table if exists rawMaterial_used")
 mycur.execute("drop table if exists batch_product")
 mycur.execute("drop table if exists collective_rawMaterial")
 mycur.execute("drop table if exists retailer_warehouse")
-mycur.execute("drop table if exists district_retailer")
+mycur.execute("drop table if exists district_warehouse")
 mycur.execute("drop table if exists hq_employee")
 mycur.execute("drop table if exists preservative")
 mycur.execute("drop table if exists collective_phone")
@@ -52,8 +52,7 @@ mycur.execute("""create table district_hq(
     hq_id int(10) primary key not null auto_increment,
     street varchar(50) ,
     city varchar(50) NOT NULL,
-    pincode int(6) NOT NULL,
-    passwd varchar(50) NOT NULL
+    pincode int(6) NOT NULL
 )""")
 
 mycur.execute("""create table executive(
@@ -123,7 +122,7 @@ mycur.execute("""create table customer(
     name varchar(50) NOT NULL,
     age int(3) NOT NULL,
     gender varchar(10) NOT NULL,
-    phone int(10) unique
+    phone varchar(15) unique
     )""")
 mycur.execute("""create table bill(
     bill_id int(10) primary key not null auto_increment,
@@ -161,13 +160,13 @@ mycur.execute("""create table warehouse_batch(
 
 mycur.execute("""create table retailer_phone(
     store_id int(10) NOT NULL,
-    phone int(10) NOT NULL unique,
+    phone varchar(15) NOT NULL unique,
     foreign key (store_id) references retailer(store_id)
     )""")
 
 mycur.execute("""create table collective_phone(
     collective_id int(10) NOT NULL,
-    phone int(10) NOT NULL unique,
+    phone varchar(15) NOT NULL unique,
     foreign key (collective_id) references collective(collective_id)
     )""")
 
@@ -185,7 +184,7 @@ mycur.execute("""create table hq_employee(
     foreign key (emp_id) references executive(emp_id)
     )""")
 
-mycur.execute("""create table distric_warehouse(
+mycur.execute("""create table district_warehouse(
     hq_id int(10) not null,
     warehouse_id int(10) not null,
     foreign key (hq_id) references executive(emp_id),
