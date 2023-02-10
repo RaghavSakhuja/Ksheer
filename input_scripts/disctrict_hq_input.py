@@ -1,8 +1,8 @@
 import csv
 import mysql.connector
 
-filename = "input_scripts/exe.csv"
-field = []
+filename = "input_scripts/hq.csv"
+fields = []
 rows = []
 
 mydb = mysql.connector.connect(
@@ -17,11 +17,11 @@ mycur=mydb.cursor()
 
 with open(filename, 'r') as csvfile:
   csvreader = csv.reader(csvfile)
-  field = next(csvreader)
+  fields = next(csvreader)
   for row in csvreader:
     rows.append(row)
-    '''executive(username, name, passwd, department, hq_id)'''
-    s=f'''insert into executive({field[0]}, {field[1]}, {field[2]}, {field[3]}, {field[4]}) values( '{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', {row[4]})'''
+    '''district_hq(street, city, pincode))'''
+    s=f'''insert into district_hq({fields[0]}, {fields[1]}, {fields[2]}) values( '{row[0]}', '{row[1]}', {row[2]})'''
     try:
       mycur.execute(s)
     except Exception as e:

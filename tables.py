@@ -48,7 +48,7 @@ mycur.execute("drop table if exists district_hq")
 
 mycur.execute("""create table district_hq(
     hq_id int(10) primary key not null auto_increment,
-    street varchar(50) ,
+    street varchar(200) ,
     city varchar(50) NOT NULL,
     pincode int(6) NOT NULL
 )""")
@@ -65,7 +65,7 @@ mycur.execute("""create table executive(
 
 mycur.execute("""create table retailer(
     store_id int(10) primary key not null auto_increment,
-    street varchar(50) ,
+    street varchar(200) ,
     city varchar(50) NOT NULL,
     pincode int(6) NOT NULL,
     name varchar(50) NOT NULL,
@@ -77,7 +77,7 @@ mycur.execute("""create table retailer(
 
 mycur.execute("""create table collective(
     collective_id int(10) primary key not null auto_increment,
-    street varchar(50) ,
+    street varchar(200) ,
     city varchar(50) NOT NULL,
     pincode int(6) NOT NULL,
     name varchar(50) NOT NULL,
@@ -132,7 +132,7 @@ mycur.execute("""create table bill(
 
 mycur.execute("""create table warehouse(
     warehouse_id int(10) primary key not null auto_increment,
-    street varchar(50) ,
+    street varchar(200) ,
     city varchar(50) NOT NULL,
     pincode int(6) NOT NULL,
     capacity int(10) NOT NULL
