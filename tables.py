@@ -24,11 +24,9 @@ print(mydb)
 mycur=mydb.cursor()
 
 mycur.execute("drop table if exists rawMaterial_used")
-mycur.execute("drop table if exists batch_product")
 mycur.execute("drop table if exists collective_rawMaterial")
 mycur.execute("drop table if exists retailer_warehouse")
 mycur.execute("drop table if exists district_warehouse")
-mycur.execute("drop table if exists hq_employee")
 mycur.execute("drop table if exists preservative")
 mycur.execute("drop table if exists collective_phone")
 mycur.execute("drop table if exists retailer_phone")
@@ -57,14 +55,12 @@ mycur.execute("""create table district_hq(
 
 mycur.execute("""create table executive(
     emp_id int(10) primary key not null auto_increment,
-    street varchar(50) ,
-    city varchar(50) NOT NULL,
-    pincode int(6) NOT NULL,
     username varchar(50) NOT NULL unique,
     name varchar(50) NOT NULL,
     passwd varchar(50) NOT NULL,
-    position varchar(50) NOT NULL,
-    department varchar(50)
+    department varchar(50),
+    hq_id int(10) NOT NULL,
+    foreign key (hq_id) references district_hq(hq_id)
     )""")
 
 mycur.execute("""create table retailer(
@@ -177,13 +173,6 @@ mycur.execute("""create table preservative(
     foreign key (product_id) references product(product_id)
     )""")
 
-mycur.execute("""create table hq_employee(
-    hq_id int(10) not null,
-    emp_id int(10) not null,
-    foreign key (hq_id) references district_hq(hq_id),
-    foreign key (emp_id) references executive(emp_id)
-    )""")
-
 mycur.execute("""create table district_warehouse(
     hq_id int(10) not null,
     warehouse_id int(10) not null,
@@ -205,14 +194,6 @@ mycur.execute("""create table collective_rawMaterial(
     quantity int(10) not null,
     foreign key (collective_id) references collective(collective_id),
     foreign key (raw_id) references Raw_material(raw_id)
-    )""")
-
-
-mycur.execute("""create table batch_product(
-    batch_id int(10) not null,
-    product_id varchar(5) not null,
-    foreign key (batch_id) references batch(batch_id),
-    foreign key (product_id) references product(product_id)
     )""")
 
 mycur.execute("""create table rawMaterial_used(

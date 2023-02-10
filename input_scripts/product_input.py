@@ -1,7 +1,7 @@
 import csv
 import mysql.connector
 
-filename = "input_scripts/product.csv"
+filename = "input_scripts/products.csv"
 field = []
 rows = []
 
