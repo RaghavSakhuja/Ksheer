@@ -9,11 +9,16 @@ h1{
 a{
     text-decoration: none;
 }
-
-/* a:visited{
+label{
+    text-align: right;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+a:visited{
     text-decoration: none;
 }
-a:hover{
+/* a:hover{
     text-decoration: none;
 }
 a:active{
@@ -25,5 +30,11 @@ table{
 }
 .prod{
     text-align: center;
+}
+input[name='add_prod']{
+    margin-right: 40px;
+}
+input[name='prod_back']{
+    width:30%;
 }
 
