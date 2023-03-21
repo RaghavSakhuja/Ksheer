@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
+    </head>
+    <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
+        <h1>Executive Login</h1>
+        <table>
+            <colgroup>
+                <col span="1" class="col1">
+                <col class="col2">
+            </colgroup>
+            
+            <form action="{% url 'exec_dash' %}" method="post">
+                {% csrf_token %}
+                <tr>
+                    <td><label for="f1" >username</label></td>
+                    <td><input type="text" id ="f1" name="username"></td>
+                </tr>
+                <tr>
+                    <td><label for="f2">password</label></td>
+                    <td><input type="text" id="f2" name="pass"></td>
+                </tr>
+                <tr style="height: 15px;"></tr>
+                <tr><td colspan="2" style="text-align: center;">
+                    <div>
+                        <input type="submit" value="Sign In" style="margin-right:20px;" >
+                        <button type="button" ><a class="back" href="{% url 'index' %}">Back</a></button>
+                    </div>
+                    </td>
+                </tr>            
+            </form>
+        </table>
+        
+        
+    </body>
+</html>
