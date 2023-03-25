@@ -8,12 +8,18 @@
         <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
     </head>
     <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
-        <h1>ADD PRODUCTS</h1>
-        <form action="{% url 'add_prod' %}" method="post">
+        <h1>ADD BILL</h1>
+        <form action="{% url 'add_bill' %}" method="post">
             {% csrf_token %}
             <div class="prod" style="margin-left: 20%;margin-right: 5%;margin-top: 5%;">
                 {% crispy form%}
+                <div style="margin-left: 45%; color: rgb(240, 20, 20); font-size: large;">
+                    {% if error %}
+                    {{error}}
+                    {%endif%}
+                </div>
             </div>
+            
             </form>
         
         
