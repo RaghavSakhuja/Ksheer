@@ -41,8 +41,8 @@ class billform(forms.Form):
     age = forms.IntegerField()
     gender = forms.CharField(max_length=10)
     phone = forms.CharField(max_length=15)
-    product_id = forms.CharField(max_length=5)
-    quantity = forms.IntegerField()
+    # product_id = forms.CharField(max_length=5)
+    # quantity = forms.IntegerField()
     
     def __init__(self, *args, **kwargs):
         
@@ -53,9 +53,14 @@ class billform(forms.Form):
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-4'
         self.helper.form_method='post'
+        self.no_of_prod=kwargs.get("number")
+        for i in range(self.no_of_prod):
+            self.fields['product_%s'%(i+1)] = forms.CharField(required=False)
+            self.fields['quantity_%s'%(i+1)] = forms.IntegerField(required=False)
         self.helper.add_input(Submit('add_prod','Add Bill',css_class='btn btn-success'))
-        self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light'))
-        self.helper.add_input(Button('add_prodfield','Add Product',onClick="javascript:history.go(-1);",css_class='btn btn-light'))
+        self.helper.add_input(Button('prod_back','Back',onClick="location.href='retail_dash'",css_class='btn btn-light'))
+        self.helper.add_input(Button('add_prodfield','Add Product',onClick="ajaxCall1()",css_class='btn btn-light'))
+        self.helper.add_input(Button('remove_prodfield','Remove Product',onClick="ajaxCall2()",css_class='btn btn-light'))
 
     
     def clean_product_id(self):
@@ -64,3 +69,7 @@ class billform(forms.Form):
         if data not in self.products:
             raise forms.ValidationError("incorrect")
         return data
+    def get_interest_fields(self):
+        for field_name in self.fields:
+            if field_name.startswith('product_') or field_name.startswith('quantity_'):
+                yield self[field_name]

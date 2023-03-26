@@ -35,15 +35,14 @@ def add_prod(request):
 
 def add_bill(request):
     if request.method=="POST":
-        form=billform(request.POST,product=products)
+        n=request.session['number']
+        form=billform(request.POST,product=products,number=n)
         if form.is_valid():
             form2=form.cleaned_data
-            h=0
             cu=db.cursor()
             cu.execute("select customer_id from customer where phone={}".format(form2['phone']))
             cu=cu.fetchone()
             if cu==None:
-                h=1
                 cu=db.cursor()
                 cu.execute("insert into customer(name,age,gender,phone) values('{}',{},'{}',{})".format(form2['name'],form2['age'],form2['gender'],form2['phone'])) 
                 db.commit()   
@@ -62,9 +61,13 @@ def add_bill(request):
             billid=cu.fetchone()
             cu=db.cursor()
             try:
-                cu.execute("insert into bill_product values({},'{}',{})".format(billid[0],form2['product_id'],form2['quantity']))
-                db.commit()
-                redirect("add_bill")
+                print(form2)
+                for i in range(1,n+1):
+                    print(billid[0],form2['product_%s'%i],form2['quantity_%s'%i])
+                    cu.execute("insert into bill_product values({},'{}',{})".format(billid[0],form2['product_%s'%i],form2['quantity_%s'%i]))
+                    db.commit()
+                del request.session['number']
+                return HttpResponseRedirect("retail_dash")
             except Exception as e:
                 cu.execute(f"delete from bill where bill_id={billid}")
                 db.commit()
@@ -73,10 +76,18 @@ def add_bill(request):
                     db.commit()
                 return render(request,"ksheer/add_bill",context={'error':"insufficient quantity","form":{form}}) 
     else:
-        form=billform(product=products)
-    return render(request,"ksheer/add_bill.html",{
-        "form":form
-    })
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            h=request.GET.get('working')
+            if h=="yes":
+                request.session['number']=request.session['number']+1
+            elif h=="no":
+                request.session['number']=request.session['number']-1
+
+        n=request.session['number']
+        form=billform(product=products,number=n)  
+        return render(request,"ksheer/add_bill.html",{
+            "form":form,"n":n
+        })
 
 def exec_inventory(request):
     return render(request,"ksheer/exec_inventory.html")
@@ -120,6 +131,7 @@ def ret_bills(request):
 
 def retail_dash(request):
     if request.method=="POST":
+            request.session['number']=1
             cu=db.cursor()
             cu.execute("select * from retailer where username='{}' and passwd='{}'".format(request.POST.get('username'),request.POST.get('pass')))
             cu=cu.fetchone()
@@ -131,7 +143,12 @@ def retail_dash(request):
                 return response
             else:
                 return HttpResponseRedirect("retailer_login")
+    elif request.session['usertype']=='r':
+        request.session['number']=1
+        response=render(request,"ksheer/retailer_dash.html",{"name":request.session['userid']})
+        return response
     else:
+        request.session['number']=1
         return render(request,"ksheer/index.html")
     
                                 
