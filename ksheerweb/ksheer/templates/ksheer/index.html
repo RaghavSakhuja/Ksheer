@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
+    </head>
+    <!-- style="background-image: url('/static/ksheer/background.jpg');" -->
+    <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
+        <h1>Login</h1>
+        <table class="list">
+            <colgroup>
+                <col span="1" class="col1">
+                <col class="col2">
+            </colgroup>
+                <tr>
+                    <td><a href="{% url 'executive' %}" >Executive</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'retailer_login' %}">Retailer</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'collective' %}">Collective</a></td>
+                </tr>             
+        </table>
+        
+    </body>
+</html>

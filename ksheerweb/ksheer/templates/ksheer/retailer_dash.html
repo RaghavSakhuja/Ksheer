@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
+    </head>
+    <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
+        <h1>{{name}}</h1>
+        <table>
+            <colgroup>
+                <col span="1" class="col1">
+                <col class="col2">
+            </colgroup>
+                <tr>
+                    <td><a href="{% url 'ret_bills' %}" >View Bills</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'add_bill' %}">Add Bill</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'exec_ret' %}">Manage retailers</a></td>
+                </tr> 
+                <tr>
+                    <td><a href="{% url 'exec_coll' %}">Manage collectives</a></td>
+                </tr> 
+                <tr>
+                    <td><a href="{% url 'exec_rep' %}">Reports</a></td>
+                </tr> 
+                <tr><td colspan="2" style="text-align: center;">
+                    <div>
+                        <button type="button" onclick="deleteCookies()"><a class="back" href="{% url 'index' %}">Sign out</a></button>
+                        <script>
+                            function deleteCookies() {
+                                var Cookies = document.cookie.split(';');
+                                for (var i = 0; i < Cookies.length; i++)
+                                document.cookie = Cookies[i] + "=;expires=" + new Date(0).toUTCString();
+                            } 
+                        </script>
+                    </div>
+                    </td>
+                </tr>            
+        </table>
+        
+        
+    </body>
+</html>

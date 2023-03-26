@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
+    </head>
+    <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
+        <h1>{{name}}</h1>
+        <table>
+            <!-- <colgroup>
+                <col span="1" class="col1">
+                <col class="col2">
+            </colgroup> -->
+            {% for row in data%}
+            <tr>
+                <td>
+                    billid: {{row.billid}}
+                </td>
+            </tr>
+            <tr>
+                <td>custid: {{row.custid}}</td>
+            </tr>
+            <tr>
+                <td>total: {{row.total}}</td>
+            </tr>
+            <tr>
+                <td>
+                    date: {{row.date}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    items: {{row.items}}
+                </td>
+            </tr>
+            <tr height = 10px></tr>
+            {% endfor %}            
+        </table >
+    </body>
+</html>

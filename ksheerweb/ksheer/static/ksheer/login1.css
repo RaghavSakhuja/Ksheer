@@ -1,0 +1,40 @@
+h1{
+    margin-top: 10%;
+    text-align: center;
+    color: black;
+}
+.back{
+    color:black;
+}
+a{
+    text-decoration: none;
+}
+label{
+    text-align: right;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+a:visited{
+    text-decoration: none;
+}
+/* a:hover{
+    text-decoration: none;
+}
+a:active{
+    text-decoration: none;
+} */
+table{
+    margin-left: auto;
+    margin-right: auto;
+}
+.prod{
+    text-align: center;
+}
+input[name='add_prod']{
+    margin-right: 40px;
+}
+input[name='prod_back']{
+    width:30%;
+}
+
