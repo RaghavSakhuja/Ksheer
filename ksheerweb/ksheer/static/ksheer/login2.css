@@ -1,0 +1,170 @@
+/* login */
+/* 
+position: relative;
+width: 1440px;
+height: 1024px;
+background: #000000; */
+
+
+/* Frame 2 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+position: absolute;
+width: 965px;
+height: 914px;
+left: -647px;
+top: 31px;
+
+
+
+/* Ellipse 1 */
+
+width: 914px;
+height: 914px;
+
+/* praimery */
+background: #4044ED;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+margin: 0px -25px;
+
+
+/* Ellipse 2 */
+
+width: 76px;
+height: 76px;
+
+/* secendry */
+background: #93DFFF;
+transform: matrix(1, 0, 0, -1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Line 1 */
+
+position: absolute;
+width: 531px;
+height: 0px;
+left: 599px;
+top: 559px;
+
+/* withe */
+border: 2px solid #FFFFFF;
+
+
+/* Line 2 */
+
+position: absolute;
+width: 531px;
+height: 0px;
+left: 599px;
+top: 659px;
+
+/* withe */
+border: 2px solid #FFFFFF;
+
+
+/* LOGIN */
+
+position: absolute;
+width: 207px;
+height: 134px;
+left: 599px;
+top: 289px;
+
+
+
+/* withe */
+color: #FFFFFF;
+
+
+
+/* Username */
+
+position: absolute;
+width: 99px;
+height: 30px;
+left: 599px;
+top: 513px;
+
+font-family: 'Acme';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 30px;
+
+/* graye */
+color: #999999;
+
+
+
+/* Password */
+
+position: absolute;
+width: 93px;
+height: 30px;
+left: 599px;
+top: 613px;
+
+font-family: 'Acme';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 30px;
+
+/* graye */
+color: #999999;
+
+
+
+/* Frame 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 10px 239px;
+gap: 10px;
+
+position: absolute;
+width: 527px;
+height: 50px;
+left: 599px;
+top: 723px;
+
+/* praimery */
+background: #4044ED;
+
+
+/* login */
+
+width: 49px;
+height: 30px;
+
+font-family: 'Acme';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 30px;
+
+/* withe */
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
