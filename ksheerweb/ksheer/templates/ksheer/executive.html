@@ -16,7 +16,7 @@
         </svg>
         </div>
         <div style="display: inline-block; vertical-align: middle; margin-left: 300px;">
-        <h1>Executive Login</h1>
+        <h1 style="color: white;">Executive Login</h1>
         <table>
             <colgroup>
                 <col span="1" class="col1">
@@ -25,11 +25,11 @@
             <form action="{% url 'exec_dash' %}" method="post">
                 {% csrf_token %}
                 <tr>
-                    <td><label for="f1" >username</label></td>
+                    <td><label for="f1" style="color: white; margin-right: 10px;">username</label></td>
                     <td><input type="text" id ="f1" name="username"></td>
                 </tr>
                 <tr>
-                    <td><label for="f2">password</label></td>
+                    <td><label for="f2" style="color: white; margin-right: 10px;">password</label></td>
                     <td><input type="text" id="f2" name="pass"></td>
                 </tr>
                 <tr style="height: 15px;"></tr>

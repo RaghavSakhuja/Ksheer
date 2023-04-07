@@ -92,6 +92,9 @@ def add_bill(request):
 def exec_inventory(request):
     return render(request,"ksheer/exec_inventory.html")
 
+def manage_ret(request):
+    return render(request,"ksheer/manage_ret.html")    
+
 def exec_dash(request):
     if request.method=="POST":
             cu=db.cursor()
@@ -100,7 +103,7 @@ def exec_dash(request):
             if cu!=None:  
                 request.session["userid"]=request.POST.get('username')
                 request.session["usertype"]="e"
-                response=render(request,"ksheer/executive_main.html",{"name":request.POST.get('username')})
+                response=render(request,"ksheer/exec_dash.html",{"name":request.POST.get('username')})
                 return response
             else:
                 return HttpResponseRedirect("executive")
@@ -153,8 +156,13 @@ def retail_dash(request):
     
                                 
 def index(request):
+    try:
+        print(request.session['userid'])
+        del request.session['usertype']
+        del request.session['userid']
+    except:
+        pass
     response=render(request,"ksheer/index.html")
-    response.delete_cookie('token')
     return response
 
 def executive(request):
@@ -265,7 +273,26 @@ def exec_yearly_product_report(request):
     df = pd.DataFrame(data, columns=columns)
     df=df.to_html(classes=['table'],index=False)
     return render(request,'ksheer/exec_yearly_report.html',context={"dataframe":df})
-    
 
+def add_retailer(request):
+    if request.method=="POST":
+        form=storeform(request.POST)
+        if form.is_valid():
+            form=form.cleaned_data
+            cu=db.cursor()
+            try:
+                cu.execute(f'''insert into retailer(street,city,pincode,name,username,passwd) values("{form['street']}","{form['city']}",{form['pincode']},"{form['store_name']}","{form['username']}","{form['password']}")''')
+                db.commit()
+            except Error as e:
+                
+        return HttpResponseRedirect("add_retailer")
+    else:
+        return render(request,"ksheer/add_retailer.html",{
+            "form":storeform()
+        })
+
+def view_retailers(request):
+    # context={"dataframe":df}
+    return render(request,'ksheer/view_ret.html')
 
 

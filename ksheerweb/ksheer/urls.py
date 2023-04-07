@@ -24,5 +24,8 @@ urlpatterns=[
     path("exec_yearly_report",views.exec_yearly_product_report,name="exec_yearly_report"),
     path("exec_batches",views.exec_add_batch,name="exec_batches"),
     path("exec_warehouse_batch",views.exec_warehouse_batch,name="exec_warehouse_batch"),
-    path("exec_ret_reports",views.exec_ret_reports,name="exec_ret_reports")
+    path("exec_ret_reports",views.exec_ret_reports,name="exec_ret_reports"),
+    path("manage_ret",views.manage_ret,name="manage_ret"),
+    path("add_retailer",views.add_retailer,name="add_retailer"),
+    path("view_ret",views.view_retailers,name="view_ret")
 ]

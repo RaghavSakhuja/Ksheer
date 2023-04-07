@@ -35,7 +35,24 @@ class prodform(forms.Form):
         self.helper.form_method='post'
         self.helper.add_input(Submit('add_prod','Add Product',css_class='btn btn-success'))
         self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light',style="width=50px;"))
-        
+
+class storeform(forms.Form):
+    username = forms.CharField(max_length=200)
+    password = forms.CharField(max_length=200)
+    street=forms.CharField(max_length=200)
+    city=forms.CharField(max_length=200)
+    store_name=forms.CharField(max_length=200)
+    pincode=forms.IntegerField(min_value=0)
+    def __init__(self, *args, **kwargs):
+        super(storeform, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-3'
+        self.helper.field_class = 'col-lg-4'
+        self.helper.form_method='post'
+        self.helper.add_input(Submit('add_store','Add Product',css_class='btn btn-success'))
+        self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light',style="width=50px;"))
+                
 class billform(forms.Form):
     name = forms.CharField(max_length=200)
     age = forms.IntegerField()

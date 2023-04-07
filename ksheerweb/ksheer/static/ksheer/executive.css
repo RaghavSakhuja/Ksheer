@@ -28,21 +28,45 @@ table,tr,td,th{
 }
 
 .heading {
-    position: relative;
-    top: 33%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-left:2%;
 }
 
-.button{
-    position: relative;
+.btn{
+    font-size: 110;
+    width: 200px !important;
     background-color: blue;
-    padding: 500px 10px;
     border: none;
     border-radius: 5%;
     text-align: center;
 }
 
-.button a{
+.btn a{
     color: rgb(234, 234, 249);
+}
+
+.index{
+    margin-top: 1%;
+    font-size: 110%;
+    color: grey;
+    margin-left: 20px;
+}
+
+.inactive_index{
+    color: grey;
+
+}
+
+.active_index
+{
+    color:blue;
+}
+
+.searchbar{
+    margin-left: 20px;
+    margin-top: 1%;
+    width: 50%;
+    height: 30px;
+    border-radius: 5%;
+    border: none;
+    padding-left: 10px;
 }
