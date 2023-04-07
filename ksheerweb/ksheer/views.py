@@ -100,7 +100,7 @@ def exec_dash(request):
             if cu!=None:  
                 request.session["userid"]=request.POST.get('username')
                 request.session["usertype"]="e"
-                response=render(request,"ksheer/exec_dash.html",{"name":request.POST.get('username')})
+                response=render(request,"ksheer/executive_main.html",{"name":request.POST.get('username')})
                 return response
             else:
                 return HttpResponseRedirect("executive")
