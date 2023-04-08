@@ -17,7 +17,14 @@ class batchform(forms.Form):
         self.helper.form_method='post'
         self.helper.add_input(Submit('add_batch','Add Batch',css_class='btn btn-success'))
         self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light',style="width=50px;"))
-
+    
+    def clean(self):
+        super(batchform,self).clean()
+        data=self.cleaned_data
+        if data.get('warehouse_id') >10:
+            self._errors['warehouse_id'] = self.error_class([
+                'Minimum 5 characters required'])
+        return self.cleaned_data
 class prodform(forms.Form):
     product_id = forms.CharField(max_length=5)
     name = forms.CharField(max_length=200)
@@ -79,13 +86,17 @@ class billform(forms.Form):
         self.helper.add_input(Button('add_prodfield','Add Product',onClick="ajaxCall1()",css_class='btn btn-light'))
         self.helper.add_input(Button('remove_prodfield','Remove Product',onClick="ajaxCall2()",css_class='btn btn-light'))
 
+        
+    def clean(self):
+        super(billform,self).clean()
+        
+        for field_name in self.fields:
+            if field_name.startswith('product_'):
+                data=self.cleaned_data.get(field_name)
+                if data not in self.products:
+                    self._errors[field_name] = self.error_class(['invalid product'])
+        return self.cleaned_data
     
-    def clean_product_id(self):
-        # raise forms.ValidationError("error")
-        data=self.cleaned_data.get('product_id')
-        if data not in self.products:
-            raise forms.ValidationError("incorrect")
-        return data
     def get_interest_fields(self):
         for field_name in self.fields:
             if field_name.startswith('product_') or field_name.startswith('quantity_'):
