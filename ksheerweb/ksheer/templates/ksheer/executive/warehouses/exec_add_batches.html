@@ -9,15 +9,11 @@
     </head>
     <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
         <h1>ADD BATCH</h1>
-        <form action="{% url 'exec_batches' %}" method="post">
+        <form action="{% url 'exec_add_batches' %}" method="post">
             {% csrf_token %}
             <div class="prod" style="margin-left: 20%;margin-right: 5%;margin-top: 5%;">
                 {% crispy form%}
                 
-            </div>
-            <div style="margin-left: 45%; color: rgb(240, 20, 20); font-size: large;">
-                
-                {{form.error}}
             </div>
             </form>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

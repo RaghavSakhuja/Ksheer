@@ -14,28 +14,30 @@ db = mysql.connector.connect(
   database="ksheer"
 )
 cu=db.cursor()
-cu.execute("select product_id from product")
-products=[i[0] for i in cu.fetchall()]
+
 
 d={}
 # Create your views here.
 class executive:
     
     def executive(request):
-         return render(request,"ksheer/executive/executive.html")
+        if request.method=="POST":
+            cu=db.cursor()
+            cu.execute("select * from executive where username='{}' and passwd='{}'".format(request.POST.get('username'),request.POST.get('pass')))
+            cu=cu.fetchone()
+            if cu!=None:  
+                request.session["userid"]=request.POST.get('username')
+                request.session["usertype"]="e"
+                return HttpResponseRedirect("exec_dash")
+            else:
+                return HttpResponseRedirect("executive")
+        else:
+            return render(request,"ksheer/executive/executive.html")
     
     def exec_dash(request):
-        if request.method=="POST":
-                cu=db.cursor()
-                cu.execute("select * from executive where username='{}' and passwd='{}'".format(request.POST.get('username'),request.POST.get('pass')))
-                cu=cu.fetchone()
-                if cu!=None:  
-                    request.session["userid"]=request.POST.get('username')
-                    request.session["usertype"]="e"
-                    response=render(request,"ksheer/executive/exec_dash.html",{"name":request.POST.get('username')})
-                    return response
-                else:
-                    return HttpResponseRedirect("executive")
+        if 'userid' in request.session:
+            response=render(request,"ksheer/executive/exec_dash.html",{"name":request.session.get('userid')})
+            return response
         else:
             return render(request,"ksheer/index.html")
     
@@ -54,13 +56,13 @@ class executive:
             })
     
     def exec_inventory(request):
-        return render(request,"ksheer/executive/exec_inventory.html")
+        return render(request,"ksheer/executive/inventory/exec_inventory.html")
     
     def manage_ret(request):
         return render(request,"ksheer/executive/stores/manage_ret.html")
     
     def exec_reports(request):
-        return render(request,"ksheer/executive/reports.html")
+        return render(request,"ksheer/executive/reports/reports.html")
 
     def exec_ret_reports(request):
         cu=db.cursor()
@@ -84,24 +86,46 @@ class executive:
         context = {'dataframe': df}
         return render(request, 'ksheer/executive/exec_ret_reports.html', context)
     
+    def exec_warehouse(request):
+        return render(request,"ksheer/executive/warehouses/exec_warehouse.html")
+    
+    def exec_add_warehouse(request):
+        if request.method=='POST':
+            form=warehouseform(request.POST)
+            if form.is_valid():
+                form2=form.cleaned_data
+                try:
+                    cu=db.cursor()
+                    cu.execute(f"insert into warehouse values({form2['street']},{form2['']})")
+                    db.commit()
+                    return HttpResponseRedirect("executive/warehouse/exec_add_batches")
+                except Exception as e:
+                    return render(request,"ksheer/executive/warehouses/exec_add_batches.html",context={"form":form})
+            else:
+                return render(request,"ksheer/executive/warehouses/exec_add_batches.html",context={"form":form})
+        else:
+            return render(request,"ksheer/executive/warehouses/exec_add_warehouse.html",context={'form':warehouseform()})
+    
     def exec_add_batch(request):
         if request.method=="POST":
-            form=batchform(request.POST)
+            cu=db.cursor()
+            cu.execute("select warehouse_id from warehouse")
+            warehouses=[i[0] for i in cu.fetchall()]
+            form=batchform(request.POST,warehouse=warehouses)
             if form.is_valid():
                 form2=form.cleaned_data
                 try:
                     cu=db.cursor()
                     cu.execute(f"insert into warehouse_batch values({form2['warehouse_id']},{form2['batch_id']})")
                     db.commit()
-                    print(form2['warehouse_id'],form2['batch_id'])
-                    return HttpResponseRedirect("exectuive/exec_batches")
+                    return HttpResponseRedirect("executive/warehouse/exec_add_batches")
                 except Exception as e:
-                    return render(request,"ksheer/executive/exec_batches.html",context={"form":form})
+                    return render(request,"ksheer/executive/warehouses/exec_add_batches.html",context={"form":form})
             else:
                 print("yes")
-                return render(request,"ksheer/executive/exec_batches.html",context={"form":form})
+                return render(request,"ksheer/executive/warehouses/exec_add_batches.html",context={"form":form})
         else:
-            return render(request,"ksheer/executive/exec_batches.html",context={"form":batchform()})
+            return render(request,"ksheer/executive/warehouses/exec_add_batches.html",context={"form":batchform()})
 
     
 
@@ -110,18 +134,19 @@ class executive:
         warehouse w,warehouse_batch wb,batch b 
         where w.warehouse_id=wb.warehouse_id and b.batch_id=wb.batch_id;
         """
+            cu=db.cursor()
             cu.execute(query)
             data=cu.fetchall()
             columns = [desc[0] for desc in cu.description]
             df = pd.DataFrame(data, columns=columns)
             df=df.to_html(classes=['table'],index=False)
-            return render(request,"ksheer/exec_batches_report.html",context={"dataframe":df})
+            return render(request,"ksheer/executive/warehouses/exec_batches_report.html",context={"dataframe":df})
 
 
     def exec_location_profit(request):
         query="""select pincode,city,street,sum(profit),grouping(pincode),grouping(city),grouping(street) from retailer
     group by pincode,city,street with rollup order by grouping(street),grouping(city),grouping(pincode);"""
-        
+        cu=db.cursor()
         cu.execute(query)
         data=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
@@ -129,12 +154,11 @@ class executive:
         df=df.to_html(classes=['table'],index=False)
         return render(request,'ksheer/exec_location_profit.html',context={"dataframe":df})
 
-
     def exec_location_capacity(request):
         query="""select pincode,city,street,sum(capacity) from warehouse
         group by pincode,city,street with rollup having grouping(pincode,city,street)<>0 ;
         """
-        
+        cu=db.cursor()
         cu.execute(query)
         data=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
@@ -152,6 +176,7 @@ class executive:
         where batch.production_date between '2021-01-01' and '2022-011-01' group by batch.product_id)
         t2 on product.product_id=t2.pid;
         """
+        cu=db.cursor()
         cu.execute(query)
         data=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
@@ -212,11 +237,13 @@ class retailer:
     
     def add_bill(request):
         if request.method=="POST":
+            cu=db.cursor()
+            cu.execute("select product_id from product")
+            products=[i[0] for i in cu.fetchall()]
             n=request.session['number']
             form=billform(request.POST,product=products,number=n)
             if form.is_valid():
                 form2=form.cleaned_data
-                print("yse",form2)
                 cu=db.cursor()
                 cu.execute("select customer_id from customer where phone={}".format(form2['phone']))
                 cu=cu.fetchone()
@@ -272,51 +299,36 @@ class retailer:
             return render(request,"ksheer/retailer/add_bill.html",{
                 "form":form,"n":n
             })
-
-
-
+    def ret_bills(request):
+        if "userid" in request.session and "usertype" in request.session and request.session['usertype']=="r":
+            cu=db.cursor()
+            cu.execute("select bill.*,bill_product.product_id,bill_product.quantity from bill left join bill_product on bill.bill_id=bill_product.bill_id where store_id={} order by bill_id".format(request.session['storeid']))
+            cu=cu.fetchall()
     
+            d={}
+            for i in cu:
+                if i[0] in d:
+                    d[i[0]][1].append([i[5],i[6]])
+                else:
+                    d[i[0]]=[[i[1],i[2],i[3],i[4]],[]]
+                    d[i[0]][1].append([i[5],i[6]])
 
-
-
-def ret_bills(request):
-    if "userid" in request.session and "usertype" in request.session and request.session['usertype']=="r":
-        cu=db.cursor()
-        cu.execute("select bill.*,bill_product.product_id,bill_product.quantity from bill left join bill_product on bill.bill_id=bill_product.bill_id where store_id={} order by bill_id".format(request.session['storeid']))
-        cu=cu.fetchall()
- 
-        d={}
-        for i in cu:
-            if i[0] in d:
-                d[i[0]][1].append([i[5],i[6]])
-            else:
-                d[i[0]]=[[i[1],i[2],i[3],i[4]],[]]
-                d[i[0]][1].append([i[5],i[6]])
-
-        l=[]
-        for i in d:
-            x={'billid':i,'custid':d[i][0][0],'date':d[i][0][2],'total':d[i][0][3],'items':d[i][1]}
-            l.append(x)
-        return render(request,"ksheer/ret_bills.html",{'data':l})
-    else:
-        return HttpResponseRedirect("index")
-
-
-                                
+            l=[]
+            for i in d:
+                x={'billid':i,'custid':d[i][0][0],'date':d[i][0][2],'total':d[i][0][3],'items':d[i][1]}
+                l.append(x)
+            return render(request,"ksheer/ret_bills.html",{'data':l})
+        else:
+            return HttpResponseRedirect("index")
+                               
 def index(request):
     try:
-        print(request.session['userid'])
         del request.session['usertype']
         del request.session['userid']
     except:
         pass
     response=render(request,"ksheer/index.html")
     return response
-
-
-
-
-
 
 def collective(request):
     return render(request,"ksheer/collective.html")

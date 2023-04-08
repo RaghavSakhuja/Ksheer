@@ -5,11 +5,27 @@ from crispy_forms.layout import Submit, Layout, Div, Fieldset,Button
 from decimal import Decimal
 from django.core.exceptions import ValidationError
 
+class warehouseform(forms.Form):
+    street =forms.CharField(max_length=200)
+    city =forms.CharField(max_length=50)
+    pincode =forms.IntegerField()
+    capacity =forms.IntegerField()
+    def __init__(self, *args, **kwargs):
+        super(warehouseform, self).__init__(*args,**kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-3'
+        self.helper.field_class = 'col-lg-4'
+        self.helper.form_method='post'
+        self.helper.add_input(Submit('add_batch','Add Batch',css_class='btn btn-success'))
+        self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light',style="width=50px;"))
+
 class batchform(forms.Form):
     batch_id=forms.IntegerField()
     warehouse_id=forms.IntegerField()
     def __init__(self, *args, **kwargs):
-        super(batchform, self).__init__(*args, **kwargs)
+        super(batchform, self).__init__(*args)
+        self.warehouses=kwargs.get('warehouse')
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-3'
@@ -18,13 +34,13 @@ class batchform(forms.Form):
         self.helper.add_input(Submit('add_batch','Add Batch',css_class='btn btn-success'))
         self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light',style="width=50px;"))
     
-    def clean(self):
-        super(batchform,self).clean()
-        data=self.cleaned_data
-        if data.get('warehouse_id') >10:
+    def clean_warehouse_id(self):
+        data=self.cleaned_data.get('warehouse_id')
+        if data not in self.warehouses:
             self._errors['warehouse_id'] = self.error_class([
-                'Minimum 5 characters required'])
+                'invalid warehouse id'])
         return self.cleaned_data
+
 class prodform(forms.Form):
     product_id = forms.CharField(max_length=5)
     name = forms.CharField(max_length=200)
@@ -95,6 +111,9 @@ class billform(forms.Form):
                 data=self.cleaned_data.get(field_name)
                 if data not in self.products:
                     self._errors[field_name] = self.error_class(['invalid product'])
+        if len(self.cleaned_data.get('phone'))<10:
+            self._errors['phone'] = self.error_class(['invalid phone number'])
+
         return self.cleaned_data
     
     def get_interest_fields(self):
