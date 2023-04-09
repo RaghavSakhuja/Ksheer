@@ -1,0 +1,65 @@
+h1{
+    color: #FFFFFF;
+    font-family: 'Jockey One' !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 134px;
+}
+.back{
+    color:black;
+}
+a{
+    text-decoration: none;
+}
+label{
+    text-align: right;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+a:visited{
+    text-decoration: none;
+}
+/* a:hover{
+    text-decoration: none;
+}
+a:active{
+    text-decoration: none;
+} */
+table{
+    margin-left: auto;
+    margin-right: auto;
+}
+.prod{
+    text-align: center;
+}
+input[name='add_prod']{
+    margin-right: 40px;
+}
+input[name='prod_back']{
+    width:30%;
+}
+input[type='text']{
+    background-color: #000000;
+    /* border: grey; */
+    color: #FFFFFF;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+input[type='text']:focus{
+    outline: none;
+}
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: #4044ED !important;
+  border-color: #4044ED !important;
+}
+.btn-primary:hover{
+  background-color: #4142aa !important;
+  border-color: #4142aa !important;
+}
+

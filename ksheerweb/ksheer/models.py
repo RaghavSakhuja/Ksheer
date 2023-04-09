@@ -7,7 +7,7 @@ class Batch(models.Model):
     production_date = models.DateField()
     expiry_date = models.DateField()
     class Meta:
-        managed = True
+        managed = False
         db_table = 'batch'
 
 class Bill(models.Model):

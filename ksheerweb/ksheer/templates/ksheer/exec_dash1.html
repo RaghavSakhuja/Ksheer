@@ -6,25 +6,36 @@
         <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
     </head>
     <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
-        <h1>REPORTS</h1>
+        <h1>{{name}}</h1>
         <table>
             <colgroup>
                 <col span="1" class="col1">
                 <col class="col2">
             </colgroup>
                 <tr>
-                    <td><a href="{% url 'exec_ret_reports' %}" >Retailer Reports</a></td>
+                    <td><a href="{% url 'exec_inventory' %}" >Manage Inventory</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'exec_ware' %}">Manage Warehouses</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'exec_ret' %}">Manage retailers</a></td>
                 </tr> 
                 <tr>
-                    <td><a href="{% url 'exec_location_profit' %}" >Location wise Profit</a></td>
+                    <td><a href="{% url 'exec_coll' %}">Manage collectives</a></td>
                 </tr> 
                 <tr>
-                    <td><a href="{% url 'exec_location_capacity' %}" >Location wise Capacity</a></td>
+                    <td><a href="{% url 'exec_reports' %}">Reports</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'exec_batches' %}">Add Batches</a></td>
                 </tr> 
                 <tr>
-                    <td><a href="{% url 'exec_yearly_report' %}" >Yearly product report</a></td>
+                    <td><a href="{% url 'exec_warehouse_batch' %}">View Batches</a></td>
                 </tr> 
+
                 <tr><td colspan="2" style="text-align: center;">
+
                     <div>
                         <button type="button" onclick="deleteCookies()"><a class="back" href="{% url 'index' %}">Sign out</a></button>
                         <script>
@@ -34,12 +45,9 @@
                                 document.cookie = Cookies[i] + "=;expires=" + new Date(0).toUTCString();
                             } 
                         </script>
-                        <button type="button" onclick="history.back()">Back</button>
                     </div>
                     </td>
                 </tr>            
-        </table>
-        
-        
+        </table> 
     </body>
 </html>

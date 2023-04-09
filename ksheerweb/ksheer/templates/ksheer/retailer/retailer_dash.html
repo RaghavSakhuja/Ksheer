@@ -6,28 +6,26 @@
         <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
     </head>
     <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
-        <h1>Executive Login</h1>
+        <h1>{{name}}</h1>
         <table>
+            <form action="{% url 'index' %}" method="post">
+                {% csrf_token %}
             <colgroup>
                 <col span="1" class="col1">
                 <col class="col2">
             </colgroup>
                 <tr>
-                    <td><a href="{% url 'add_prod' %}" >Add Product</a></td>
+                    <td><a href="{% url 'ret_bills' %}" >View Bills</a></td>
                 </tr>
                 <tr>
-                    <td><a href="{% url 'exec_ware' %}">Edit Product</a></td>
+                    <td><a href="{% url 'add_bill' %}">Add Bill</a></td>
                 </tr>
                 <tr>
-                    <td><a href="{% url 'exec_ret' %}">Delete Product</a></td>
-                </tr> 
-                <tr><td colspan="2" style="text-align: center;">
-                    <div>
-                        <button type="button" onclick="history.back()">Back</button>
-                    </div>
-
+                    <td>
+                        <input type="submit" value="Logout" style="margin-right:20px;" class='btn btn-primary' >
                     </td>
-                </tr>            
+                </tr>
+                </form>          
         </table>
         
         
