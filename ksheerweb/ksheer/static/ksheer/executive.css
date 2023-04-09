@@ -1,8 +1,8 @@
 .container {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(+100%, -50%);
+    left: 15%;
+    transform: translate(+100%, -40%);
     color: rgb(234, 234, 249);
 }   
 
@@ -24,7 +24,7 @@
 }
 table,tr,td,th{
     border: none !important;
-    padding:50px;
+    padding:10px;
 }
 
 .heading {
