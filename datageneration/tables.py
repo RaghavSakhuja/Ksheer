@@ -94,6 +94,11 @@ mycur.execute("""create table Raw_material(
     amount int(10) NOT NULL,
     rate int(10) NOT NULL
     )""")
+mycur.execute("""CREATE TABLE `ksheer`.`category` (
+  `cat_id` VARCHAR(5) NOT NULL,
+  `Cat_Name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`cat_id`));""")
+
 mycur.execute("""create table product(
     product_id varchar(5) primary key not null,
     name varchar(200) NOT NULL,
@@ -152,6 +157,13 @@ mycur.execute("""create table warehouse_batch(
     foreign key (warehouse_id) references warehouse(warehouse_id),
     foreign key (batch_id) references batch(batch_id)
     )""")
+
+mycur.execute(""" create table category_product(
+    cat_id varchar(5) NOT NULL,
+    product_id varchar(5) not null,
+    foreign key (cat_id) references category(cat_id),
+    foreign key (product_id) references product(product_id)
+    );""")
 
 mycur.execute("""create table retailer_phone(
     store_id int(10) NOT NULL,
