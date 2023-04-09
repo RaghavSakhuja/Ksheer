@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Search</title>
+        <title>Ksheer</title>
         <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
     </head>
     <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
@@ -13,7 +13,7 @@
                 <col class="col2">
             </colgroup>
             
-            <form action="{% url 'executive'%}" method="post">
+            <form action="{% url 'collective_dash'%}" method="post">
                 {% csrf_token %}
                 <tr>
                     <td><label for="f1" >username</label></td>

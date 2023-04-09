@@ -28,9 +28,11 @@ urlpatterns=[
     path("retail_dash",views.retailer.retail_dash,name="retail_dash"),
     path("add_bill",views.retailer.add_bill,name="add_bill"),
     path("ret_bills",views.retailer.ret_bills,name="ret_bills"),
+    path("ret_order",views.retailer.ret_order,name="ret_order"),
     
     #collectives
-    path("collective",views.collective,name="collective"),
+    path("collective",views.collective.collective,name="collective"),
+    path("collective_dash",views.collective.collective_dash,name="collective_dash"),
 
 
     path("",views.index,name="index"),

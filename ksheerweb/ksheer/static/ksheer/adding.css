@@ -1,30 +1,18 @@
 input[type="text"]{
-    background-color: rgb(67, 142, 255) !important;
-    color:white !important;
-    width: 350%;
-    height: 30px;
-    border-radius: 5%;
-    border: none;
-    padding-left: 10px;
-    margin-left: 20px;
-    margin-top: 1%;
+  background-color: rgb(67, 142, 255) !important;
+  color:white !important;
+  height: 30px;
+  border-radius: 5%;
+  border: none;
 }
-
 input[type="number"]{
     background-color: rgb(67,142,255) !important;
     color:white !important;
-    width: 350%;
     height: 30px;
     border-radius: 5%;
     border: none;
-    padding-left: 10px;
-    margin-left: 20px;
-    margin-top: 1%;
 }
 
-.form-horizontal{
-    left: 20px;
-}
 
 .btn-primary,
 .btn-primary:active,
@@ -36,4 +24,17 @@ input[type="number"]{
 .btn-primary:hover{
   background-color: #4142aa !important;
   border-color: #4142aa !important;
+}
+.btn{
+  width: 30px!important;
+}
+input[type='submit']{
+  width: fit-content!important;
+  margin-right:10px;
+  margin-left:100px;
+  margin-top: 20px;
+}
+input[type='button']{
+  width: 120px!important;
+  margin-top: 20px;
 }

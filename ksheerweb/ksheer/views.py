@@ -272,7 +272,6 @@ class retailer:
                         print(billid[0],form2['product_%s'%i],form2['quantity_%s'%i])
                         cu.execute("insert into bill_product values({},'{}',{})".format(billid[0],form2['product_%s'%i],form2['quantity_%s'%i]))
                         db.commit()
-                    del request.session['number']
                     return HttpResponseRedirect("retail_dash")
                 except Exception as e:
                     cu.execute(f"delete from bill where bill_id={billid}")
@@ -283,7 +282,7 @@ class retailer:
                     return render(request,"ksheer/retailer/add_bill.html",context={'error':"insufficient quantity","form":{form}})
             else:
                 # print(form.__dict__)
-                print("yes")
+                # print("yes")
                 return render(request,"ksheer/retailer/add_bill.html",context={"form":form})
         else:
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -294,11 +293,12 @@ class retailer:
                     request.session['number']=request.session['number']-1
 
             n=request.session['number']
-            form=billform(product=products,number=n)
+            form=billform(number=n)
             print(form.__dict__)  
             return render(request,"ksheer/retailer/add_bill.html",{
                 "form":form,"n":n
             })
+    
     def ret_bills(request):
         if "userid" in request.session and "usertype" in request.session and request.session['usertype']=="r":
             cu=db.cursor()
@@ -320,7 +320,67 @@ class retailer:
             return render(request,"ksheer/ret_bills.html",{'data':l})
         else:
             return HttpResponseRedirect("index")
-                               
+    
+    def ret_order(request):
+        if request.method=="POST":
+            cu=db.cursor()
+            cu.execute("select product_id from product")
+            products=[i[0] for i in cu.fetchall()]
+            n=request.session['number']
+            form=retorderform(request.POST,product=products,number=n)
+            if form.is_valid():
+                form2=form.cleaned_data
+                try:
+                    del request.session['number']
+                    return HttpResponseRedirect("retail_dash")
+                except Exception as e:
+                    if h==1:
+                        db.commit()
+                    return render(request,"ksheer/retailer/ret_order.html",context={'error':"insufficient quantity","form":{form}})
+            else:
+                return render(request,"ksheer/retailer/ret_order_bill.html",context={"form":form})
+        else:
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                h=request.GET.get('working')
+                if h=="yes":
+                    request.session['number']=request.session['number']+1
+                elif h=="no":
+                    request.session['number']=request.session['number']-1
+
+            n=request.session['number']
+            form=retorderform(number=n)
+            print(form.__dict__)  
+            return render(request,"ksheer/retailer/ret_order.html",{
+                "form":form,"n":n
+            })                       
+
+
+class collective:
+    def collective(request):
+        return render(request,"ksheer/collective/collective.html")
+    
+    def collective_dash(request):
+        if request.method=="POST":
+                cu=db.cursor()
+                cu.execute("select * from collective where username='{}' and passwd='{}'".format(request.POST.get('username'),request.POST.get('pass')))
+                print(request.POST.get('username'),request.POST.get('pass'))
+                cu=cu.fetchone()
+                print(cu)
+                if cu!=None:  
+                    request.session["userid"]=request.POST.get('username')
+                    request.session['collective']=cu[0]
+                    request.session['usertype']="c"
+                    response=render(request,"ksheer/collective/collective_dash.html",{"name":request.POST.get('username')})
+                    return response
+                else:
+                    return HttpResponseRedirect("collective")
+        elif request.session['usertype']=='c':
+            response=render(request,"ksheer/collective/collective_dash.html",{"name":request.session['userid']})
+            return response
+        else:
+            return render(request,"ksheer/index.html")
+
+
 def index(request):
     try:
         del request.session['usertype']
@@ -329,11 +389,6 @@ def index(request):
         pass
     response=render(request,"ksheer/index.html")
     return response
-
-def collective(request):
-    return render(request,"ksheer/collective.html")
-
-
 
 
 
