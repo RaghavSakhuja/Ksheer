@@ -30,7 +30,7 @@ class executive:
                 request.session["usertype"]="e"
                 return HttpResponseRedirect("exec_dash")
             else:
-                return HttpResponseRedirect("executive")
+                return render(request,'ksheer/executive/executive.html',context={'error':"invalid username/password"})
         else:
             return render(request,"ksheer/executive/executive.html")
     
@@ -226,6 +226,7 @@ class retailer:
                     response=render(request,"ksheer/retailer/retailer_dash.html",{"name":request.POST.get('username')})
                     return response
                 else:
+
                     return HttpResponseRedirect("retailer_login")
         elif request.session['usertype']=='r':
             request.session['number']=1
