@@ -3,12 +3,25 @@
 <html lang="en">
     <head>
         <title>Search</title>
+        <link href="{% static 'ksheer/tables.css' %}" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
     </head>
-    <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
-        <h1 style="margin-top: 5%;">REPORTS</h1>
-        <div style="width: fit-content; margin-left: 34%;">
+    <body class="background">
+        <div class="index">
+            <a class="inactive_index" href="#">Dashboard</a>/
+            <a class="inactive_index" href="#">Manage Warehouse</a>/
+            <a href="#">View Batches</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+        <form>
+            <input type="text" placeholder="Search...">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          
+        <h1 class="table_heading"> Batches </h1>
+
+        <div class="table_setting" style="width: fit-content; margin-left: 34%;">
         {{dataframe | safe}}
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

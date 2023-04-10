@@ -139,6 +139,7 @@ class executive:
             data=cu.fetchall()
             columns = [desc[0] for desc in cu.description]
             df = pd.DataFrame(data, columns=columns)
+            df.style.set_properties(**{'color': 'white', 'background-color': 'black'})
             df=df.to_html(classes=['table'],index=False)
             return render(request,"ksheer/executive/warehouses/exec_batches_report.html",context={"dataframe":df})
 
