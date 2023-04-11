@@ -32,11 +32,15 @@ class warehouseform(forms.Form):
         super(warehouseform, self).__init__(*args,**kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-3'
-        self.helper.field_class = 'col-lg-4'
-        self.helper.form_method='post'
-        self.helper.add_input(Submit('add_batch','Add Batch',css_class='btn btn-success'))
-        self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light',style="width=50px;"))
+        self.helper.label_class = 'col-lg-4'
+        self.helper.field_class = 'col-lg-7'
+        self.helper.layout = Layout(
+            'street',
+            'city',
+            'pincode',
+            'capacity',
+            Div(
+            Submit('add_warehouse','Add Warehouse')        ))
 
 class batchform(forms.Form):
     batch_id=forms.IntegerField()
@@ -49,18 +53,13 @@ class batchform(forms.Form):
         self.initial['batch_id'] = kwargs.get('batchs')
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-3'
-        self.helper.field_class = 'col-lg-4'
-        self.helper.form_method='post'
+        self.helper.label_class = 'col-lg-4'
+        self.helper.field_class = 'col-lg-7'
         self.helper.layout = Layout(
-            Field('batch_id',readonly=True),
+            'batch_id',
             'warehouse_id',
             Div(
-            Submit('add_prod','Add Product'),
-            Button('prod_back','Back',onClick="location.href='exec_inventory'",css_class='btn-primary'),css_class='row'
-        )) 
-        # self.helper.add_input(Submit('add_batch','Add Batch',css_class='btn btn-success'))
-        # self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light',style="width=50px;"))
+            Submit('add_batch','Add Batch')        ))
     
     def clean_warehouse_id(self):
         data=self.cleaned_data.get('warehouse_id')
@@ -92,9 +91,7 @@ class prodform(forms.Form):
             'cost',
             'mrp',
             Div(
-            Submit('add_prod','Add Product'),
-            Button('prod_back','Back',onClick="location.href='exec_inventory'",css_class='btn-primary'),css_class='row'
-        )) 
+            Submit('add_prod','Add Product'))) 
 
 class storeform(forms.Form):
     username = forms.CharField(max_length=200)
@@ -107,12 +104,18 @@ class storeform(forms.Form):
         super(storeform, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-3'
-        self.helper.field_class = 'col-lg-4'
-        self.helper.form_method='post'
-        self.helper.add_input(Submit('add_store','Add Product',css_class='btn btn-success'))
-        self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light',style="width=50px;"))
-                
+        self.helper.label_class = 'col-lg-4'
+        self.helper.field_class = 'col-lg-7'
+        self.helper.layout=Layout(
+            'username',
+            'password',
+            'street',
+            'city',
+            'store_name',
+            'pincode',
+            Div(
+            Submit('add_store','Add Store')        ))
+
 class billform(forms.Form):
     name = forms.CharField(max_length=200)
     age = forms.IntegerField()

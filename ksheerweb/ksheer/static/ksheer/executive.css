@@ -31,29 +31,18 @@ table,tr,td,th{
     margin-left:2%;
 }
 
-.btn{
-    font-size: 110;
-    width: 200px !important;
-    background-color: blue;
-    border: none;
-    border-radius: 5%;
-    text-align: center;
-}
-
-.btn a{
-    color: rgb(234, 234, 249);
-}
-
 .index{
-    margin-top: 1%;
+    padding-top: 1%;
+    padding-bottom: 2%;
+    padding-left: 1%;
     font-size: 110%;
     color: grey;
-    margin-left: 20px;
+    width: 100%;
+    background-color: #030e3b;;
 }
 
 .inactive_index{
     color: grey;
-
 }
 
 .active_index
@@ -61,12 +50,34 @@ table,tr,td,th{
     color:blue;
 }
 
-.searchbar{
-    margin-left: 20px;
-    margin-top: 1%;
-    width: 50%;
-    height: 30px;
-    border-radius: 5%;
-    border: none;
-    padding-left: 10px;
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: #4044ED !important;
+  border-color: #4044ED !important;
+}
+.btn-primary:hover{
+  background-color: #4142aa !important;
+  border-color: #4142aa !important;
+}
+.btn{
+    width: 200px!important;
+}
+
+.signout{
+    top: 10% !important;
+    font-size: 80% !important;
+    width: 100px!important;
+    height: 35px!important;
+    float: right;
+    margin-right: 80px;
+}
+
+.back{
+    font-size: 80% !important;
+    width: 100px!important;
+    height: 35px!important;
+    float: right;
+    margin-right: 10px;
 }
