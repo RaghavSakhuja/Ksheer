@@ -106,27 +106,69 @@ class executive:
         else:
             return render(request,"ksheer/executive/warehouses/exec_add_warehouse.html",context={'form':warehouseform()})
     
-    def exec_add_batch(request):
+    def make_clickable(url):
+        return '<a href="#" class="edit">Edit</a>'.format("exec_add_batches",url)
+        # return HttpResponseRedirect('exec_add_batches')
+    def edit_prod(request):
         if request.method=="POST":
-            cu=db.cursor()
-            cu.execute("select warehouse_id from warehouse")
-            warehouses=[i[0] for i in cu.fetchall()]
-            form=batchform(request.POST,warehouse=warehouses)
-            if form.is_valid():
-                form2=form.cleaned_data
-                try:
-                    cu=db.cursor()
-                    cu.execute(f"insert into warehouse_batch values({form2['warehouse_id']},{form2['batch_id']})")
-                    db.commit()
-                    return HttpResponseRedirect("executive/warehouse/exec_add_batches")
-                except Exception as e:
-                    return render(request,"ksheer/executive/warehouses/exec_add_batches.html",context={"form":form})
-            else:
-                print("yes")
-                return render(request,"ksheer/executive/warehouses/exec_add_batches.html",context={"form":form})
-        else:
-            return render(request,"ksheer/executive/warehouses/exec_add_batches.html",context={"form":batchform()})
+            print(request.POST)
 
+        cu=db.cursor()
+        cu.execute("SELECT * from product")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df['link'] = df.apply(lambda x: executive.make_clickable(x['product_id']), axis=1)
+        df.style
+        df=df.to_html(classes=['table'],index=False,render_links=True,escape=False)
+        return render(request,"ksheer/executive/inventory/edit_prod.html",context={'dataframe1':df})
+    
+    def exec_add_batch_1(request):
+        if request.method=="POST":
+            print(request.POST)
+            try:
+                batches=request.POST.get('batches')
+                print(batches)
+                warehouse=request.POST.get('warehouses')[0]
+            except:
+                pass
+            sum=0
+            for i in batches:
+                print(i,i.split("_"))
+                sum+=int(i.split("_")[1])
+            if(sum+int(warehouse.split("_")[2])>int(warehouse.split("_")[1])):
+                print("no")
+            # try:
+            #     cu=db.cursor()
+            #     for i in batches:
+            #         cu.execute(f"insert into warehouse_batch values({warehouse},{i})")
+
+        cu=db.cursor()
+        cu.execute("SELECT batch_id,product_id,quantity FROM batch WHERE batch.batch_id NOT IN (SELECT warehouse_batch.batch_id FROM warehouse_batch) order by production_date")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        l=[]
+        for index, row in df.iterrows():
+            print(str(row['batch_id'])+"_"+str(row['quantity']))
+            l.append('<input type="checkbox" name="batches" value={} />'.format(str(row['batch_id'])+"_"+str(row['quantity'])))
+        df.insert(3,"",l,True)
+        cu=db.cursor()
+        cu.execute('''SELECT warehouse.warehouse_id w_id, warehouse.street, warehouse.city, 
+        warehouse.pincode, warehouse.capacity, COALESCE(SUM(batch.quantity), 0) as total_capacity
+        FROM warehouse LEFT JOIN warehouse_batch ON warehouse.warehouse_id = warehouse_batch.warehouse_id
+        LEFT JOIN batch ON warehouse_batch.batch_id = batch.batch_id
+        GROUP BY warehouse.warehouse_id;''')
+        wares=cu.fetchall()
+        columns2 = [desc[0] for desc in cu.description]
+        df2 = pd.DataFrame(wares, columns=columns2)
+        l2=[]
+        for index, row in df2.iterrows():
+            l2.append('<input type="radio" name="warehouses" value={} />'.format(str(row['w_id'])+"_"+str(row["capacity"])+"_"+str(row['total_capacity'])))
+        df2.insert(6,"",l2,True)
+        df2=df2.to_html(classes=['table'],index=False,render_links=True,escape=False)
+        df=df.to_html(classes=['table'],index=False,render_links=True,escape=False)
+        return render(request,"ksheer/executive/warehouses/exec_add_batches_1.html",context={'dataframe1':df,'dataframe2':df2})
     
 
     def exec_warehouse_batch(request):
@@ -205,6 +247,7 @@ class executive:
     def view_retailers(request):
         # context={"dataframe":df}
         return render(request,'ksheer/view_ret.html')  
+    
 
 class retailer:
     
@@ -226,7 +269,6 @@ class retailer:
                     response=render(request,"ksheer/retailer/retailer_dash.html",{"name":request.POST.get('username')})
                     return response
                 else:
-
                     return HttpResponseRedirect("retailer_login")
         elif request.session['usertype']=='r':
             request.session['number']=1

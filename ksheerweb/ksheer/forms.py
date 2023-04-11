@@ -42,22 +42,32 @@ class batchform(forms.Form):
     batch_id=forms.IntegerField()
     warehouse_id=forms.IntegerField()
     def __init__(self, *args, **kwargs):
+        self.batch_id=kwargs.get('batchs')
+        print("working",self.batch_id)
         super(batchform, self).__init__(*args)
         self.warehouses=kwargs.get('warehouse')
+        self.initial['batch_id'] = kwargs.get('batchs')
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-4'
         self.helper.form_method='post'
-        self.helper.add_input(Submit('add_batch','Add Batch',css_class='btn btn-success'))
-        self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light',style="width=50px;"))
+        self.helper.layout = Layout(
+            Field('batch_id',readonly=True),
+            'warehouse_id',
+            Div(
+            Submit('add_prod','Add Product'),
+            Button('prod_back','Back',onClick="location.href='exec_inventory'",css_class='btn-primary'),css_class='row'
+        )) 
+        # self.helper.add_input(Submit('add_batch','Add Batch',css_class='btn btn-success'))
+        # self.helper.add_input(Button('prod_back','Back',onClick="javascript:history.go(-1);",css_class='btn btn-light',style="width=50px;"))
     
     def clean_warehouse_id(self):
         data=self.cleaned_data.get('warehouse_id')
         if data not in self.warehouses:
             self._errors['warehouse_id'] = self.error_class([
                 'invalid warehouse id'])
-        return self.cleaned_data
+        return data
 
 class prodform(forms.Form):
     product_id = forms.CharField(max_length=5)

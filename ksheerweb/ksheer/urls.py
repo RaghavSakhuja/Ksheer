@@ -13,7 +13,7 @@ urlpatterns=[
     path("exec_location_profit",views.executive.exec_location_profit,name="exec_location_profit"),
     path("exec_location_capacity",views.executive.exec_location_capacity,name="exec_location_capacity"),
     path("exec_yearly_report",views.executive.exec_yearly_product_report,name="exec_yearly_report"),
-    path("exec_add_batches",views.executive.exec_add_batch,name="exec_add_batches"),
+    path("exec_add_batches_1",views.executive.exec_add_batch_1,name="exec_add_batches_1"),
     path("exec_warehouse",views.executive.exec_warehouse,name="exec_warehouse"),
     path("exec_add_warehouse",views.executive.exec_add_warehouse,name="exec_add_warehouse"),
     path("exec_warehouse_batch",views.executive.exec_warehouse_batch,name="exec_warehouse_batch"),
@@ -21,6 +21,8 @@ urlpatterns=[
     path("manage_ret",views.executive.manage_ret,name="manage_ret"),
     path("add_retailer",views.executive.add_retailer,name="add_retailer"),
     path("view_ret",views.executive.view_retailers,name="view_ret"),
+    path("edit_prod",views.executive.edit_prod,name="edit_prod"),
+    
     
     #retailers
     path("ret_warehouse",views.executive.add_prod,name="ret_warehouse"),
