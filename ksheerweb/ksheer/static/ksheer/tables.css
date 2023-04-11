@@ -1,19 +1,18 @@
 .index{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    font-size: 110%;
-    color: grey;
-    margin-left: 20px;
+  padding-top: 1%;
+  padding-bottom: 2%;
+  padding-left: 1%;
+  font-size: 110%;
+  color: grey;
+  width: 100%;
+  background-color: #030e3b;;
 }
-
 .inactive_index{
-    color: grey;
-
+  color: grey;
 }
-
 .active_index
 {
-    color:blue;
+  color:blue;
 }
 
 
@@ -53,15 +52,6 @@ table {
 .dataframe table{
     color:rgb(234, 234, 249);
 }
-.searchbar{
-    margin-left: 20px;
-    margin-top: 1%;
-    width: 50%;
-    height: 30px;
-    border-radius: 5%;
-    border: none;
-    padding-left: 10px;
-}
 
 form input[type="text"] {
     color: beige;
@@ -70,7 +60,7 @@ form input[type="text"] {
     width: 50%;
     padding: 2px;
     font-size: 16px;
-    margin-top: 6px;
+    margin-top: 15px;
     margin-bottom: 16px;
     margin-left: 300px;
 }
@@ -91,6 +81,21 @@ form input[type="text"] {
   border-color: #4142aa !important;
 }
 .btn{
-  width: 10
-  0px!important;
+  width: 100px!important;
+}
+.signout{
+  top: 10% !important;
+  font-size: 80% !important;
+  width: 100px!important;
+  height: 35px!important;
+  float: right;
+  margin-right: 80px;
+}
+
+.back{
+  font-size: 80% !important;
+  width: 100px!important;
+  height: 35px!important;
+  float: right;
+  margin-right: 10px;
 }

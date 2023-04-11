@@ -40,9 +40,7 @@ class warehouseform(forms.Form):
             'pincode',
             'capacity',
             Div(
-            Submit('add_warehouse','Add Warehouse'),
-            Button('warehouse_back','Back',onClick="location.href='exec_warehouse'",css_class='btn-primary'),css_class='row'
-        ))
+            Submit('add_warehouse','Add Warehouse')        ))
 
 class batchform(forms.Form):
     batch_id=forms.IntegerField()
@@ -58,9 +56,7 @@ class batchform(forms.Form):
             'batch_id',
             'warehouse_id',
             Div(
-            Submit('add_batch','Add Batch'),
-            Button('batch_back','Back',onClick="location.href='exec_warehouse'",css_class='btn-primary'),css_class='row'
-        ))
+            Submit('add_batch','Add Batch')        ))
     
     def clean_warehouse_id(self):
         data=self.cleaned_data.get('warehouse_id')
@@ -92,9 +88,7 @@ class prodform(forms.Form):
             'cost',
             'mrp',
             Div(
-            Submit('add_prod','Add Product'),
-            Button('prod_back','Back',onClick="location.href='exec_inventory'",css_class='btn-primary'),css_class='row'
-        )) 
+            Submit('add_prod','Add Product'))) 
 
 class storeform(forms.Form):
     username = forms.CharField(max_length=200)
@@ -117,9 +111,7 @@ class storeform(forms.Form):
             'store_name',
             'pincode',
             Div(
-            Submit('add_store','Add Store'),
-            Button('store_back','Back',onClick="location.href='manage_ret'",css_class='btn-primary'),css_class='row'
-        ))
+            Submit('add_store','Add Store')        ))
 
 class billform(forms.Form):
     name = forms.CharField(max_length=200)
