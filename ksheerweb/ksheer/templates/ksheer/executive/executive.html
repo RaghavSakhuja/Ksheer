@@ -40,9 +40,14 @@
                         <!-- <button type="button" ><a class="back" href="{% url 'index' %}">Back</a></button> -->
                     </div>
                     </td>
-                </tr>            
+                </tr>          
             </form>
         </table>
+        <div style="color:red">
+            {% if error%}
+            {{error}}
+            {%endif%}
+        </div>
         </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

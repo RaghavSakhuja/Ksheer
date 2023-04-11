@@ -4,18 +4,43 @@
 <html lang="en">
     <head>
         <title>Search</title>
+        <link href="{% static 'ksheer/adding.css' %}" rel="stylesheet">
+        <link href="{% static 'ksheer/executive.css' %}" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
     </head>
-    <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
-        <h1>ADD BATCH</h1>
+    <body class="background">
+        <div class="index">
+            <a class="inactive_index" href="#">Dashboard</a>/
+            <a class="inactive_index" href="#">Manage Warehouse</a>/
+            <a href="#">Add Warehouse</a>
+            <input type="button" value="Logout" onclick="location.href='logout'" class='btn btn-primary signout' >
+            <input type="button" value="Back" onclick="location.href='exec_warehouse'" class='btn btn-primary back' >
+
+        </div>
+        <div>
+            <div class="background_container" style="display: inline-block; vertical-align: middle;">
+            <svg width="310" height="700">
+                <ellipse cx="-10" cy="350" rx="300" ry="300"
+                style="fill:#4044ED;" />
+            </svg>
+            <div class="container" style="display: inline-block; width:500px">
+                <h1 class="heading" style="margin-left: 80px;">Add Warehouse</h1>
+        
+                <div class="prod">
+                    {% crispy form%}
+                </div>
+                
+            </div>
+        </div>
+<!-- 
+    
         <form action="{% url 'exec_add_batches' %}" method="post">
             {% csrf_token %}
             <div class="prod" style="margin-left: 20%;margin-right: 5%;margin-top: 5%;">
                 {% crispy form%}
                 
             </div>
-            </form>
+            </form> -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -8,7 +8,11 @@
     </head>
     <body class="background">
         <div class="index">
-            <a class="inactive_index" href="#">Dashboard</a>/<a href="#">Manage Retailers</a>
+            <a class="inactive_index" href="#">Dashboard</a>/
+            <a href="#">Manage Retailers</a>
+            <input type="button" value="Logout" onclick="location.href='logout'" class='btn btn-primary signout' >
+            <input type="button" value="Back" onclick="location.href='exec_dash'" class='btn btn-primary back' >
+
         </div>
         <div>
             <div class="background_container" style="display: inline-block; vertical-align: middle;">
@@ -33,11 +37,6 @@
                     <tr>
                         <td>
                             <input type="button" value="View Stores" onclick="location.href='view_ret'" style="margin-right:20px;" class='btn btn-primary' >
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="Button" value="Back" onclick="location.href='exec_dash'" style="margin-right:20px;" class='btn btn-primary' >
                         </td>
                     </tr>
                 </form>

@@ -1,0 +1,39 @@
+input[type="text"]{
+  background-color: rgb(67, 142, 255) !important;
+  color:white !important;
+  height: 30px;
+  border-radius: 5%;
+  border: none;
+}
+input[type="number"]{
+    background-color: rgb(67,142,255) !important;
+    color:white !important;
+    height: 30px;
+    border-radius: 5%;
+    border: none;
+}
+
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: #4044ED !important;
+  border-color: #4044ED !important;
+}
+.btn-primary:hover{
+  background-color: #4142aa !important;
+  border-color: #4142aa !important;
+}
+.btn{
+  width: 30px!important;
+}
+input[type='submit']{
+  width: fit-content!important;
+  margin-right:10px;
+  margin-left:100px;
+  margin-top: 20px;
+}
+input[type='button']{
+  width: 120px!important;
+}
