@@ -8,6 +8,27 @@
     </head>
     <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
         <h1 style="margin-top: 5%;">REPORTS</h1>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
+            <script>
+                function myFunction() {
+                  var input, filter, table, tr, td, i, txtValue;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  table = document.getElementById("myTable");
+                  tr = table.getElementsByTagName("tr");
+                  for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                      txtValue = td.textContent || td.innerText;
+                      if (txtValue.toUpperCase().indexOf(filter) ==0) {
+                        tr[i].style.display = "";
+                      } else {
+                        tr[i].style.display = "none";
+                      }
+                    }       
+                  }
+                }
+            </script>
         <div style="width: fit-content; margin-left: 42.7%;">
         {{dataframe | safe}}
         </div>

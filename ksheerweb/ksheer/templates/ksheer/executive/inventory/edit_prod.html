@@ -13,6 +13,27 @@
         <form action="{% url 'edit_prod' %}" method="post">
             {% csrf_token %}
             <h1>ADD BATCH</h1>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
+            <script>
+                function myFunction() {
+                  var input, filter, table, tr, td, i, txtValue;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  table = document.getElementById("myTable");
+                  tr = table.getElementsByTagName("tr");
+                  for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                      txtValue = td.textContent || td.innerText;
+                      if (txtValue.toUpperCase().indexOf(filter) ==0) {
+                        tr[i].style.display = "";
+                      } else {
+                        tr[i].style.display = "none";
+                      }
+                    }       
+                  }
+                }
+                </script>
                 <div style="width: 800px; margin-left: 300px;" class="table-responsive">
                 {{dataframe1 | safe}}
                 </div>

@@ -22,7 +22,7 @@ urlpatterns=[
     path("add_retailer",views.executive.add_retailer,name="add_retailer"),
     path("view_ret",views.executive.view_retailers,name="view_ret"),
     path("edit_prod",views.executive.edit_prod,name="edit_prod"),
-    
+    path("delete_prod",views.executive.delete_prod,name="delete_prod"),
     
     #retailers
     path("ret_warehouse",views.executive.add_prod,name="ret_warehouse"),

@@ -65,27 +65,7 @@ class executive:
     def exec_reports(request):
         return render(request,"ksheer/executive/reports/reports.html")
 
-    def exec_ret_reports(request):
-        cu=db.cursor()
-        cu.execute("SET @sql=NULL")
-        cu.execute("set session group_concat_max_len=10000;")
-        cu.execute('''SELECT group_concat(Distinct concat(
-            'SUM(case when bills.product_id="',bills.product_id,'" then bills.quantity else 0 end) as ',bills.product_id)
-        )
-        INTO @sql
-        FROM (select store_id,product_id,quantity from bill_product natural join bill) as bills;''')
-        cu.execute('''SET @sql=concat('SELECT bills.store_id, ', @sql,' from (select bill.store_id,bill_product.product_id,bill_product.quantity from bill_product 
-        natural join bill) as bills group by bills.store_id order by bills.store_id');''')
-        cu.execute("prepare stmt from @sql;")
-        cu.execute("execute stmt;")
-        data=cu.fetchall()
-        columns = [desc[0] for desc in cu.description]
-        df = pd.DataFrame(data, columns=columns)
-        df=df.to_html(classes=['table'],index=False)
-        cu=db.cursor()    
-        cu.execute("deallocate prepare stmt;")
-        context = {'dataframe': df}
-        return render(request, 'ksheer/executive/reports/exec_ret_reports.html', context)
+    
     
     def exec_warehouse(request):
         return render(request,"ksheer/executive/warehouses/exec_warehouse.html")
@@ -121,10 +101,12 @@ class executive:
         df = pd.DataFrame(batches, columns=columns)
         df['link'] = df.apply(lambda x: executive.make_delete_clickable(x['product_id']), axis=1)
         df.style
-        df=df.to_html(classes=['table'],index=False,render_links=True,escape=False)
+        df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
         return render(request,"ksheer/executive/inventory/delete_prod.html",context={'dataframe1':df})
     
     
+    def make_edit_clickable(url):
+        return '<a href="#" class="Edit">Delete</a>'
     
     def edit_prod(request):
         if request.method=="POST":
@@ -137,7 +119,7 @@ class executive:
         df = pd.DataFrame(batches, columns=columns)
         df['link'] = df.apply(lambda x: executive.make_edit_clickable(x['product_id']), axis=1)
         df.style
-        df=df.to_html(classes=['table'],index=False,render_links=True,escape=False)
+        df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
         return render(request,"ksheer/executive/inventory/edit_prod.html",context={'dataframe1':df})
     
     def exec_add_batch(request):
@@ -184,8 +166,8 @@ class executive:
         for index, row in df2.iterrows():
             l2.append('<input type="radio" name="warehouses" value={} />'.format(str(row['w_id'])+"_"+str(row["capacity"])+"_"+str(row['total_capacity'])))
         df2.insert(6,"",l2,True)
-        df2=df2.to_html(classes=['table'],index=False,render_links=True,escape=False)
-        df=df.to_html(classes=['table'],index=False,render_links=True,escape=False)
+        df2=df2.to_html(classes=['table'],table_id="myTable2",index=False,render_links=True,escape=False)
+        df=df.to_html(classes=['table'],table_id="myTable1",index=False,render_links=True,escape=False)
         return render(request,"ksheer/executive/warehouses/exec_add_batch.html",context={'dataframe1':df,'dataframe2':df2})
     
 
@@ -200,10 +182,30 @@ class executive:
             columns = [desc[0] for desc in cu.description]
             df = pd.DataFrame(data, columns=columns)
             df.style.set_properties(**{'color': 'white', 'background-color': 'black'})
-            df=df.to_html(classes=['table'],index=False)
+            df=df.to_html(classes=['table'],index=False,table_id="myTable")
             return render(request,"ksheer/executive/warehouses/exec_batches_report.html",context={"dataframe":df})
 
-
+    def exec_ret_reports(request):
+        cu=db.cursor()
+        cu.execute("SET @sql=NULL")
+        cu.execute("set session group_concat_max_len=10000;")
+        cu.execute('''SELECT group_concat(Distinct concat(
+            'SUM(case when bills.product_id="',bills.product_id,'" then bills.quantity else 0 end) as ',bills.product_id)
+        )
+        INTO @sql
+        FROM (select store_id,product_id,quantity from bill_product natural join bill) as bills;''')
+        cu.execute('''SET @sql=concat('SELECT bills.store_id, ', @sql,' from (select bill.store_id,bill_product.product_id,bill_product.quantity from bill_product 
+        natural join bill) as bills group by bills.store_id order by bills.store_id');''')
+        cu.execute("prepare stmt from @sql;")
+        cu.execute("execute stmt;")
+        data=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(data, columns=columns)
+        df=df.to_html(classes=['table'],table_id="myTable",index=False)
+        cu=db.cursor()    
+        cu.execute("deallocate prepare stmt;")
+        return render(request, 'ksheer/executive/reports/exec_ret_reports.html', context={'dataframe': df})
+    
     def exec_location_profit(request):
         query="""select pincode,city,street,sum(profit),grouping(pincode),grouping(city),grouping(street) from retailer
     group by pincode,city,street with rollup order by grouping(street),grouping(city),grouping(pincode);"""
@@ -212,7 +214,7 @@ class executive:
         data=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(data, columns=columns)
-        df=df.to_html(classes=['table'],index=False)
+        df=df.to_html(classes=['table'],table_id="myTable",index=False)
         return render(request,'ksheer/executive/reports/exec_location_profit.html',context={"dataframe":df})
 
     def exec_location_capacity(request):
@@ -224,7 +226,7 @@ class executive:
         data=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(data, columns=columns)
-        df=df.to_html(classes=['table'],index=False)
+        df=df.to_html(classes=['table'],table_id="myTable",index=False)
         return render(request,'ksheer/executive/reports/exec_location_capacity.html',context={"dataframe":df})
 
     def exec_yearly_product_report(request):
@@ -242,7 +244,7 @@ class executive:
         data=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(data, columns=columns)
-        df=df.to_html(classes=['table'],index=False)
+        df=df.to_html(classes=['table'],table_id="myTable",index=False)
         return render(request,'ksheer/executive/reports/exec_yearly_report.html',context={"dataframe":df})
 
     def add_retailer(request):
