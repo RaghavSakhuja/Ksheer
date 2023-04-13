@@ -10,9 +10,25 @@
         <div class="index">
             <a class="inactive_index" href="#">Dashboard</a>/
             <a href="#">Manage Retailers</a>
-            <input type="button" value="Logout" onclick="location.href='logout'" class='btn btn-primary signout' >
+            <input id="logout" type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
             <input type="button" value="Back" onclick="location.href='exec_dash'" class='btn btn-primary back' >
-
+            <script>
+                function logout() {
+                    var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
+                    $.ajax({
+                        url: "index",
+                        type:'post',
+                        headers: {
+                        'X-CSRFToken': token },
+                        data: {
+                            working:"yes"
+                        },
+                        success:function(){
+                            window.location.href='index'
+                        }
+                    });
+                }
+            </script>
         </div>
         <div>
             <div class="background_container" style="display: inline-block; vertical-align: middle;">

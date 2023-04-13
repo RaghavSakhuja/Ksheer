@@ -19,7 +19,8 @@
             <script>
             $(document).ready(function () {
                 var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
-                $('.edit').click(function () {
+                console.log(token);
+                $('.delete').click(function () {
                     var currentTD = $(this).parents('tr').find('td');
                     if ($(this).html() == 'Edit') {                  
                         $.each(currentTD, function () {
@@ -33,7 +34,9 @@
                             list.push($(this).html())
                         });
                         
+                        console.log(list)
                         function ajaxCall1(list,token) {
+                            console.log(list)
                             $.ajax({
                                 url: window.location.href,
                                 type:'post',
@@ -52,6 +55,7 @@
                     }
                     $(this).prop('contenteditable', false)
                     $(this).html($(this).html() == 'Edit' ? 'Save' : 'Edit')
+                    
                     
                 });
           

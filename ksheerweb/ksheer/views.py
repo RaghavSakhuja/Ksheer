@@ -39,7 +39,8 @@ class executive:
             response=render(request,"ksheer/executive/exec_dash.html",{"name":request.session.get('userid')})
             return response
         else:
-            return render(request,"ksheer/index.html")
+            return HttpResponseRedirect('index')
+            # return render(request,"ksheer/index.html")
     
     def add_prod(request):
         if request.method=="POST":
@@ -84,7 +85,7 @@ class executive:
         cu=db.cursor()    
         cu.execute("deallocate prepare stmt;")
         context = {'dataframe': df}
-        return render(request, 'ksheer/executive/exec_ret_reports.html', context)
+        return render(request, 'ksheer/executive/reports/exec_ret_reports.html', context)
     
     def exec_warehouse(request):
         return render(request,"ksheer/executive/warehouses/exec_warehouse.html")
@@ -98,17 +99,33 @@ class executive:
                     cu=db.cursor()
                     cu.execute(f"insert into warehouse values({form2['street']},{form2['']})")
                     db.commit()
-                    return HttpResponseRedirect("executive/warehouse/exec_add_batches")
+                    return HttpResponseRedirect("executive/warehouses/exec_add_warehouse")
                 except Exception as e:
-                    return render(request,"ksheer/executive/warehouses/exec_add_batches.html",context={"form":form})
+                    return render(request,"ksheer/executive/warehouses/exec_add_warehouse.html",context={"form":form})
             else:
-                return render(request,"ksheer/executive/warehouses/exec_add_batches.html",context={"form":form})
+                return render(request,"ksheer/executive/warehouses/exec_add_warehouse.html",context={"form":form})
         else:
             return render(request,"ksheer/executive/warehouses/exec_add_warehouse.html",context={'form':warehouseform()})
     
-    def make_clickable(url):
-        return '<a href="#" class="edit">Edit</a>'.format("exec_add_batches",url)
-        # return HttpResponseRedirect('exec_add_batches')
+    def make_delete_clickable(url):
+        return '<a href="#" class="delete">Delete</a>'
+    
+    def delete_prod(request):
+        if request.method=="POST":
+            print(request.POST)
+
+        cu=db.cursor()
+        cu.execute("SELECT * from product")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df['link'] = df.apply(lambda x: executive.make_delete_clickable(x['product_id']), axis=1)
+        df.style
+        df=df.to_html(classes=['table'],index=False,render_links=True,escape=False)
+        return render(request,"ksheer/executive/inventory/delete_prod.html",context={'dataframe1':df})
+    
+    
+    
     def edit_prod(request):
         if request.method=="POST":
             print(request.POST)
@@ -118,12 +135,12 @@ class executive:
         batches=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(batches, columns=columns)
-        df['link'] = df.apply(lambda x: executive.make_clickable(x['product_id']), axis=1)
+        df['link'] = df.apply(lambda x: executive.make_edit_clickable(x['product_id']), axis=1)
         df.style
         df=df.to_html(classes=['table'],index=False,render_links=True,escape=False)
         return render(request,"ksheer/executive/inventory/edit_prod.html",context={'dataframe1':df})
     
-    def exec_add_batch_1(request):
+    def exec_add_batch(request):
         if request.method=="POST":
             print(request.POST)
             try:
@@ -133,6 +150,7 @@ class executive:
             except:
                 pass
             sum=0
+            #transaction query
             for i in batches:
                 print(i,i.split("_"))
                 sum+=int(i.split("_")[1])
@@ -168,7 +186,7 @@ class executive:
         df2.insert(6,"",l2,True)
         df2=df2.to_html(classes=['table'],index=False,render_links=True,escape=False)
         df=df.to_html(classes=['table'],index=False,render_links=True,escape=False)
-        return render(request,"ksheer/executive/warehouses/exec_add_batches_1.html",context={'dataframe1':df,'dataframe2':df2})
+        return render(request,"ksheer/executive/warehouses/exec_add_batch.html",context={'dataframe1':df,'dataframe2':df2})
     
 
     def exec_warehouse_batch(request):
@@ -195,7 +213,7 @@ class executive:
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(data, columns=columns)
         df=df.to_html(classes=['table'],index=False)
-        return render(request,'ksheer/exec_location_profit.html',context={"dataframe":df})
+        return render(request,'ksheer/executive/reports/exec_location_profit.html',context={"dataframe":df})
 
     def exec_location_capacity(request):
         query="""select pincode,city,street,sum(capacity) from warehouse
@@ -207,7 +225,7 @@ class executive:
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(data, columns=columns)
         df=df.to_html(classes=['table'],index=False)
-        return render(request,'ksheer/exec_location_capacity.html',context={"dataframe":df})
+        return render(request,'ksheer/executive/reports/exec_location_capacity.html',context={"dataframe":df})
 
     def exec_yearly_product_report(request):
         query="""

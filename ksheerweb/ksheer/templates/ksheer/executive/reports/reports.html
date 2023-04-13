@@ -22,17 +22,17 @@
                     {% csrf_token %}
                     <tr>
                         <td>
-                            <input type="button" value="Retailer" onclick="location.href='add_retailer'" style="margin-right:20px;" class='btn btn-primary' >
+                            <input type="button" value="Retailer" onclick="location.href='exec_ret_reports'" style="margin-right:20px;" class='btn btn-primary' >
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="button" value="Profit" onclick="location.href='view_ret'" style="margin-right:20px;" class='btn btn-primary' >
+                            <input type="button" value="Profit" onclick="location.href='exec_yearly_report'" style="margin-right:20px;" class='btn btn-primary' >
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="button" value="Capacity" onclick="location.href='view_ret'" style="margin-right:20px;" class='btn btn-primary' >
+                            <input type="button" value="Capacity" onclick="location.href='exec_location_capacity'" style="margin-right:20px;" class='btn btn-primary' >
                         </td>
                     </tr>
                     <tr>
@@ -46,36 +46,7 @@
                         </td>
                     </tr>
                 </form>
-
-                    <!-- <tr>
-                        <td><a href="{% url 'exec_ret_reports' %}" >Retailer Reports</a></td>
-                    </tr> 
-                    <tr>
-                        <td><a href="{% url 'exec_location_profit' %}" >Location wise Profit</a></td>
-                    </tr> 
-                    <tr>
-                        <td><a href="{% url 'exec_location_capacity' %}" >Location wise Capacity</a></td>
-                    </tr> 
-                    <tr>
-                        <td><a href="{% url 'exec_yearly_report' %}" >Yearly product report</a></td>
-                    </tr> 
-                    <tr><td colspan="2" style="text-align: center;">
-                        <div>
-                            <button type="button" onclick="deleteCookies()"><a class="back" href="{% url 'index' %}">Sign out</a></button>
-                            <script>
-                                function deleteCookies() {
-                                    var Cookies = document.cookie.split(';');
-                                    for (var i = 0; i < Cookies.length; i++)
-                                    document.cookie = Cookies[i] + "=;expires=" + new Date(0).toUTCString();
-                                } 
-                            </script>
-                            <button type="button" onclick="history.back()">Back</button>
-                        </div>
-                        </td>
-                    </tr>             -->
             </table>
             </div>
-        
-        
     </body>
 </html>
