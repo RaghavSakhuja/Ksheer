@@ -5,6 +5,7 @@ import pandas as pd
 import datetime
 import mysql.connector
 from django.core.exceptions import *
+import copy
 
 
 db = mysql.connector.connect(
@@ -306,7 +307,11 @@ class retailer:
             products=[i[0] for i in cu.fetchall()]
             n=request.session['number']
             form=billform(request.POST,product=products,number=n)
+            form3=copy.deepcopy(form)
+            h=0
+            
             if form.is_valid():
+                
                 form2=form.cleaned_data
                 cu=db.cursor()
                 cu.execute("select customer_id from customer where phone={}".format(form2['phone']))
@@ -314,7 +319,8 @@ class retailer:
                 if cu==None:
                     cu=db.cursor()
                     cu.execute("insert into customer(name,age,gender,phone) values('{}',{},'{}',{})".format(form2['name'],form2['age'],form2['gender'],form2['phone'])) 
-                    db.commit()   
+                    db.commit()
+                    h=1   
                     cu.execute("select customer_id from customer where phone={}".format(form2['phone']))
                     cu=cu.fetchone()
                 custid=cu
@@ -331,22 +337,23 @@ class retailer:
                 print(billid)
                 cu=db.cursor()
                 try:
-                    print(form2)
                     for i in range(1,n+1):
                         print(billid[0],form2['product_%s'%i],form2['quantity_%s'%i])
                         cu.execute("insert into bill_product values({},'{}',{})".format(billid[0],form2['product_%s'%i],form2['quantity_%s'%i]))
                         db.commit()
                     return HttpResponseRedirect("retail_dash")
                 except Exception as e:
-                    cu.execute(f"delete from bill where bill_id={billid}")
+                    cu.execute(f"delete from bill where bill_id={billid[0]}")
                     db.commit()
                     if h==1:
-                        cu.execute(f"delete from customer where customer_id={custid}")
+                        cu.execute(f"delete from customer where customer_id={custid[0]}")
                         db.commit()
-                    return render(request,"ksheer/retailer/add_bill.html",context={'error':"insufficient quantity","form":{form}})
+                    print(form3)
+                    return render(request,"ksheer/retailer/add_bill.html",context={'error':"insufficient quantity","form":form})
             else:
-                # print(form.__dict__)
+                
                 # print("yes")
+                print(form)
                 return render(request,"ksheer/retailer/add_bill.html",context={"form":form})
         else:
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
