@@ -23,7 +23,8 @@ urlpatterns=[
     path("view_ret",views.executive.view_retailers,name="view_ret"),
     path("edit_prod",views.executive.edit_prod,name="edit_prod"),
     path("delete_prod",views.executive.delete_prod,name="delete_prod"),
-    
+    path("remove_retailer",views.executive.remove_store,name="remove_retailer"),
+    path("remove_warehouse",views.executive.remove_warehouse,name="remove_warehouse"),
     #retailers
     path("ret_warehouse",views.executive.add_prod,name="ret_warehouse"),
     path("retailer_login",views.retailer.retailer_login,name="retailer_login"),
@@ -32,10 +33,11 @@ urlpatterns=[
     path("ret_bills",views.retailer.ret_bills,name="ret_bills"),
     path("ret_order",views.retailer.ret_order,name="ret_order"),
     
+    
     #collectives
     path("collective",views.collective.collective,name="collective"),
     path("collective_dash",views.collective.collective_dash,name="collective_dash"),
-
+    path("collective_edit",views.collective.collective_edit,name="collective_edit"),
 
     path("",views.index,name="index"),
     path("index",views.index,name="index2"),

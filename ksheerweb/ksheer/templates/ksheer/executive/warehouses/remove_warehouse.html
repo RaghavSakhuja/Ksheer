@@ -10,13 +10,11 @@
 
     </head>
     <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
-        <form action="{% url 'edit_prod' %}" method="post">
+        <form action="{% url 'remove_warehouse' %}" method="post">
             {% csrf_token %}
-            <h1>Edit Product</h1>
+            <h1>Remove Warehouse</h1>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
             <script>
-                
-                $(document).ready(function () {
                 function myFunction() {
                   var input, filter, table, tr, td, i, txtValue;
                   input = document.getElementById("myInput");
@@ -35,55 +33,47 @@
                     }       
                   }
                 }
-                var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
-                $('.edit').click(function () {
-                    var currentTD = $(this).parents('tr').find('td');
-                    if ($(this).html() == 'Edit') {                  
-                        $.each(currentTD, function () {
-                            $(this).prop('contenteditable', true)
-                        });
-                        console.log('True')
-                        
-                    } 
-                    else {
-                        var list=[]
-                        $.each(currentTD, function () {
-                            $(this).prop('contenteditable', false)
-                            list.push($(this).html())
-                        });
-                        
-                            function ajaxCall1(list,token) {
-                                $.ajax({
-                                    url: window.location.href,
-                                    type:'post',
-                                    data: {
-                                        prod:list
-                                    },
-                                    headers: {'X-CSRFToken': token },
-                                    success:function(){
-                                        console.log("success")
-                                    }
-                                });
-                            }
-                            ajaxCall1(list,token);
-                    }
-                    $(this).prop('contenteditable', false)
-                    $(this).html($(this).html() == 'Edit' ? 'Save' : 'Edit')
-                });
-                    
-            
-            });
-            </script>
-                <div style="width: 800px; margin-left: 300px;" class="table-responsive">
+                </script>
+                <div style="width: 850px; margin-left: 300px;" class="table-responsive">
                 {{dataframe1 | safe}}
                 </div>
             <script>
-            
-            </script>
-            <div style="position: fixed;top:90%;left:45%;">
-                
-                <input type="submit" value="Add Batch" style="margin-right:20px;" class='btn btn-primary' >
-            </div>         
+            $(document).ready(function () {
+                var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
+                console.log(token);
+                $('.delete').click(function () {
+                    var currentTD = $(this).parents('tr').find('td');
+                    if ($(this).html() != 'Delete') {                  
+                        var list=[]
+                       $.each(currentTD, function () {
+                            list.push($(this).html())
+                        });
+                        
+                        console.log(list)
+                        function ajaxCall1(list,token) {
+                            console.log(list)
+                            $.ajax({
+                                url: window.location.href,
+                                type:'post',
+                                data: {
+                                    prod:list,
+                                    delete:1,
+                                },
+                                headers: {
+                    'X-CSRFToken': token 
+               },
+                                success:function(){
+                                    console.log("success")
+                                }
+                            });
+                        }
+                        ajaxCall1(list,token);
+                    }
+                    $(this).html($(this).html() == 'Delete' ? 'Confirm' : 'Delete')
+                });
+          
+            });
+            </script>     
         </form>
 
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

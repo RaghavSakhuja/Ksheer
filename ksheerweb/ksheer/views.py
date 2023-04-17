@@ -107,7 +107,7 @@ class executive:
     
     
     def make_edit_clickable(url):
-        return '<a href="#" class="Edit">Delete</a>'
+        return '<a href="#" class="edit">Edit</a>'
     
     def edit_prod(request):
         if request.method=="POST":
@@ -269,7 +269,34 @@ class executive:
     def view_retailers(request):
         # context={"dataframe":df}
         return render(request,'ksheer/view_ret.html')  
+        
+    def remove_store(request):
+        if request.method=="POST":
+            print(request.POST)
+
+        cu=db.cursor()
+        cu.execute("SELECT * from retailer")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df['link'] = df.apply(lambda x: executive.make_delete_clickable(x['store_id']), axis=1)
+        df.style
+        df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
+        return render(request,"ksheer/executive/stores/remove_store.html",context={'dataframe1':df})
     
+    def remove_warehouse(request):
+        if request.method=="POST":
+            print(request.POST)
+
+        cu=db.cursor()
+        cu.execute("SELECT * from warehouse")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df['link'] = df.apply(lambda x: executive.make_delete_clickable(x['warehouse_id']), axis=1)
+        df.style
+        df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
+        return render(request,"ksheer/executive/warehouses/remove_warehouse.html",context={'dataframe1':df})
 
 class retailer:
     
@@ -450,6 +477,25 @@ class collective:
             return response
         else:
             return render(request,"ksheer/index.html")
+    
+    def make_edit_clickable(url):
+        return '<a href="#" class="edit">Edit</a>'
+    
+    def collective_edit(request):
+        if request.method=="POST":
+            print(request.POST)
+
+        cu=db.cursor()
+        cu.execute(f"SELECT * from collective where collective_id={request.session['collective']}")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df['link'] = df.apply(lambda x: collective.make_edit_clickable(x['collective_id']), axis=1)
+        df.style
+        df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
+        return render(request,"ksheer/collective/collective_edit.html",context={'dataframe1':df})
+    
+
 
 
 def index(request):
