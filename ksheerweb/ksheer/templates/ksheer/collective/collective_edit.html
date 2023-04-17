@@ -10,7 +10,7 @@
 
     </head>
     <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
-        <form action="{% url 'edit_prod' %}" method="post">
+        <form action="{% url 'collective_edit' %}" method="post">
             {% csrf_token %}
             <h1>Edit Info</h1>
             <script>
@@ -36,8 +36,7 @@
                                 $.ajax({
                                     url: window.location.href,
                                     type:'post',
-                                    data: {
-                                        prod:list
+                                    data: {"list":list
                                     },
                                     headers: {'X-CSRFToken': token },
                                     success:function(){

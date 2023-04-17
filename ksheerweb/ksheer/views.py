@@ -6,6 +6,7 @@ import datetime
 import mysql.connector
 from django.core.exceptions import *
 import copy
+import json
 
 
 db = mysql.connector.connect(
@@ -111,7 +112,10 @@ class executive:
     
     def edit_prod(request):
         if request.method=="POST":
-            print(request.POST)
+            data=request.POST.getlist('list[]')
+            cu=db.cursor()
+            cu.execute(f"update product set name='{data[1]}',fat_percent={float(data[2])},protein_percent={float(data[3])},calories={float(data[4])},cost={int(data[5])},mrp={int(data[6])} where product_id='{data[0]}'")
+            db.commit()
 
         cu=db.cursor()
         cu.execute("SELECT * from product")
@@ -472,8 +476,10 @@ class collective:
     
     def collective_edit(request):
         if request.method=="POST":
-            print(request.POST)
-
+            data=request.POST.getlist('list[]')
+            cu=db.cursor()
+            cu.execute(f"update collective set street={data[1]},city={data[2]},pincode={data[3]},name={data[4]},username={data[5]},passwd={data[6]} where collective_id={data[0]}")
+            db.commit()
         cu=db.cursor()
         cu.execute(f"SELECT * from collective where collective_id={request.session['collective']}")
         batches=cu.fetchall()
