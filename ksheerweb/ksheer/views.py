@@ -419,38 +419,27 @@ class retailer:
         else:
             return HttpResponseRedirect("index")
     
+    def make_order_clickable(url):
+        return '<a href="#" class="edit">Edit</a>'
+    
+    def make_order_clickable2(url):
+        return '<input type="number" style="width:50px" disabled>'
+    
     def ret_order(request):
         if request.method=="POST":
-            cu=db.cursor()
-            cu.execute("select product_id from product")
-            products=[i[0] for i in cu.fetchall()]
-            n=request.session['number']
-            form=retorderform(request.POST,product=products,number=n)
-            if form.is_valid():
-                form2=form.cleaned_data
-                try:
-                    del request.session['number']
-                    return HttpResponseRedirect("retail_dash")
-                except Exception as e:
-                    if h==1:
-                        db.commit()
-                    return render(request,"ksheer/retailer/ret_order.html",context={'error':"insufficient quantity","form":{form}})
-            else:
-                return render(request,"ksheer/retailer/ret_order_bill.html",context={"form":form})
-        else:
-            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                h=request.GET.get('working')
-                if h=="yes":
-                    request.session['number']=request.session['number']+1
-                elif h=="no":
-                    request.session['number']=request.session['number']-1
+            print(request.POST)
 
-            n=request.session['number']
-            form=retorderform(number=n)
-            print(form.__dict__)  
-            return render(request,"ksheer/retailer/ret_order.html",{
-                "form":form,"n":n
-            })                       
+
+        cu=db.cursor()
+        cu.execute(f"SELECT * from product")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df['link'] = df.apply(lambda x: retailer.make_order_clickable(x['product_id']), axis=1)
+        df['link2'] = df.apply(lambda x: retailer.make_order_clickable2(x['product_id']), axis=1)
+        df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
+        return render(request,"ksheer/retailer/ret_order.html",context={'dataframe1':df})
+                          
 
 
 class collective:
