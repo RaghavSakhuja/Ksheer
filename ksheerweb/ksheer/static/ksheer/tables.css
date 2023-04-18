@@ -36,6 +36,50 @@ table {
     background-color: #031353;
   }
 
+.left_table{
+    float: left;
+    width: 50%;
+    margin-left: 5%;
+    height: 100%;
+    padding: 1px;
+    color: beige;
+}
+
+.right_table{
+    float: left;
+    width: 70%;
+    margin-left: 15%;
+    height: 100%;
+    padding: 1px;
+    color: beige;
+}
+
+#myInput1 {
+  float: left;
+  width: 20%;
+  height: 100%;
+  padding: 1px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 5%;
+  background-color: #00013c;
+  color: beige;
+  font-size: 110%;
+}
+#myInput2 {
+  float: left;
+  width: 45%;
+  height: 100%;
+  padding: 1px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 15%;
+  margin-right: 1%;
+  background-color: #00013c;
+  color: beige;
+  font-size: 110%;
+}
+
 .table_heading {
     text-align: center;
     color: beige;
@@ -55,9 +99,9 @@ table {
 
 input[type="text"] {
     color: beige;
-    background-color: #00013c!important;
+    background-color: #00013c;
     border: none;
-    width: 50%;
+    width: 55%;
     padding: 2px;
     font-size: 16px;
     margin-top: 15px;
