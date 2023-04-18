@@ -65,7 +65,6 @@
                         $.each(currentTD, function () {
                             $(this).prop('contenteditable', true)
                         });
-                        console.log('True')
                         
                     } 
                     else {
@@ -74,14 +73,13 @@
                             $(this).prop('contenteditable', false)
                             list.push($(this).html())
                         });
+                        list.pop();
                         
                             function ajaxCall1(list,token) {
                                 $.ajax({
                                     url: window.location.href,
                                     type:'post',
-                                    data: {
-                                        prod:list
-                                    },
+                                    data: {'list':list},
                                     headers: {'X-CSRFToken': token },
                                     success:function(){
                                         console.log("success")
