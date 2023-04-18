@@ -419,7 +419,7 @@ class retailer:
             for i in d:
                 x={'billid':i,'custid':d[i][0][0],'date':d[i][0][2],'total':d[i][0][3],'items':d[i][1]}
                 l.append(x)
-            return render(request,"ksheer/ret_bills.html",{'data':l})
+            return render(request,"ksheer/retailer/ret_bills.html",{'data':l})
         else:
             return HttpResponseRedirect("index")
     
