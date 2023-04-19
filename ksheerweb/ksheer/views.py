@@ -301,6 +301,34 @@ class executive:
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
         return render(request,"ksheer/executive/warehouses/remove_warehouse.html",context={'dataframe1':df})
+    
+    def make_getraw_clickable2(url):
+        return '<input type="number" style="width:50px" disabled>'
+    
+    def make_getraw_clickable(url):
+        return '<a href="#" class="add">Add</a>'
+    
+    def getraw(request):
+        if request.method=="POST":
+            queryDict=dict(request.POST)
+            print(queryDict)
+            cu=db.cursor()
+
+        
+        cu=db.cursor()
+        cu.execute(f"SELECT * from raw_material")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df['link'] = df.apply(lambda x: retailer.make_bill_clickable(x['raw_id']), axis=1)
+        df['link2'] = df.apply(lambda x: retailer.make_order_clickable2(x['raw_id']), axis=1)
+        df.style
+        df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
+        return render(request,"ksheer/executive/collect/getraw.html",context={'dataframe1':df})
+    
+    def collect(request):
+        return render(request,"ksheer/executive/collect/collect.html")
+
 
 class retailer:
     
@@ -331,75 +359,29 @@ class retailer:
             request.session['number']=1
             return render(request,"ksheer/index.html")
     
+    def make_bill_clickable(url):
+        return '<a href="#" class="add">Add</a>'
+    
     def add_bill(request):
         if request.method=="POST":
+            queryDict=dict(request.POST)
             cu=db.cursor()
-            cu.execute("select product_id from product")
-            products=[i[0] for i in cu.fetchall()]
-            n=request.session['number']
-            form=billform(request.POST,product=products,number=n)
-            form3=copy.deepcopy(form)
-            h=0
+
+        
+        cu=db.cursor()
+        cu.execute(f"SELECT * from product")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df['link'] = df.apply(lambda x: retailer.make_bill_clickable(x['product_id']), axis=1)
+        df['link2'] = df.apply(lambda x: retailer.make_order_clickable2(x['product_id']), axis=1)
+        df.style
+        df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
+        return render(request,"ksheer/retailer/add_bill1.html",context={'dataframe1':df})
+    
             
-            if form.is_valid():
-                
-                form2=form.cleaned_data
-                cu=db.cursor()
-                cu.execute("select customer_id from customer where phone={}".format(form2['phone']))
-                cu=cu.fetchone()
-                if cu==None:
-                    cu=db.cursor()
-                    cu.execute("insert into customer(name,age,gender,phone) values('{}',{},'{}',{})".format(form2['name'],form2['age'],form2['gender'],form2['phone'])) 
-                    db.commit()
-                    h=1   
-                    cu.execute("select customer_id from customer where phone={}".format(form2['phone']))
-                    cu=cu.fetchone()
-                custid=cu
-                
-                cu=db.cursor()
-                today = datetime.date.today()
-                formatted_date = today.strftime('%Y-%m-%d')
-                query="insert into bill(customer_id,store_id,date) values({},{},'{}')".format(custid[0],request.session['storeid'],formatted_date)    
-                cu.execute(query)
-                db.commit()
-
-                cu.execute("select max(bill_id) from bill")
-                billid=cu.fetchone()
-                print(billid)
-                cu=db.cursor()
-                try:
-                    for i in range(1,n+1):
-                        print(billid[0],form2['product_%s'%i],form2['quantity_%s'%i])
-                        cu.execute("insert into bill_product values({},'{}',{})".format(billid[0],form2['product_%s'%i],form2['quantity_%s'%i]))
-                        db.commit()
-                    return HttpResponseRedirect("retail_dash")
-                except Exception as e:
-                    cu.execute(f"delete from bill where bill_id={billid[0]}")
-                    db.commit()
-                    if h==1:
-                        cu.execute(f"delete from customer where customer_id={custid[0]}")
-                        db.commit()
-                    print(form3)
-                    return render(request,"ksheer/retailer/add_bill.html",context={'error':"insufficient quantity","form":form})
-            else:
-                
-                # print("yes")
-                print(form)
-                return render(request,"ksheer/retailer/add_bill.html",context={"form":form})
-        else:
-            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                h=request.GET.get('working')
-                if h=="yes":
-                    request.session['number']=request.session['number']+1
-                elif h=="no":
-                    request.session['number']=request.session['number']-1
-
-            n=request.session['number']
-            form=billform(number=n)
-            print(form.__dict__)  
-            return render(request,"ksheer/retailer/add_bill.html",{
-                "form":form,"n":n
-            })
+           
+               
     
     def ret_bills(request):
         if "userid" in request.session and "usertype" in request.session and request.session['usertype']=="r":
@@ -431,7 +413,8 @@ class retailer:
     
     def ret_order(request):
         if request.method=="POST":
-            print(request.POST)
+            queryDict=dict(request.POST)
+            print(queryDict)
 
 
         cu=db.cursor()
