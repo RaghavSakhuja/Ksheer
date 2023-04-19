@@ -45,27 +45,27 @@
                       'X-CSRFToken': token },
                         data: 
                             dict
-                    ,
-                    success:function(){
-                        location.reload()
-                    }
-                    });
-                    }
+                        ,
+                        success:function(){
+                            location.reload()
+                        }
+                        });
+                    };
                 $(document).ready(function () {
                     
-                    $('.edit').click(function () {
+                    $('.add').click(function () {
                         var currentTD = $(this).parents('tr').find('td');
-                        if ($(this).html() == 'Edit') {                  
-                            currentTD[8].firstChild.disabled=false;
+                        if ($(this).html() == 'Add') {                  
+                            currentTD[7].firstChild.disabled=false;
                         } 
                         else {
                             let s=currentTD[0].firstChild.textContent;
-                            dict[s]=currentTD[8].firstChild.value;
+                            dict[s]=currentTD[7].firstChild.value;
                             console.log(dict);
-                            currentTD[8].firstChild.disabled=true;
+                            currentTD[7].firstChild.disabled=true;
                             
                         }
-                        $(this).html($(this).html() == 'Edit' ? 'Save' : 'Edit')
+                        $(this).html($(this).html() == 'Add' ? 'Save' : 'Add')
                     });
                 });
             </script>

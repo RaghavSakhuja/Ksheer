@@ -25,6 +25,8 @@ urlpatterns=[
     path("delete_prod",views.executive.delete_prod,name="delete_prod"),
     path("remove_retailer",views.executive.remove_store,name="remove_retailer"),
     path("remove_warehouse",views.executive.remove_warehouse,name="remove_warehouse"),
+    path("getraw",views.executive.getraw,name="getraw"),
+    path("collect",views.executive.collect,name="collect"),
     #retailers
     path("ret_warehouse",views.executive.add_prod,name="ret_warehouse"),
     path("retailer_login",views.retailer.retailer_login,name="retailer_login"),
