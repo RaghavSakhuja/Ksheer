@@ -4,17 +4,19 @@
 <html lang="en">
     <head>
         <title>Ksheer</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link href="{% static 'ksheer/tables.css' %}" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     </head>
     <body class="background">
         <div class="index">
-            <a class="inactive_index" href="#">Dashboard</a>/
-            <a href="#">Add bills</a>
-            <input type="button" value="Logout" onclick="location.href='logout'" class='btn btn-primary signout' >
-            <input type="button" value="Back" onclick="location.href='retail_dash'" class='btn btn-primary back' >
+            <a class="inactive_index" href="{% url 'retail_dash' %}">Dashboard/</a>
+            <a class="inactive_index" href="{% url 'cust_details' %}">Customer Details/</a>
+            <a href="{% url 'ret_order' %}">Edit bills</a>
+            <input type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
+            <input type="button" value="Back" onclick="location.href='cust_details'" class='btn btn-primary back' >
             <script>
                 function logout() {
                     var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
@@ -33,8 +35,8 @@
                 }
             </script>
         </div>
-  
               <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
+              
             <script>
                 var dict={}
                 var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
@@ -90,9 +92,13 @@
                     });
                 });
             </script>
+            <form action="{% url 'add_bill' %}" method="post">
+                {% csrf_token %}
+           
                 <div style="width: 800px; margin-left: 300px;" class="table-responsive">
                 {{dataframe1 | safe}}
                 </div>
+            </form>
             <div style="position: fixed;top:90%;left:45%;">
                 <button style="margin-right:20px;" onclick="ajaxCall1()" class='btn btn-primary' >Add Bill</button>
             </div>         

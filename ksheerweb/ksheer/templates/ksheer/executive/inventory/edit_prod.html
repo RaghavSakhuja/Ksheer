@@ -12,10 +12,10 @@
     </head>
     <body class="background">
         <div class="index">
-            <a class="inactive_index" href="#">Dashboard</a>/
-            <a class="inactive_index" href="#">Manage Inventory</a>/
-            <a href="#">Edit Products</a>
-            <input type="button" value="Logout" onclick="location.href='logout'" class='btn btn-primary signout' >
+            <a class="inactive_index" href="{% url 'exec_dash' %}">Dashboard</a>/
+            <a class="inactive_index" href="{% url 'exec_inventory' %}">Manage Inventory</a>/
+            <a href="{% url 'edit_prod' %}">Edit Products</a>
+            <input type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
             <input type="button" value="Back" onclick="location.href='exec_inventory'" class='btn btn-primary back' >
             <script>
                 function logout() {

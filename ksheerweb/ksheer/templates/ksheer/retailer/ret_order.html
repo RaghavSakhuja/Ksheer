@@ -12,8 +12,8 @@
     </head>    
     <body class="background">
         <div class="index">
-            <a class="inactive_index" href="#">Dashboard</a>/
-            <a href="#">Edit bills</a>
+            <a class="inactive_index" href="{% url 'retail_dash' %}">Dashboard</a>/
+            <a href="{% url 'ret_order' %}">Order</a>
             <input type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
             <input type="button" value="Back" onclick="location.href='retail_dash'" class='btn btn-primary back' >
             <script>
@@ -36,7 +36,6 @@
         </div>
         <form action="{% url 'ret_order'%}" method="post">
             {% csrf_token %}
-        <h1>Edit Product</h1>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
             <script>
                 var dict={}

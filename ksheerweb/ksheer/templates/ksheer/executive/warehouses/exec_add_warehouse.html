@@ -11,10 +11,10 @@
     </head>
     <body class="background">
         <div class="index">
-            <a class="inactive_index" href="#">Dashboard</a>/
-            <a class="inactive_index" href="#">Manage Warehouse</a>/
-            <a href="#">Add Warehouse</a>
-            <input type="button" value="Logout" onclick="location.href='logout'" class='btn btn-primary signout' >
+            <a class="inactive_index" href="{% url 'exec_dash' %}">Dashboard</a>/
+            <a class="inactive_index" href="{% url 'exec_warehouse' %}">Manage Warehouse</a>/
+            <a href="{% url 'exec_add_warehouse' %}">Add Warehouse</a>
+            <input type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
             <input type="button" value="Back" onclick="location.href='exec_warehouse'" class='btn btn-primary back' >
             <script>
                 function logout() {

@@ -10,8 +10,8 @@
     </head>
     <body class="background">
         <div class="index">
-            <a class="inactive_index" href="#">Dashboard</a>/
-            <a class="active_index" href="#">Manage Inventory</a>
+            <a class="inactive_index" href="{% url 'exec_dash' %}">Dashboard</a>/
+            <a class="active_index" href="{% url 'exec_inventory' %}">Manage Inventory</a>
             <input type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
             <input type="button" value="Back" onclick="location.href='exec_dash'" class='btn btn-primary back' >
             <script>
