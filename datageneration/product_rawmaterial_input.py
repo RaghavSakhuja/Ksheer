@@ -1,7 +1,7 @@
 import csv
 import mysql.connector
 
-filename = "input_scripts/raw_material.csv"
+filename = "input_scripts/product_rawmaterial.csv"
 field = []
 rows = []
 
@@ -18,16 +18,15 @@ mycur=mydb.cursor()
 with open(filename, 'r') as csvfile:
   csvreader = csv.reader(csvfile)
   field = next(csvreader)
-  t=0
   for row in csvreader:
     rows.append(row)
-    t+=1
-    '''Raw_material(raw_id,name,fat_percent,protein_percent,amount,rate)'''
-    s=f'''insert into Raw_material(raw_id, {field[1]}, {field[2]}, {field[3]}, {field[4]}) values('{row[0]}', '{row[1]}', {row[2]}, {row[3]}, {row[4]})'''
+    '''product_rawmaterial( product_id, raw_id, quantity_perpiece)'''
+    s=f'''insert into product_rawmaterial({field[0]}, {field[1]}, {field[2]}) values('{row[0]}', '{row[1]}', {row[2]})'''
     print(s);
     try:
       mycur.execute(s)
     except Exception as e:
       print(e)
-      
 mydb.commit()
+
+
