@@ -6,9 +6,11 @@
         <title>Ksheer</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link href="{% static 'ksheer/tables.css' %}" rel="stylesheet">
+        <!-- <link href="{% static 'ksheer/add_batches.css' %}" rel="stylesheet"> -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    </head>    <body class="background">
+    </head>    
+    <body class="background">
         <div class="index">
             <a class="inactive_index" href="#">Dashboard</a>/
             <a href="#">Edit bills</a>
@@ -32,6 +34,9 @@
                 }
             </script>
         </div>
+        <form action="{% url 'ret_order'%}" method="post">
+            {% csrf_token %}
+        <h1>Edit Product</h1>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
             <script>
                 var dict={}
@@ -91,10 +96,10 @@
                 <div style="width: 800px; margin-left: 300px;" class="table-responsive">
                 {{dataframe1 | safe}}
                 </div>
+            </form> 
             <div style="position: fixed;top:90%;left:45%;">
                 <button style="margin-right:20px;" onclick="ajaxCall1()" class='btn btn-primary' >Order</button>
-            </div>         
-
+            </div>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>

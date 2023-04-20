@@ -313,7 +313,8 @@ class executive:
             response=dict(request.POST)
             print(response)
             cu=db.cursor()
-            s="begin"      
+            s="begin"    
+            cu.execute(s)  
             print(request.session)
             collective_user=request.session['userid']
             s=f"select collective_id from collective where username='{collective_user}'"
@@ -432,8 +433,17 @@ class retailer:
     
     def ret_order(request):
         if request.method=="POST":
+            print(request.session['storeid'])
             queryDict=dict(request.POST)
             print(queryDict)
+            cu=db.cursor()
+            s="begin"
+            cu.execute(s)
+            username=request.session['storeid']
+            s="select store_id from retailer where username='{}'".format(username)
+            cu.execute(s)
+            store_id=cu.fetchone()[0]
+            
 
 
         cu=db.cursor()
