@@ -6,12 +6,10 @@
         <title>Search</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
-        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
-        <h1>ADD BILL</h1>
-        <form action="{% url 'add_bill' %}" method="post" novalidate>
-            {% csrf_token %}
+        <h1>Customer Details</h1>
             <div class="prod" style="margin-left: 20%;margin-right: 5%;margin-top: 5%;">
                 {%crispy form%}
                 <div style="margin-left: 45%; color: rgb(240, 20, 20); font-size: large;">
@@ -20,9 +18,32 @@
                     {%endif%}
                 </div>
             </div>
-            
-            </form>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
+                    $("input[name='name']").prop('readonly',true);
+                    $("input[name='age']").prop('readonly',true);
+                    $("input[name='gender']").prop('readonly',true);
+                    document.getElementsByName('phone')[0].onfocusout = function(){
+                        var value=this.value;
+                        if(value.length==10){
+                            $.ajax({
+                                url: window.location.href,
+                                type:'get',
+                                headers: {'X-CSRFToken': token },
+                                data:{phone:value},
+                                success:function(data){
+                                    if(data=="no"){
+                                        $("input[name='name']").prop('readonly',false);
+                                        $("input[name='age']").prop('readonly',false);
+                                        $("input[name='gender']").prop('readonly',false);
+                                    }
+                                }
+                            });
+                        }
+                    };   
+                });
+            </script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>

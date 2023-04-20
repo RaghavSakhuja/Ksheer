@@ -27,11 +27,13 @@ urlpatterns=[
     path("remove_warehouse",views.executive.remove_warehouse,name="remove_warehouse"),
     path("getraw",views.executive.getraw,name="getraw"),
     path("collect",views.executive.collect,name="collect"),
+    path("create_batches",views.executive.create_batches,name="create_batches"),
     #retailers
     path("ret_warehouse",views.executive.add_prod,name="ret_warehouse"),
     path("retailer_login",views.retailer.retailer_login,name="retailer_login"),
     path("retail_dash",views.retailer.retail_dash,name="retail_dash"),
     path("add_bill",views.retailer.add_bill,name="add_bill"),
+    path("cust_details",views.retailer.cust_details,name="cust_details"),
     path("ret_bills",views.retailer.ret_bills,name="ret_bills"),
     path("ret_order",views.retailer.ret_order,name="ret_order"),
     

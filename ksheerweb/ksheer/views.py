@@ -314,7 +314,6 @@ class executive:
             print(queryDict)
             cu=db.cursor()
 
-        
         cu=db.cursor()
         cu.execute(f"SELECT * from raw_material")
         batches=cu.fetchall()
@@ -324,11 +323,29 @@ class executive:
         df['link2'] = df.apply(lambda x: retailer.make_order_clickable2(x['raw_id']), axis=1)
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
-        return render(request,"ksheer/executive/collect/getraw.html",context={'dataframe1':df})
+        return render(request,"ksheer/collective/getraw.html",context={'dataframe1':df})
     
     def collect(request):
         return render(request,"ksheer/executive/collect/collect.html")
-
+    
+    def make_create_batches(url):
+        return '''<select class="create" name={}>
+    <option value="volvo">None</option>
+    <option value="saab">1000</option>
+    <option value="fiat">2500</option>
+    <option value="audi">5000</option>
+  </select>'''.format(url)
+    def create_batches(request):
+        cu=db.cursor()
+        cu.execute(f"SELECT * from product")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df['link'] = df.apply(lambda x: executive.make_create_batches(x['product_id']), axis=1)
+        # df['link2'] = df.apply(lambda x: retailer.make_order_clickable2(x['product_id']), axis=1)
+        df.style
+        df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
+        return render(request,"ksheer/executive/warehouses/create_batches.html",context={'dataframe1':df}) 
 
 class retailer:
     
@@ -362,9 +379,39 @@ class retailer:
     def make_bill_clickable(url):
         return '<a href="#" class="add">Add</a>'
     
+    def cust_details(request):
+        if request.method=="POST":
+            form=billform(request.POST)
+            if form.is_valid():
+                form=form.cleaned_data
+                cu=db.cursor()
+                cu.execute(f"select customer_id from customer where phone={form['phone']}")
+                cu=cu.fetchone()
+                if cu==None:
+                    print("yes")
+                    cu=db.cursor()
+                    cu.execute(f"insert into customer(name,age,gender,phone) values('{form['name']}',{form['age']},'{form['gender']}',{form['phone']})")
+                    db.commit()
+                    cu.execute(f"select customer_id from customer where phone={form['phone']}")
+                    cu=cu.fetchone()  
+                request.session['custid']=cu[0]
+                return HttpResponseRedirect('add_bill')
+
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            phone=dict(request.GET)['phone']
+            cu=db.cursor()
+            cu.execute(f"select * from customer where phone={int(phone[0])}")
+            cu=cu.fetchone()
+            if cu==None:
+                return HttpResponse("no")
+            else:
+                return HttpResponse("yes")
+        return render(request,"ksheer/retailer/cust_details.html",context={"form":billform()})
+
     def add_bill(request):
         if request.method=="POST":
             queryDict=dict(request.POST)
+            print(request.session['custid'])
             cu=db.cursor()
 
         
@@ -378,10 +425,6 @@ class retailer:
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
         return render(request,"ksheer/retailer/add_bill1.html",context={'dataframe1':df})
-    
-            
-           
-               
     
     def ret_bills(request):
         if "userid" in request.session and "usertype" in request.session and request.session['usertype']=="r":
