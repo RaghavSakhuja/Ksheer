@@ -59,14 +59,14 @@
                             }
                             }       
                         }
-                    };
-                    function ajaxCall1() {
+                };
+                function ajaxCall1() {
                         console.log("yes");
                         $.ajax({
                         url: window.location.href,
                         type:'post',
                         headers: {
-                      'X-CSRFToken': token },
+                        'X-CSRFToken': token },
                         data: 
                             dict
                     ,
@@ -74,13 +74,15 @@
                         location.reload()
                     }
                     });
-                    }
+                }
                 $(document).ready(function () {
                     
-                    $('.edit').click(function () {
+                    $('.edit').click(function ($e) {
+                        $e.preventDefault();
                         var currentTD = $(this).parents('tr').find('td');
-                        if ($(this).html() == 'Edit') {                  
+                        if ($(this).html() == 'Edit') {               
                             currentTD[8].firstChild.disabled=false;
+                            console.log("yes")
                         } 
                         else {
                             let s=currentTD[0].firstChild.textContent;
