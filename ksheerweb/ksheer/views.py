@@ -262,7 +262,7 @@ class executive:
                     cu.execute(f'''insert into retailer(street,city,pincode,name,username,passwd) values("{form['street']}","{form['city']}",{form['pincode']},"{form['store_name']}","{form['username']}","{form['password']}")''')
                     db.commit()
                 except Exception as e:
-                    pass
+                    print(e)
                     
             return HttpResponseRedirect("add_retailer")
         else:
@@ -310,9 +310,31 @@ class executive:
     
     def getraw(request):
         if request.method=="POST":
-            queryDict=dict(request.POST)
-            print(queryDict)
+            response=dict(request.POST)
+            print(response)
             cu=db.cursor()
+            s="begin"      
+            print(request.session)
+            collective_user=request.session['userid']
+            s=f"select collective_id from collective where username='{collective_user}'"
+            cu.execute(s)
+            collective_id=cu.fetchone()[0]
+            a=response.keys()
+            try:
+                for i in a:
+                    print(i,response[i][0])
+                    raw_id=i
+                    quantity=response[i][0]
+                    supply_date=datetime.date.today()
+                    print(supply_date)
+                    s=f"insert into collective_rawmaterial values({collective_id},'{raw_id}','{supply_date}',{quantity})"
+                    print(s)
+                    cu.execute(s)
+            except Exception as e:
+                print(e)
+                s="rollback"
+                cu.execute(s)
+            db.commit()
 
         
         cu=db.cursor()
@@ -378,10 +400,7 @@ class retailer:
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
         return render(request,"ksheer/retailer/add_bill1.html",context={'dataframe1':df})
-    
-            
-           
-               
+         
     
     def ret_bills(request):
         if "userid" in request.session and "usertype" in request.session and request.session['usertype']=="r":
@@ -473,8 +492,6 @@ class collective:
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
         return render(request,"ksheer/collective/collective_edit.html",context={'dataframe1':df})
     
-
-
 
 def index(request):
     try:
