@@ -14,7 +14,7 @@
         <div class="index">
             <a class="inactive_index" href="#">Dashboard</a>/
             <a href="#">Edit bills</a>
-            <input type="button" value="Logout" onclick="location.href='logout'" class='btn btn-primary signout' >
+            <input type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
             <input type="button" value="Back" onclick="location.href='retail_dash'" class='btn btn-primary back' >
             <script>
                 function logout() {
@@ -82,7 +82,6 @@
                         var currentTD = $(this).parents('tr').find('td');
                         if ($(this).html() == 'Edit') {               
                             currentTD[8].firstChild.disabled=false;
-                            console.log("yes")
                         } 
                         else {
                             let s=currentTD[0].firstChild.textContent;

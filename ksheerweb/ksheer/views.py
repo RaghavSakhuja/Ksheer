@@ -353,12 +353,17 @@ class executive:
     
     def make_create_batches(url):
         return '''<select class="create" name={}>
-    <option value="volvo">None</option>
-    <option value="saab">1000</option>
-    <option value="fiat">2500</option>
-    <option value="audi">5000</option>
-  </select>'''.format(url)
+                <option value="0">None</option>
+                <option value="1000">1000</option>
+                <option value="2500">2500</option>
+                <option value="5000">5000</option>
+                </select>'''.format(url)
+    
+    
     def create_batches(request):
+        if request.method=="POST":
+            print(request.POST)
+        
         cu=db.cursor()
         cu.execute(f"SELECT * from product")
         batches=cu.fetchall()

@@ -37,26 +37,27 @@
                         }
                     };
                     function ajaxCall1() {
-                        console.log("yes");
                         $.ajax({
                         url: window.location.href,
                         type:'post',
                         headers: {
                       'X-CSRFToken': token },
-                        data: 
-                            dict
-                    ,
+                        data: dict,
                     success:function(){
                         location.reload()
                     }
                 });
                     };
                 $(document).ready(function () {
-                    
-                    $('.create').click(function () {
-                        var currentTD = $(this).parents('tr').find('td');
-                        console.log($(this).value)
-                        // $(this).html($(this).html() == 'Add' ? 'Save' : 'Add')
+                    $('.create').change(function(){
+                        if($(this)[0].value==0){
+                            delete dict[$(this).attr('name')];
+                            console.log(dict);
+                        }
+                        else{
+                            dict[$(this).attr('name')]=$(this)[0].value;
+                            console.log(dict);
+                        }
                     });
                 });
             </script>
