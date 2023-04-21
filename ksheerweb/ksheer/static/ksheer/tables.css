@@ -97,7 +97,7 @@ table {
     color:rgb(234, 234, 249);
 }
 
-input[type="text"] {
+input[type="text"],input[name="age"] {
     color: beige;
     background-color: #00013c;
     border: none;

@@ -129,20 +129,14 @@ class executive:
     
     def exec_add_batch(request):
         if request.method=="POST":
-            print(request.POST)
-            try:
-                batches=request.POST.get('batches')
-                print(batches)
-                warehouse=request.POST.get('warehouses')[0]
-            except:
-                pass
-            sum=0
+            querydict=dict(request.POST)
+            # try:
+            #     batches=request.POST.get('batches')
+            #     print(batches)
+            #     warehouse=request.POST.get('warehouses')[0]
+            # except:
+            #     pass
             #transaction query
-            for i in batches:
-                print(i,i.split("_"))
-                sum+=int(i.split("_")[1])
-            if(sum+int(warehouse.split("_")[2])>int(warehouse.split("_")[1])):
-                print("no")
             # try:
             #     cu=db.cursor()
             #     for i in batches:
@@ -155,7 +149,7 @@ class executive:
         df = pd.DataFrame(batches, columns=columns)
         l=[]
         for index, row in df.iterrows():
-            print(str(row['batch_id'])+"_"+str(row['quantity']))
+            # print(str(row['batch_id'])+"_"+str(row['quantity']))
             l.append('<input type="checkbox" name="batches" value={} />'.format(str(row['batch_id'])+"_"+str(row['quantity'])))
         df.insert(3,"",l,True)
         cu=db.cursor()
@@ -353,12 +347,17 @@ class executive:
     
     def make_create_batches(url):
         return '''<select class="create" name={}>
-    <option value="volvo">None</option>
-    <option value="saab">1000</option>
-    <option value="fiat">2500</option>
-    <option value="audi">5000</option>
-  </select>'''.format(url)
+                <option value="0">None</option>
+                <option value="1000">1000</option>
+                <option value="2500">2500</option>
+                <option value="5000">5000</option>
+                </select>'''.format(url)
+    
+    
     def create_batches(request):
+        if request.method=="POST":
+            print(request.POST)
+        
         cu=db.cursor()
         cu.execute(f"SELECT * from product")
         batches=cu.fetchall()
@@ -405,6 +404,7 @@ class retailer:
     def cust_details(request):
         if request.method=="POST":
             form=billform(request.POST)
+            
             if form.is_valid():
                 form=form.cleaned_data
                 cu=db.cursor()
@@ -419,16 +419,18 @@ class retailer:
                     cu=cu.fetchone()  
                 request.session['custid']=cu[0]
                 return HttpResponseRedirect('add_bill')
-
+            else:
+                return render(request,"ksheer/retailer/cust_details.html",context={"form":form})
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             phone=dict(request.GET)['phone']
             cu=db.cursor()
             cu.execute(f"select * from customer where phone={int(phone[0])}")
             cu=cu.fetchone()
+            print(cu)
             if cu==None:
                 return HttpResponse("no")
             else:
-                return HttpResponse("yes")
+                return HttpResponse(json.dumps({'name':cu[1],'age':cu[2],'gender':cu[3]}))
         return render(request,"ksheer/retailer/cust_details.html",context={"form":billform()})
 
     def add_bill(request):

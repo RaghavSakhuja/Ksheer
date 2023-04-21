@@ -9,10 +9,10 @@
     </head>
     <body class="background">
         <div class="index">
-            <a class="inactive_index" href="#">Dashboard</a>/
-            <a class="inactive_index" href="#">Manage Warehouse</a>/
-            <a href="#">View Batches</a>
-            <input type="button" value="Logout" onclick="location.href='logout'" class='btn btn-primary signout' >
+            <a class="inactive_index" href="{% url 'exec_dash' %}">Dashboard</a>/
+            <a class="inactive_index" href="{% url 'exec_warehouse' %}">Manage Warehouse</a>/
+            <a href="{% url 'exec_warehouse_batch' %}">View Batches</a>
+            <input type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
             <input type="button" value="Back" onclick="location.href='exec_warehouse'" class='btn btn-primary back' >
             <script>
                 function logout() {
@@ -57,7 +57,9 @@
                 </script>
           
         <h1 class="table_heading"> Batches </h1>
-
+        <form action="{% url 'index' %}" method="post">
+          {%csrf_token%}
+        </form>
         <div class="table_setting" style="width: fit-content; margin-left: 34%;">
         {{dataframe | safe}}
         </div>

@@ -12,9 +12,9 @@
     </head>    
     <body class="background">
         <div class="index">
-            <a class="inactive_index" href="#">Dashboard</a>/
-            <a href="#">Edit bills</a>
-            <input type="button" value="Logout" onclick="location.href='logout'" class='btn btn-primary signout' >
+            <a class="inactive_index" href="{% url 'retail_dash' %}">Dashboard</a>/
+            <a href="{% url 'ret_order' %}">Order</a>
+            <input type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
             <input type="button" value="Back" onclick="location.href='retail_dash'" class='btn btn-primary back' >
             <script>
                 function logout() {
@@ -36,7 +36,6 @@
         </div>
         <form action="{% url 'ret_order'%}" method="post">
             {% csrf_token %}
-        <h1>Edit Product</h1>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
             <script>
                 var dict={}
@@ -82,7 +81,6 @@
                         var currentTD = $(this).parents('tr').find('td');
                         if ($(this).html() == 'Edit') {               
                             currentTD[8].firstChild.disabled=false;
-                            console.log("yes")
                         } 
                         else {
                             let s=currentTD[0].firstChild.textContent;

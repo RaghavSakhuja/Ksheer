@@ -118,9 +118,9 @@ class storeform(forms.Form):
 
 class billform(forms.Form):
     phone = forms.CharField(max_length=15)
-    name = forms.CharField(max_length=200,initial="yes")
-    age = forms.IntegerField(initial=0)
-    gender = forms.CharField(max_length=10,initial="male")
+    name = forms.CharField(max_length=200)
+    age = forms.IntegerField(min_value=0)
+    gender = forms.CharField(max_length=10)
   
     def __init__(self, *args, **kwargs):
         super(billform, self).__init__(*args,**kwargs)
@@ -128,7 +128,7 @@ class billform(forms.Form):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-4'
-        self.helper.form_method='post'
+
         self.helper.add_input(Submit('next','next',css_class='btn btn-success'))
         # self.helper.add_input(Button('back','Back',onClick="location.href='retail_dash'",css_class='btn btn-light'))
         
