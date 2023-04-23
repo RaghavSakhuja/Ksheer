@@ -499,7 +499,35 @@ class retailer:
             queryDict=dict(request.POST)
             print(request.session['custid'])
             print(request.session['storeid'])
+            print(queryDict)
             cu=db.cursor()
+            a=queryDict.keys()
+            s="begin"
+            cu.execute(s)
+            s='select * from bill'
+            cu.execute(s)
+            bill=cu.fetchall()
+            bill_id=bill[-1][0]+1;
+            s=f"insert into bill(bill_id,customer_id,store_id,date) values({bill_id},{request.session['custid']},{request.session['storeid']},'{datetime.date.today()}')"
+            print(s)
+            cu.execute(s)
+            for i in a:
+                if i!='csrfmiddlewaretoken':
+                    try:
+                        if(queryDict[i][0]==''):
+                            continue
+                        s=f"insert into bill_product(bill_id,product_id,quantity) values({bill_id},'{i}',{queryDict[i][0]})"
+                        print(s)
+                        cu.execute(s)
+                    except Exception as e:
+                        print(e)
+                        s="rollback"
+                        cu.execute(s)
+                        break;
+        db.commit()
+
+
+
 
         
         cu=db.cursor()
