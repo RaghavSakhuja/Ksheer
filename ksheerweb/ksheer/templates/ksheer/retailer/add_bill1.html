@@ -22,7 +22,7 @@
                     var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
                     $.ajax({
                         url: "index",
-                        type:'post',
+                        type:'post',    
                         headers: {
                         'X-CSRFToken': token },
                         data: {
