@@ -369,12 +369,12 @@ class executive:
             print(request.POST)
             query=dict(request.POST)
             a=query.keys()
-            s="lock table batch write,product read,raw_material write"
+            cu=db.cursor()
+            s="lock table batch write,product read,raw_material write,product_rawmaterial read"
             cu.execute(s)
             for i in a:
                 if i!='csrfmiddlewaretoken':
                     print(i,query[i][0])
-                    cu=db.cursor()
                     s="begin"
                     cu.execute(s)
                     s=f'select * from batch';
@@ -385,11 +385,31 @@ class executive:
                         s=f"insert into batch(batch_id,product_id,quantity,production_date,expiry_date) values({batch_id},'{i}',{query[i][0]},'{datetime.date.today()}','{datetime.date.today()+datetime.timedelta(days=180)}')"
                         print(s)
                         cu.execute(s)
+                        s="select * from product_rawmaterial where product_id='{}'".format(i)
+                        print(s)
+                        cu.execute(s)
+                        raw=cu.fetchall()
+                        for j in raw:
+                            need=j[2]
+                            amount=int(query[i][0])*need
+                            print(amount)
+                            s=f"select * from raw_material where raw_id='{j[1]}'"
+                            cu.execute(s)
+                            raw_material=cu.fetchall()
+                            print(raw_material)
+                            quantity=int(raw_material[0][4])-amount
+                            print(quantity)
+                            if quantity<0:
+                                raise Exception("Not enough raw material")
+                            s=f"update raw_material set amount=amount-{amount} where raw_id='{j[1]}'"
+                            print(s)
+                            cu.execute(s)
+
                     except Exception as e:
                         print(e)
                         s="rollback"
                         cu.execute(s)
-                        break;
+                        break
                         
             s="unlock tables"
             cu.execute(s)
