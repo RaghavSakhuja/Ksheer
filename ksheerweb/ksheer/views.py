@@ -400,6 +400,25 @@ class executive:
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
         return render(request,"ksheer/executive/warehouses/create_batches.html",context={'dataframe1':df}) 
+    
+    def add_collective(request):
+        if request.method=="POST":
+            form2=collectiveform(request.POST)
+            if form2.is_valid():
+                form=form2.cleaned_data
+                cu=db.cursor()
+                try:
+                    cu.execute(f'''insert into retailer(street,city,pincode,name,username,passwd) values("{form['street']}","{form['city']}",{form['pincode']},"{form['store_name']}","{form['username']}","{form['password']}")''')
+                    db.commit()
+                    return HttpResponseRedirect("add_collective")
+                except Exception as e:
+                    return render(request,"ksheer/executive/collect/add_collective.html",{
+                        "form":collectiveform(),"error":e
+                    })
+        else:
+            return render(request,"ksheer/executive/collect/add_collective.html",{
+                "form":collectiveform()
+            })
 
 class retailer:
     

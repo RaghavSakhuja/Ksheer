@@ -27,6 +27,7 @@ urlpatterns=[
     path("remove_warehouse",views.executive.remove_warehouse,name="remove_warehouse"),
     path("getraw",views.executive.getraw,name="getraw"),
     path("collect",views.executive.collect,name="collect"),
+    path("add_collective",views.executive.add_collective,name="add_collective"),
     path("create_batches",views.executive.create_batches,name="create_batches"),
     #retailers
     path("ret_warehouse",views.executive.add_prod,name="ret_warehouse"),
