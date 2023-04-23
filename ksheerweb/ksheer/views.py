@@ -130,17 +130,26 @@ class executive:
     def exec_add_batch(request):
         if request.method=="POST":
             querydict=dict(request.POST)
-            # try:
-            #     batches=request.POST.get('batches')
-            #     print(batches)
-            #     warehouse=request.POST.get('warehouses')[0]
-            # except:
-            #     pass
-            #transaction query
-            # try:
-            #     cu=db.cursor()
-            #     for i in batches:
-            #         cu.execute(f"insert into warehouse_batch values({warehouse},{i})")
+            print(querydict)
+            a=querydict.keys()
+            cu=db.cursor()
+            for i in a:
+                s="begin"
+                cu.execute(s)
+                b=i.split("_")
+                warehouse_id=b[0]
+                l=querydict[i]
+                for j in l:
+                    k=j.split("_")
+                    batch_id=k[0]
+                    try:
+                        cu.execute(f"insert into warehouse_batch values({warehouse_id},{batch_id})")
+                    except Exception as e:
+                        print(e)
+                        cu.execute("rollback")
+            
+            db.commit()
+
 
         cu=db.cursor()
         cu.execute("SELECT batch_id,product_id,quantity FROM batch WHERE batch.batch_id NOT IN (SELECT warehouse_batch.batch_id FROM warehouse_batch) order by production_date")
@@ -357,6 +366,29 @@ class executive:
     def create_batches(request):
         if request.method=="POST":
             print(request.POST)
+            query=dict(request.POST)
+            a=query.keys()
+            for i in a:
+                if i!='csrfmiddlewaretoken':
+                    print(i,query[i][0])
+                    cu=db.cursor()
+                    s="begin"
+                    cu.execute(s)
+                    s=f'select * from batch';
+                    cu.execute(s)
+                    batch=cu.fetchall()
+                    batch_id=batch[-1][0]+1;
+                    try:
+                        s=f"insert into batch(batch_id,product_id,quantity,production_date,expiry_date) values({batch_id},'{i}',{query[i][0]},'{datetime.date.today()}','{datetime.date.today()+datetime.timedelta(days=180)}')"
+                        print(s)
+                        cu.execute(s)
+                    except Exception as e:
+                        print(e)
+                        s="rollback"
+                        cu.execute(s)
+                        break;
+                        
+            db.commit()
         
         cu=db.cursor()
         cu.execute(f"SELECT * from product")
@@ -437,6 +469,7 @@ class retailer:
         if request.method=="POST":
             queryDict=dict(request.POST)
             print(request.session['custid'])
+            print(request.session['storeid'])
             cu=db.cursor()
 
         
@@ -486,13 +519,84 @@ class retailer:
             queryDict=dict(request.POST)
             print(queryDict)
             cu=db.cursor()
-            s="begin"
-            cu.execute(s)
-            username=request.session['storeid']
-            s="select store_id from retailer where username='{}'".format(username)
-            cu.execute(s)
-            store_id=cu.fetchone()[0]
+            store_id=request.session['storeid']
+            a=queryDict.keys()
+            for i in a:
+                product_id=i;
+                if(queryDict[i][0]==''):
+                    continue
+                s="begin"
+                cu.execute(s)
+                quantity=int(queryDict[i][0])
+                s=f'select * from retailer_warehouse where store_id={store_id}'
+                print(s);
+                cu.execute(s)
+                warehouses=cu.fetchall()
+                flag=False
+                for i in warehouses:
+                    warehouse_id=i[1]
+                    s=f'''select distinct * from 
+                    (select * from batch where product_id='{product_id}') as t1
+                    inner join
+                    (select * from batch where batch_id in (
+                    select batch_id from warehouse_batch wb,(
+                    select warehouse_id from warehouse where warehouse_id not in (select warehouse_id from
+                    retailer_warehouse)) a where wb.warehouse_id=a.warehouse_id)) t2
+                    on t1.batch_id=t2.batch_id'''
+                    print(s)
+                    cu.execute(s)
+                    batches=cu.fetchall()
+                    batch_flag=False
+                    for i in batches:
+                        quantity1=i[2]
+                        print(quantity,type(quantity))
+                        print(quantity1,type(quantity1))
+                        if(quantity1>=quantity):
+                            batch_flag=True
+                            if(quantity1==quantity):
+                                s=f'delete from warehouse_batch where batch_id={i[0]}'
+                                print(s)
+                                cu.execute(s)
+                                s=f'delete from batch where batch_id={i[0]}'
+                                print(s)
+                                cu.execute(s)
+                            else:
+                                s=f'update batch set quantity={quantity1-quantity} where batch_id={i[0]}'
+                                print(s)
+                                cu.execute(s)
+                            s=f'select * from batch';
+                            cu.execute(s)
+                            batch=cu.fetchall()
+                            batch_id=batch[-1][0]+1;
+                            s=f'insert into batch(batch_id,product_id,quantity,production_date,expiry_date) values({batch_id},"{i[1]}",{quantity},"{i[3]}","{i[4]}")'
+                            print(s)
+                            cu.execute(s)
+                            try:
+                                s=f'insert into warehouse_batch values({warehouse_id},{batch_id})'
+                                print(s)
+                                cu.execute(s)
+                                flag=True
+                                break
+                            except Exception as e:
+                                print(e)
+                                s='rollback'
+                                cu.execute(s)
+                
+                    if(flag==False):
+                        s='rollback'
+                        print(s)
+                        cu.execute(s)
+                        if(batch_flag==False):
+                            print("not enough stock")
+                        else:
+                            print("not enough warehouse",warehouse_id)
+                    else:
+                        s='commit'
+                        print(s)
+                        cu.execute(s)
+                        break
             
+            db.commit()
 
 
         cu=db.cursor()
