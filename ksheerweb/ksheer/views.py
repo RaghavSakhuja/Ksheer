@@ -588,7 +588,6 @@ class retailer:
             for i in d:
                 x={'billid':i,'custid':d[i][0][0],'date':d[i][0][2],'total':d[i][0][3],'items':d[i][1],"link":'<a href="view_bills?billid={}">view more</a>'.format(i)}
                 l.append(x)
-            print(l)
             return render(request,"ksheer/retailer/ret_bills.html",{'data':l})
         else:
             return HttpResponseRedirect("index")
@@ -606,9 +605,8 @@ class retailer:
         df.drop(df.columns[[0, 1, 2,3,4]], axis=1, inplace=True)
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False)
-
-
         return render(request,"ksheer/retailer/view_bills.html",context={"dataframe":df,"billid":bill_id,"custid":cust_id,"storeid":store_id,"date":date,"total":total})
+    
     def make_order_clickable(url):
         return '<a href="#" class="edit">Edit</a>'
     
