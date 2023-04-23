@@ -366,6 +366,29 @@ class executive:
     def create_batches(request):
         if request.method=="POST":
             print(request.POST)
+            query=dict(request.POST)
+            a=query.keys()
+            for i in a:
+                if i!='csrfmiddlewaretoken':
+                    print(i,query[i][0])
+                    cu=db.cursor()
+                    s="begin"
+                    cu.execute(s)
+                    s=f'select * from batch';
+                    cu.execute(s)
+                    batch=cu.fetchall()
+                    batch_id=batch[-1][0]+1;
+                    try:
+                        s=f"insert into batch(batch_id,product_id,quantity,production_date,expiry_date) values({batch_id},'{i}',{query[i][0]},'{datetime.date.today()}','{datetime.date.today()+datetime.timedelta(days=180)}')"
+                        print(s)
+                        cu.execute(s)
+                    except Exception as e:
+                        print(e)
+                        s="rollback"
+                        cu.execute(s)
+                        break;
+                        
+            db.commit()
         
         cu=db.cursor()
         cu.execute(f"SELECT * from product")
@@ -530,9 +553,17 @@ class retailer:
                         print(quantity1,type(quantity1))
                         if(quantity1>=quantity):
                             batch_flag=True
-                            s=f'update batch set quantity={quantity1-quantity} where batch_id={i[0]}'
-                            print(s)
-                            cu.execute(s)
+                            if(quantity1==quantity):
+                                s=f'delete from warehouse_batch where batch_id={i[0]}'
+                                print(s)
+                                cu.execute(s)
+                                s=f'delete from batch where batch_id={i[0]}'
+                                print(s)
+                                cu.execute(s)
+                            else:
+                                s=f'update batch set quantity={quantity1-quantity} where batch_id={i[0]}'
+                                print(s)
+                                cu.execute(s)
                             s=f'select * from batch';
                             cu.execute(s)
                             batch=cu.fetchall()
