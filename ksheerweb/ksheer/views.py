@@ -79,9 +79,9 @@ class executive:
                 form2=form.cleaned_data
                 try:
                     cu=db.cursor()
-                    cu.execute(f"insert into warehouse values({form2['street']},{form2['']})")
+                    cu.execute(f"insert into warehouse(street,city,pincode,capacity) values('{form2['street']}','{form2['city']}',{form2['pincode']},{form2['capacity']})")
                     db.commit()
-                    return HttpResponseRedirect("executive/warehouses/exec_add_warehouse")
+                    return HttpResponseRedirect("exec_add_warehouse")
                 except Exception as e:
                     return render(request,"ksheer/executive/warehouses/exec_add_warehouse.html",context={"form":form})
             else:
@@ -474,6 +474,28 @@ class retailer:
             request.session['number']=1
             return render(request,"ksheer/index.html")
     
+    def ret_add_warehouse(request):
+        if request.method=='POST':
+            form=warehouseform(request.POST)
+            if form.is_valid():
+                form2=form.cleaned_data
+                try:
+                    cu=db.cursor()
+                    cu.execute(f"insert into warehouse(street,city,pincode,capacity) values('{form2['street']}','{form2['city']}',{form2['pincode']},{form2['capacity']})")
+                    cu.execute(f"select warehouse_id from warehouse where street='{form2['street']}' and city='{form2['city']}' and pincode={form2['pincode']} and capacity={form2['capacity']}")
+                    wareid=cu.fetchone()[0]
+                    cu=db.cursor()
+                    cu.execute(f"insert into retailer_warehouse values({request.session['storeid']},{wareid})")
+                    db.commit()
+                    return HttpResponseRedirect("ret_add_warehouse")
+                except Exception as e:
+                    print(e)
+                    return render(request,"ksheer/retailer/add_warehouse.html",context={"form":form,"error":e})
+            else:
+                return render(request,"ksheer/retailer/add_warehouse.html",context={"form":form})
+        else:
+            return render(request,"ksheer/retailer/add_warehouse.html",context={'form':warehouseform()})
+        
     def ret_inventory(request):
         cu=db.cursor()
         cu.execute(f"select * from batch natural join(select batch_id from warehouse_batch natural join (SELECT warehouse_id from retailer_warehouse where store_id=28) t1) t2;")
