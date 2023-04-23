@@ -455,9 +455,7 @@ class retailer:
                 request.session['number']=1
                 cu=db.cursor()
                 cu.execute("select * from retailer where username='{}' and passwd='{}'".format(request.POST.get('username'),request.POST.get('pass')))
-                print(request.POST.get('username'),request.POST.get('pass'))
                 cu=cu.fetchone()
-                print(cu)
                 if cu!=None:  
                     request.session["userid"]=request.POST.get('username')
                     request.session['storeid']=cu[0]
