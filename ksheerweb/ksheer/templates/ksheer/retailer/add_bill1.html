@@ -38,8 +38,25 @@
               <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
               
             <script>
-                var dict={}
-                var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
+                var token="";
+                $(document).ready(function () {
+                    token= $('input[name="csrfmiddlewaretoken"]').attr('value'); 
+                    $('.add').click(function () {
+                        var currentTD = $(this).parents('tr').find('td');
+                        if ($(this).html() == 'Add') {                  
+                            currentTD[8].firstChild.disabled=false;
+                        } 
+                        else {
+                            let s=currentTD[0].firstChild.textContent;
+                            dict[s]=currentTD[8].firstChild.value;
+                            console.log(dict);
+                            currentTD[8].firstChild.disabled=true;
+                            
+                        }
+                        $(this).html($(this).html() == 'Add' ? 'Save' : 'Add')
+                    });
+                });
+                var dict={};
                 function myFunction() {
                     console.log("yes")
                         var input, filter, table, tr, td, i, txtValue;
@@ -74,27 +91,10 @@
                     }
                 });
                     };
-                $(document).ready(function () {
-                    
-                    $('.add').click(function () {
-                        var currentTD = $(this).parents('tr').find('td');
-                        if ($(this).html() == 'Add') {                  
-                            currentTD[8].firstChild.disabled=false;
-                        } 
-                        else {
-                            let s=currentTD[0].firstChild.textContent;
-                            dict[s]=currentTD[8].firstChild.value;
-                            console.log(dict);
-                            currentTD[8].firstChild.disabled=true;
-                            
-                        }
-                        $(this).html($(this).html() == 'Add' ? 'Save' : 'Add')
-                    });
-                });
+                
             </script>
             <form action="{% url 'add_bill' %}" method="post">
                 {% csrf_token %}
-           
                 <div style="width: 800px; margin-left: 300px;" class="table-responsive">
                 {{dataframe1 | safe}}
                 </div>
