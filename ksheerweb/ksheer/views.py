@@ -316,13 +316,11 @@ class executive:
             response=dict(request.POST)
             print(response)
             cu=db.cursor()
+            s="lock table collective_rawmaterial write,raw_material write"
             s="begin"    
             cu.execute(s)  
             print(request.session)
-            collective_user=request.session['userid']
-            s=f"select collective_id from collective where username='{collective_user}'"
-            cu.execute(s)
-            collective_id=cu.fetchone()[0]
+            collective_id=request.session['collective']
             a=response.keys()
             try:
                 for i in a:
@@ -338,6 +336,9 @@ class executive:
                 print(e)
                 s="rollback"
                 cu.execute(s)
+            
+            s="unlock tables"
+            cu.execute(s)
             db.commit()
 
         cu=db.cursor()
@@ -368,6 +369,8 @@ class executive:
             print(request.POST)
             query=dict(request.POST)
             a=query.keys()
+            s="lock table batch write,product read,raw_material write"
+            cu.execute(s)
             for i in a:
                 if i!='csrfmiddlewaretoken':
                     print(i,query[i][0])
@@ -388,6 +391,8 @@ class executive:
                         cu.execute(s)
                         break;
                         
+            s="unlock tables"
+            cu.execute(s)
             db.commit()
         
         cu=db.cursor()
@@ -492,6 +497,8 @@ class retailer:
             print(queryDict)
             cu=db.cursor()
             a=queryDict.keys()
+            s="lock table bill write,bill_product write"
+            cu.execute(s)
             s="begin"
             cu.execute(s)
             s='select * from bill'
@@ -514,7 +521,9 @@ class retailer:
                         s="rollback"
                         cu.execute(s)
                         break;
-        db.commit()
+            s="unlock tables"
+            cu.execute(s)
+            db.commit()
 
 
 
@@ -568,6 +577,9 @@ class retailer:
             cu=db.cursor()
             store_id=request.session['storeid']
             a=queryDict.keys()
+            s="lock table retailer_warehouse write,warehouse_batch write,batch write,warehouse read"
+            cu.execute(s)
+
             for i in a:
                 product_id=i;
                 if(queryDict[i][0]==''):
@@ -643,6 +655,8 @@ class retailer:
                         cu.execute(s)
                         break
             
+            s="unlock tables"
+            cu.execute(s)
             db.commit()
 
 
