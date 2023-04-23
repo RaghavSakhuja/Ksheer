@@ -454,6 +454,16 @@ class retailer:
             request.session['number']=1
             return render(request,"ksheer/index.html")
     
+    def ret_inventory(request):
+        cu=db.cursor()
+        cu.execute(f"select * from batch natural join(select batch_id from warehouse_batch natural join (SELECT warehouse_id from retailer_warehouse where store_id=28) t1) t2;")
+        batches=cu.fetchall()
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df.style
+        df=df.to_html(classes=['table'],table_id="myTable",index=False)
+        return render(request,"ksheer/retailer/ret_inventory.html",context={"dataframe":df})
+    
     def make_bill_clickable(url):
         return '<a href="#" class="add">Add</a>'
     

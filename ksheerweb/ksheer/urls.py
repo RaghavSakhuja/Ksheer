@@ -37,7 +37,7 @@ urlpatterns=[
     path("cust_details",views.retailer.cust_details,name="cust_details"),
     path("ret_bills",views.retailer.ret_bills,name="ret_bills"),
     path("ret_order",views.retailer.ret_order,name="ret_order"),
-    
+    path("ret_inventory",views.retailer.ret_inventory,name="ret_inventory"),
     
     #collectives
     path("collective",views.collective.collective,name="collective"),
