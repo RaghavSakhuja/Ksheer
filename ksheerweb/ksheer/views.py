@@ -130,17 +130,26 @@ class executive:
     def exec_add_batch(request):
         if request.method=="POST":
             querydict=dict(request.POST)
-            # try:
-            #     batches=request.POST.get('batches')
-            #     print(batches)
-            #     warehouse=request.POST.get('warehouses')[0]
-            # except:
-            #     pass
-            #transaction query
-            # try:
-            #     cu=db.cursor()
-            #     for i in batches:
-            #         cu.execute(f"insert into warehouse_batch values({warehouse},{i})")
+            print(querydict)
+            a=querydict.keys()
+            cu=db.cursor()
+            for i in a:
+                s="begin"
+                cu.execute(s)
+                b=i.split("_")
+                warehouse_id=b[0]
+                l=querydict[i]
+                for j in l:
+                    k=j.split("_")
+                    batch_id=k[0]
+                    try:
+                        cu.execute(f"insert into warehouse_batch values({warehouse_id},{batch_id})")
+                    except Exception as e:
+                        print(e)
+                        cu.execute("rollback")
+            
+            db.commit()
+
 
         cu=db.cursor()
         cu.execute("SELECT batch_id,product_id,quantity FROM batch WHERE batch.batch_id NOT IN (SELECT warehouse_batch.batch_id FROM warehouse_batch) order by production_date")
@@ -437,6 +446,7 @@ class retailer:
         if request.method=="POST":
             queryDict=dict(request.POST)
             print(request.session['custid'])
+            print(request.session['storeid'])
             cu=db.cursor()
 
         
@@ -556,8 +566,6 @@ class retailer:
                         break
             
             db.commit()
-
-            
 
 
         cu=db.cursor()
