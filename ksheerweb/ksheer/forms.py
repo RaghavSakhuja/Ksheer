@@ -5,6 +5,22 @@ from crispy_forms.layout import Submit, Layout, Div, Fieldset,Button,Row,Column,
 from decimal import Decimal
 from django.core.exceptions import ValidationError
 
+class collectiveform(forms.Form):
+    street = forms.CharField(max_length=200)
+    city = forms.CharField(max_length=50)
+    pincode = forms.IntegerField()
+    name = forms.CharField(max_length=200)
+    username = forms.CharField(max_length=200)
+    passwd = forms.CharField(max_length=50)
+    no_of_members = forms.IntegerField()
+    def __init__(self, *args, **kwargs):
+        super(collectiveform, self).__init__(*args,**kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-4'
+        self.helper.field_class = 'col-lg-7'
+        self.helper.add_input(Submit('add_collective','Add'))
+
 class retorderform(forms.Form):    
     def __init__(self, *args, **kwargs):
         super(retorderform, self).__init__(*args)
