@@ -386,7 +386,7 @@ class executive:
                         print(e)
                         s="rollback"
                         cu.execute(s)
-                        break;
+                        break
                         
             db.commit()
         
@@ -547,7 +547,6 @@ class retailer:
             cu=db.cursor()
             cu.execute("select bill.*,bill_product.product_id,bill_product.quantity from bill left join bill_product on bill.bill_id=bill_product.bill_id where store_id={} order by bill_id".format(request.session['storeid']))
             cu=cu.fetchall()
-    
             d={}
             for i in cu:
                 if i[0] in d:
@@ -558,12 +557,29 @@ class retailer:
 
             l=[]
             for i in d:
-                x={'billid':i,'custid':d[i][0][0],'date':d[i][0][2],'total':d[i][0][3],'items':d[i][1]}
+                x={'billid':i,'custid':d[i][0][0],'date':d[i][0][2],'total':d[i][0][3],'items':d[i][1],"link":'<a href="view_bills?billid={}">view more</a>'.format(i)}
                 l.append(x)
+            print(l)
             return render(request,"ksheer/retailer/ret_bills.html",{'data':l})
         else:
             return HttpResponseRedirect("index")
-    
+    def view_bills(request):
+        cu=db.cursor()
+        cu.execute("select bill.*,bill_product.product_id,bill_product.quantity from bill left join bill_product on bill.bill_id=bill_product.bill_id where bill.bill_id={}".format(request.GET['billid']))
+        bills=cu.fetchall()
+        bill_id=bills[0][0]
+        cust_id=bills[0][1]
+        store_id=bills[0][2]
+        date=bills[0][3]
+        total=bills[0][4]
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(bills, columns=columns)
+        df.drop(df.columns[[0, 1, 2,3,4]], axis=1, inplace=True)
+        df.style
+        df=df.to_html(classes=['table'],table_id="myTable",index=False)
+
+
+        return render(request,"ksheer/retailer/view_bills.html",context={"dataframe":df,"billid":bill_id,"custid":cust_id,"storeid":store_id,"date":date,"total":total})
     def make_order_clickable(url):
         return '<a href="#" class="edit">Edit</a>'
     

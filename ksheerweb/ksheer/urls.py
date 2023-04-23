@@ -38,6 +38,7 @@ urlpatterns=[
     path("ret_bills",views.retailer.ret_bills,name="ret_bills"),
     path("ret_order",views.retailer.ret_order,name="ret_order"),
     path("ret_inventory",views.retailer.ret_inventory,name="ret_inventory"),
+    path("view_bills",views.retailer.view_bills,name="view_bills"),
     
     #collectives
     path("collective",views.collective.collective,name="collective"),

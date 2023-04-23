@@ -3,39 +3,62 @@
 <html lang="en">
     <head>
         <title>Search</title>
-        <link href="{% static 'ksheer/login1.css' %}" rel="stylesheet">
+        <link href="{% static 'ksheer/tables.css' %}" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            .grid-container {
+              display: grid;
+              grid-template-columns: auto auto auto;
+              background-color: #2196F3;
+              padding: 10px;
+              column-gap: 10px;
+              row-gap: 10px;
+            }
+            .grid-item {
+              background-color: rgba(255, 255, 255, 0.8);
+              border: 1px solid rgba(0, 0, 0, 0.8);
+              padding: 20px;
+              font-size: 30px;
+              text-align: center;
+            }
+            </style>
     </head>
-    <body style="background-image: url('/static/ksheer/background.jpg'); background-size: cover;">
-        <h1>{{name}}</h1>
-        <table>
-            <!-- <colgroup>
-                <col span="1" class="col1">
-                <col class="col2">
-            </colgroup> -->
+    <body class="background">
+        <div class="index">
+            <a class="inactive_index" href="{% url 'retail_dash' %}">Dashboard/</a>
+            <a href="{% url 'ret_bills' %}">Bills</a>
+            <input type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
+            <input type="button" value="Back" onclick="location.href='retail_dash'" class='btn btn-primary back' >
+            <script>
+                function logout() {
+                    var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
+                    $.ajax({
+                        url: "index",
+                        type:'post',    
+                        headers: {
+                        'X-CSRFToken': token },
+                        data: {
+                            working:"yes"
+                        },
+                        success:function(){
+                            window.location.href='index'
+                        }
+                    });
+                }
+            </script>
+            </div>
+
+        <div class="grid-container" style="margin-left:25%; width: 700px; background-color:  rgb(5, 13, 26);">
             {% for row in data%}
-            <tr>
-                <td>
-                    billid: {{row.billid}}
-                </td>
-            </tr>
-            <tr>
-                <td>custid: {{row.custid}}</td>
-            </tr>
-            <tr>
-                <td>total: {{row.total}}</td>
-            </tr>
-            <tr>
-                <td>
-                    date: {{row.date}}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    items: {{row.items}}
-                </td>
-            </tr>
-            <tr height = 10px></tr>
-            {% endfor %}            
-        </table >
+            <div class="grid-item">
+                billid: {{row.billid}}<br>
+                date: {{row.date}}<br>
+                {{row.link|safe}}
+            </div>
+            {% endfor %}
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
