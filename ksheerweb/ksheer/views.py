@@ -277,11 +277,10 @@ select warehouse_id from retailer_warehouse)''')
     def remove_store(request):
 
         cu=db.cursor()
-        cu.execute("SELECT * from retailer")
+        cu.execute("SELECT store_id,street,city,pincode,name,profit from retailer")
         batches=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(batches, columns=columns)
-        df.drop([5,6],axis=1,inplace=True)
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
         return render(request,"ksheer/executive/stores/view_store.html",context={'dataframe1':df})
