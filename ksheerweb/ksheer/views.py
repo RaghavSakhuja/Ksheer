@@ -160,10 +160,11 @@ class executive:
         df.insert(3,"",l,True)
         cu=db.cursor()
         cu.execute('''SELECT warehouse.warehouse_id w_id, warehouse.street, warehouse.city, 
-        warehouse.pincode, warehouse.capacity, COALESCE(SUM(batch.quantity), 0) as total_capacity
-        FROM warehouse LEFT JOIN warehouse_batch ON warehouse.warehouse_id = warehouse_batch.warehouse_id
-        LEFT JOIN batch ON warehouse_batch.batch_id = batch.batch_id
-        GROUP BY warehouse.warehouse_id;''')
+warehouse.pincode, warehouse.capacity, COALESCE(SUM(batch.quantity), 0) as total_capacity
+FROM warehouse LEFT JOIN warehouse_batch ON warehouse.warehouse_id = warehouse_batch.warehouse_id
+LEFT JOIN batch ON warehouse_batch.batch_id = batch.batch_id
+GROUP BY warehouse.warehouse_id having warehouse.warehouse_id not in (
+select warehouse_id from retailer_warehouse)''')
         wares=cu.fetchall()
         columns2 = [desc[0] for desc in cu.description]
         df2 = pd.DataFrame(wares, columns=columns2)
@@ -276,7 +277,7 @@ class executive:
     def remove_store(request):
 
         cu=db.cursor()
-        cu.execute("SELECT * from retailer")
+        cu.execute("SELECT store_id,street,city,pincode,name,profit from retailer")
         batches=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(batches, columns=columns)
@@ -326,6 +327,8 @@ class executive:
                     print(i,response[i][0])
                     raw_id=i
                     quantity=response[i][0]
+                    if(quantity==''):
+                        continue
                     supply_date=datetime.date.today()
                     print(supply_date)
                     s=f"insert into collective_rawmaterial values({collective_id},'{raw_id}','{supply_date}',{quantity})"
