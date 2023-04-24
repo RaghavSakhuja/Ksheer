@@ -28,6 +28,7 @@ urlpatterns=[
     path("getraw",views.executive.getraw,name="getraw"),
     path("collect",views.executive.collect,name="collect"),
     path("add_collective",views.executive.add_collective,name="add_collective"),
+    path("view_collective",views.executive.view_collective,name="view_collective"),
     path("create_batches",views.executive.create_batches,name="create_batches"),
     #retailers
     path("ret_warehouse",views.executive.add_prod,name="ret_warehouse"),

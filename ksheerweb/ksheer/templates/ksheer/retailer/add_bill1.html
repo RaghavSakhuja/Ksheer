@@ -41,7 +41,8 @@
                 var token="";
                 $(document).ready(function () {
                     token= $('input[name="csrfmiddlewaretoken"]').attr('value'); 
-                    $('.add').click(function () {
+                    $('.add').click(function ($e) {
+                        $e.preventDefault();
                         var currentTD = $(this).parents('tr').find('td');
                         if ($(this).html() == 'Add') {                  
                             currentTD[8].firstChild.disabled=false;

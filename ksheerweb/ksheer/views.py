@@ -275,23 +275,27 @@ select warehouse_id from retailer_warehouse)''')
         return render(request,'ksheer/view_ret.html')  
         
     def remove_store(request):
-        if request.method=="POST":
-            print(request.POST)
 
         cu=db.cursor()
         cu.execute("SELECT * from retailer")
         batches=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(batches, columns=columns)
-        df['link'] = df.apply(lambda x: executive.make_delete_clickable(x['store_id']), axis=1)
+        df.drop([5,6],axis=1,inplace=True)
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
-        return render(request,"ksheer/executive/stores/remove_store.html",context={'dataframe1':df})
+        return render(request,"ksheer/executive/stores/view_store.html",context={'dataframe1':df})
     
     def remove_warehouse(request):
         if request.method=="POST":
-            print(request.POST)
-
+            wareid=int(request.POST.getlist('prod[]')[0])
+            cu=db.cursor()
+            try:
+                cu.execute(f"Delete from warehouse_batch where warehouse_id={wareid}")
+                cu.execute(f"Delete from retailer_warehouse where warehouse_id ={wareid}")
+                cu.execute(f"Delete from warehouse where warehouse_id={wareid}")
+            except:
+                pass
         cu=db.cursor()
         cu.execute("SELECT * from warehouse")
         batches=cu.fetchall()
@@ -361,6 +365,17 @@ select warehouse_id from retailer_warehouse)''')
                 <option value="2500">2500</option>
                 <option value="5000">5000</option>
                 </select>'''.format(url)
+    
+    def view_collective(request):
+        cu=db.cursor()
+        cu.execute(f"SELECT * from collective")
+        batches=cu.fetchall()
+        print(batches)
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df.style
+        df=df.to_html(classes=['table'],table_id="myTable",index=False)
+        return render(request,"ksheer/executive/collect/view_collective.html",context={'dataframe':df}) 
     
     def create_batches(request):
         if request.method=="POST":
