@@ -67,8 +67,6 @@ class executive:
     def exec_reports(request):
         return render(request,"ksheer/executive/reports/reports.html")
 
-    
-    
     def exec_warehouse(request):
         return render(request,"ksheer/executive/warehouses/exec_warehouse.html")
     
@@ -105,8 +103,7 @@ class executive:
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
         return render(request,"ksheer/executive/inventory/delete_prod.html",context={'dataframe1':df})
-    
-    
+      
     def make_edit_clickable(url):
         return '<a href="#" class="edit">Edit</a>'
     
@@ -177,7 +174,6 @@ class executive:
         df2=df2.to_html(classes=['table'],table_id="myTable2",index=False,render_links=True,escape=False)
         df=df.to_html(classes=['table'],table_id="myTable1",index=False,render_links=True,escape=False)
         return render(request,"ksheer/executive/warehouses/exec_add_batch.html",context={'dataframe1':df,'dataframe2':df2})
-    
 
     def exec_warehouse_batch(request):
             query="""select w.warehouse_id,w.pincode,b.batch_id,b.product_id,b.quantity from 
@@ -363,7 +359,6 @@ class executive:
                 <option value="5000">5000</option>
                 </select>'''.format(url)
     
-    
     def create_batches(request):
         if request.method=="POST":
             print(request.POST)
@@ -547,8 +542,8 @@ class retailer:
             print(queryDict)
             cu=db.cursor()
             a=queryDict.keys()
-            s="lock table bill write,bill_product write"
-            cu.execute(s)
+            # s="lock table bill write,bill_product write"
+            # cu.execute(s)
             s="begin"
             cu.execute(s)
             s='select * from bill'
@@ -571,8 +566,8 @@ class retailer:
                         s="rollback"
                         cu.execute(s)
                         break;
-            s="unlock tables"
-            cu.execute(s)
+            # s="unlock tables"
+            # cu.execute(s)
             db.commit()
 
 
@@ -588,8 +583,7 @@ class retailer:
         df['link2'] = df.apply(lambda x: retailer.make_order_clickable2(x['product_id']), axis=1)
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
-        return render(request,"ksheer/retailer/add_bill1.html",context={'dataframe1':df})
-         
+        return render(request,"ksheer/retailer/add_bill1.html",context={'dataframe1':df})    
     
     def ret_bills(request):
         if "userid" in request.session and "usertype" in request.session and request.session['usertype']=="r":
@@ -611,6 +605,7 @@ class retailer:
             return render(request,"ksheer/retailer/ret_bills.html",{'data':l})
         else:
             return HttpResponseRedirect("index")
+
     def view_bills(request):
         cu=db.cursor()
         cu.execute("select bill.*,bill_product.product_id,bill_product.quantity from bill left join bill_product on bill.bill_id=bill_product.bill_id where bill.bill_id={}".format(request.GET['billid']))
