@@ -35,6 +35,8 @@
             </script>  
         </div>
               <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
+            f<form action="remove_warehouse" method="post">
+                {%csrf_token%}
             <script>
                 function myFunction() {
                   var input, filter, table, tr, td, i, txtValue;
@@ -62,7 +64,8 @@
             $(document).ready(function () {
                 var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
                 console.log(token);
-                $('.delete').click(function () {
+                $('.delete').click(function ($e) {
+                    $e.preventDefault();
                     var currentTD = $(this).parents('tr').find('td');
                     if ($(this).html() != 'Delete') {                  
                         var list=[]

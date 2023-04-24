@@ -287,8 +287,14 @@ class executive:
     
     def remove_warehouse(request):
         if request.method=="POST":
-            print(request.POST)
-
+            wareid=int(request.POST.getlist('prod[]')[0])
+            cu=db.cursor()
+            try:
+                cu.execute(f"Delete from warehouse_batch where warehouse_id={wareid}")
+                cu.execute(f"Delete from retailer_warehouse where warehouse_id ={wareid}")
+                cu.execute(f"Delete from warehouse where warehouse_id={wareid}")
+            except:
+                pass
         cu=db.cursor()
         cu.execute("SELECT * from warehouse")
         batches=cu.fetchall()

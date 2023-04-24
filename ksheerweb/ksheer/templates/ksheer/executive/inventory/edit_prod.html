@@ -37,6 +37,8 @@
 
         </div>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
+            <form action="#" method="post">
+                {%csrf_token%}
             <script>
                 
                 $(document).ready(function () {
@@ -59,7 +61,8 @@
                   }
                 }
                 var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
-                $('.edit').click(function () {
+                $('.edit').click(function ($e) {
+                    $e.preventDefault();
                     var currentTD = $(this).parents('tr').find('td');
                     if ($(this).html() == 'Edit') {                  
                         $.each(currentTD, function () {

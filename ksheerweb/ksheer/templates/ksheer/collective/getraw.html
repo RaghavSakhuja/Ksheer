@@ -77,7 +77,8 @@
                     };
                 $(document).ready(function () {
                     
-                    $('.add').click(function () {
+                    $('.add').click(function ($e) {
+                        $e.preventDefault();
                         var currentTD = $(this).parents('tr').find('td');
                         if ($(this).html() == 'Add') {                  
                             currentTD[7].firstChild.disabled=false;
