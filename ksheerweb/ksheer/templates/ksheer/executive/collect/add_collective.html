@@ -12,11 +12,11 @@
     <body class="background">
         <div class="index">
             <a class="inactive_index" href="{% url 'exec_dash' %}">Dashboard</a>/
-            <a class="inactive_index" href="{% url 'manage_ret' %}">Manage Stores</a>/
-            <a href="{% url 'add_retailer' %}">Add Retailer</a>
+            <a class="inactive_index" href="{% url 'collect' %}">Manage collective</a>/
+            <a href="{% url 'add_collective' %}">Add collective</a>
             
             <input id="logout" type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
-            <input type="button" value="Back" onclick="location.href='manage_ret'" class='btn btn-primary back' >
+            <input type="button" value="Back" onclick="location.href='collect'" class='btn btn-primary back' >
             <script>
                 function logout() {
                     var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 

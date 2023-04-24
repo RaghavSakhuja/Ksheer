@@ -143,3 +143,11 @@ input[type="text"],input[name="age"] {
   float: right;
   margin-right: 10px;
 }
+
+.grid-item{
+  width: 100%;
+  height: 100%;
+  padding: 1px;
+  background-color: #031353 !important;
+  color: beige;
+}

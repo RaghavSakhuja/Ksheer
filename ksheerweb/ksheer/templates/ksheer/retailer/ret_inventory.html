@@ -12,7 +12,7 @@
     <a class="inactive_index" href="{% url 'retail_dash' %}">Dashboard</a>/
     <a href="{% url 'ret_inventory' %}">Inventory</a>
     <input type="button" value="Logout" onclick="logout()" class='btn btn-primary signout' >
-      <input type="button" value="Back" onclick="location.href='exec_reports'" class='btn btn-primary back' >
+      <input type="button" value="Back" onclick="location.href='retail_dash'" class='btn btn-primary back' >
       <script>
           function logout() {
               var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
