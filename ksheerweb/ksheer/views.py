@@ -274,18 +274,16 @@ class executive:
         return render(request,'ksheer/view_ret.html')  
         
     def remove_store(request):
-        if request.method=="POST":
-            print(request.POST)
 
         cu=db.cursor()
         cu.execute("SELECT * from retailer")
         batches=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(batches, columns=columns)
-        df['link'] = df.apply(lambda x: executive.make_delete_clickable(x['store_id']), axis=1)
+        df.drop([5,6],axis=1,inplace=True)
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
-        return render(request,"ksheer/executive/stores/remove_store.html",context={'dataframe1':df})
+        return render(request,"ksheer/executive/stores/view_store.html",context={'dataframe1':df})
     
     def remove_warehouse(request):
         if request.method=="POST":
