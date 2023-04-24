@@ -767,14 +767,16 @@ class collective:
     def collective_edit(request):
         if request.method=="POST":
             data=request.POST.getlist('list[]')
+            print(data)
             cu=db.cursor()
-            cu.execute(f"update collective set street={data[1]},city={data[2]},pincode={data[3]},name={data[4]},username={data[5]},passwd={data[6]} where collective_id={data[0]}")
+            cu.execute(f"update collective set street='{data[1]}',city='{data[2]}',pincode={data[3]},name='{data[4]}',username='{data[5]}',passwd='{data[6]}',no_of_members={data[7]} where collective_id={data[0]}")
             db.commit()
         cu=db.cursor()
         cu.execute(f"SELECT * from collective where collective_id={request.session['collective']}")
         batches=cu.fetchall()
         columns = [desc[0] for desc in cu.description]
         df = pd.DataFrame(batches, columns=columns)
+        df.drop(df.columns[[8]], axis=1, inplace=True)
         df['link'] = df.apply(lambda x: collective.make_edit_clickable(x['collective_id']), axis=1)
         df.style
         df=df.to_html(classes=['table'],table_id="myTable",index=False,render_links=True,escape=False)
