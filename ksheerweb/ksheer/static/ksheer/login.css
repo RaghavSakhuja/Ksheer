@@ -40,7 +40,7 @@ input[name='add_prod']{
 input[name='prod_back']{
     width:30%;
 }
-input[type='text']{
+input[type='text'],input[name="pass"]{
     background-color: #000000;
     /* border: grey; */
     color: #FFFFFF;
