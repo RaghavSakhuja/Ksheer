@@ -363,6 +363,17 @@ class executive:
                 <option value="5000">5000</option>
                 </select>'''.format(url)
     
+    def view_collective(request):
+        cu=db.cursor()
+        cu.execute(f"SELECT * from collective")
+        batches=cu.fetchall()
+        print(batches)
+        columns = [desc[0] for desc in cu.description]
+        df = pd.DataFrame(batches, columns=columns)
+        df.style
+        df=df.to_html(classes=['table'],table_id="myTable",index=False)
+        return render(request,"ksheer/executive/collect/view_collective.html",context={'dataframe':df}) 
+    
     def create_batches(request):
         if request.method=="POST":
             print(request.POST)
