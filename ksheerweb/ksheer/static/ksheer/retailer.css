@@ -1,0 +1,83 @@
+.container {
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    transform: translate(+120%, -40%);
+    color: rgb(234, 234, 249);
+}   
+
+.background_container{
+    display: inline-block;
+    position: relative;
+    height: 100%;
+}
+
+.circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.background{
+    background-color: rgb(5, 13, 26);
+}
+table,tr,td,th{
+    border: none !important;
+    padding:10px;
+}
+
+.heading {
+    margin-left:2%;
+}
+
+.index{
+    padding-top: 1%;
+    padding-bottom: 2%;
+    padding-left: 1%;
+    font-size: 110%;
+    color: grey;
+    width: 100%;
+    background-color: #030e3b;;
+}
+
+.inactive_index{
+    color: grey;
+}
+
+.active_index
+{
+    color:blue;
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: #4044ED !important;
+  border-color: #4044ED !important;
+}
+.btn-primary:hover{
+  background-color: #4142aa !important;
+  border-color: #4142aa !important;
+}
+.btn{
+    width: 200px!important;
+}
+
+.signout{
+    top: 10% !important;
+    font-size: 80% !important;
+    width: 100px!important;
+    height: 35px!important;
+    float: right;
+    margin-right: 80px;
+}
+
+.back{
+    font-size: 80% !important;
+    width: 100px!important;
+    height: 35px!important;
+    float: right;
+    margin-right: 10px;
+}

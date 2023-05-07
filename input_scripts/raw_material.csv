@@ -1,0 +1,22 @@
+﻿raw_id,name,fat_percent,protein_percent,rate
+gma,goat milk A,3,5,20
+gmb,goat milk B,3.5,2.5,19
+gmc,goat milk C,4,4,18
+gmd,goat milk D,4,3.5,17
+gme,goat milk E,5,2,15.5
+cma,cow milk A,4,6,25
+cmb,cow milk B,5,4,22
+cmc,cow milk C,8,4,21.5
+cmd,cow milk D,9,2,20
+cme,cow milk E,9,5,19.5
+bma,buffalo milk A,2,5,22
+bmb,buffalo milk B,2,4,21.5
+bmc,buffalo milk C,4,5,20
+bmd,buffalo milk D,5,6,19
+bme,buffalo milk E,6,8,18.5
+ama,camel milk A,4,4,30
+amb,camel milk B,3.5,2,28
+amc,camel milk C,5.5,1,27
+amd,camel milk D,5,3,27.5
+ame,camel milk E,6,3.5,26
+sc,sugarcane,10,2,40

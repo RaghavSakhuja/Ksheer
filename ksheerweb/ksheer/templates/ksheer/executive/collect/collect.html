@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link href="{% static 'ksheer/executive.css' %}" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    </head>
+    <body class="background">
+        <div class="index">
+            <a class="inactive_index" href="exec_dash">Dashboard</a>/<a href="#">Manage Collective</a>
+            <input type="button" value="Logout" onclick="location.href='logout'" class='btn btn-primary signout' >
+            <input type="button" value="Back" onclick="location.href='exec_dash'" class='btn btn-primary back' >
+            <script>
+                function logout() {
+                    var token = $('input[name="csrfmiddlewaretoken"]').attr('value'); 
+                    $.ajax({
+                        url: "index",
+                        type:'post',
+                        headers: {
+                        'X-CSRFToken': token },
+                        data: {
+                            working:"yes"
+                        },
+                        success:function(){
+                            window.location.href='index'
+                        }
+                    });
+                }
+            </script>  
+        </div>
+        <div class="background_container" style="display: inline-block; vertical-align: middle;">
+            <svg width="310" height="700">
+                <ellipse cx="-10" cy="350" rx="300" ry="300"
+                style="fill:#4044ED;" />
+            </svg>
+            <div class="container" style="display: inline-block; vertical-align: middle; margin-left: 300px;">
+            <table class="table">
+                    {% csrf_token %}
+                    <tr>
+                        <td>
+                            <input type="button" value="Add Collective" onclick="location.href='add_collective'" style="margin-right:20px;" class='btn btn-primary' >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" value="View Collective" onclick="location.href='view_collective'" style="margin-right:20px;" class='btn btn-primary' >
+                        </td>
+                    </tr>
+            </table>
+            </div>
+    </body>
+</html>
