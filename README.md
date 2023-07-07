@@ -17,47 +17,48 @@ Allows users to access 3 different portals for different user types.
 3. Collective: The login page for collectives
 ### Executive Dashboard
 It is the dashboard for all the executives and employees of the company.
-* Manage Inventory: To manage the products of the company
-** Add product: Add a new product to the company.
-** Edit product: edit the existing details of a product. The edit button
-allows the details of the particular product to be edited, and the save
-button saves it.
-2. Manage warehouse: To add, edit or remove warehouse owned by the
+- Manage Inventory: To manage the products of the company
+  - Add product: Add a new product to the company.
+  - Edit product: edit the existing details of a product. The edit button
+                  allows the details of the particular product to be edited, and the save
+                  button saves it.
+- Manage warehouse: To add, edit or remove warehouse owned by the
 company.
-a. Add warehouse: to add a new warehouse
-b. Create batches: create new batches using raw materials.
-c. Add batch: add batches to the warehouse.
-d. View batches: view the batches in the warehouse
-e. Remove Warehouse: delete a warehouse owned by the company
-3. Manage collective: manage the collectives which have a contract with the
+  - Add warehouse: to add a new warehouse
+  - Create batches: create new batches using raw materials.
+  - Add batch: add batches to the warehouse.
+  - View batches: view the batches in the warehouse
+  - Remove Warehouse: delete a warehouse owned by the company
+- Manage collective: manage the collectives which have a contract with the
 company
-a. add collective: add contract with a new collective
-b. View collective: see the details of all the collectives of the company.
-4. Manage retailer: manage the retailers associated with the company.
-a. Add retailer: Add a new store where the company sells its products.
-b. View retailers: view the info of existing retailers.
-5. Reports: see the various reports of different parameters
-a. Location: location-wise profit that the company is earning from the
+  - add collective: add contract with a new collective
+  - View collective: see the details of all the collectives of the company.
+- Manage retailer: manage the retailers associated with the company.
+  - Add retailer: Add a new store where the company sells its products.
+  - View retailers: view the info of existing retailers.
+- Reports: see the various reports of different parameters
+  - Location: location-wise profit that the company is earning from the
 retailers.
-b. Capacity: location-wise capacity of warehouses of the company
-c. Yearly: The yearly profits of the company
-d. Retailer: retailer-wise profit
-Retailer Dashboard
+  - Capacity: location-wise capacity of warehouses of the company
+  - Yearly: The yearly profits of the company
+  - Retailer: retailer-wise profit
+### Retailer Dashboard
 It is the dashboard for all the retailers associated with the company.
-1. Add bill: add a bill to the database of the company
-2. Add warehouse: add a warehouse for the retailer
-3. Order products: Order products from the company
-4. View Inventory: view the current inventory of the retailer
-5. View bill: View the details of the bills of the store.
-Collective Dashboard
+- Add bill: add a bill to the database of the company
+-  Add warehouse: add a warehouse for the retailer
+- Order products: Order products from the company
+- View Inventory: view the current inventory of the retailer
+-  View bill: View the details of the bills of the store.
+### Collective Dashboard
 It is the dashboard for all the collectives associated with the company.
-1. Edit info: Edit the personal information of the collective
-2. Supply: supply raw materials to the company
-Additional Features:
-1. Each page has a back and a logout button.
-2. The links on the header of each page can be used to go back to previous
+- Edit info: Edit the personal information of the collective
+- Supply: supply raw materials to the company
+
+### Additional Features:
+- Each page has a back and a logout button.
+-  The links on the header of each page can be used to go back to previous
 pages.
-3. Search bars can search the table based on the first column
+- Search bars can search the table based on the first column
 
 ## Setup
 
