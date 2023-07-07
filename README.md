@@ -6,12 +6,13 @@ This is a database project made to Facilitate the working of a Dairy Company. It
 * CSS
 * Django
 * HTML
+* Javascript
 
-The project aims to tackle the working of a dairy company of any size. It provides a way to create the database to manage the employees, raw_materials and  products and arrange them in a well-ordered Database system. The database is in BCNF form and all the queries follow ACID properties. 
+The project aims to tackle the working of a dairy company of any size. It provides a way to create a database to manage the employees, raw materials and  products and arrange them in a well-ordered Database system. The database is in BCNF form, and all the queries follow ACID properties. 
 
 ## User guide
 ### Homepage
-Allows users to access 3 different portals for different user types.
+Allows users to access three different portals for different user types.
 1. Executive: The login page of executive
 2. Retailer: The login page for the retailer
 3. Collective: The login page for collectives
@@ -55,10 +56,14 @@ It is the dashboard for all the collectives associated with the company.
 - Supply: supply raw materials to the company
 
 ### Additional Features:
+- The stock changes of raw materials and Products are automated using triggers.
+- Billing is automated.
+- Over 100 products categorized and arranged.
+- manage the procurement of all types of raw materials and their processing units.
+- locks provide safe transactions.
 - Each page has a back and a logout button.
--  The links on the header of each page can be used to go back to previous
-pages.
-- Search bars can search the table based on the first column
+- The links on the header of each page can be used to go back to previous pages.
+- Search bars can search the table based on the first column.
 
 ## Setup
 
